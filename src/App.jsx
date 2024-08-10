@@ -9,7 +9,8 @@ const App = () => {
     <Router>
       <Header />
       <Routes>
-        <Route path="/studenthelpline" element={<h2>Hello there</h2>} />
+        <Route path="/home" element={<h2>Hello there</h2>} />
+        <Route path="/market" element={<h2>Hello there</h2>} />
         <Route path="/about" element={<h2>Hello there from about</h2>} />
       </Routes>
     </Router>

@@ -12,6 +12,9 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import { NavLink } from "react-router-dom";
+
+import "./Header.css";
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -37,7 +40,7 @@ function Header() {
   return (
     <AppBar
       position="static"
-      sx={{ backgroundColor: "transparent", boxShadow: "none" }}
+      sx={{ backgroundColor: "white", boxShadow: "none" }}
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -89,24 +92,52 @@ function Header() {
               }}
             >
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" sx={{ color: "black" }}>
-                  Home
-                </Typography>
+                <NavLink
+                  to="/home"
+                  className={({ isActive }) =>
+                    `nav-link ${isActive ? "active-link" : ""}`
+                  }
+                >
+                  <Typography textAlign="center" sx={{ color: "black" }}>
+                    Home
+                  </Typography>
+                </NavLink>
               </MenuItem>
-              <MenuItem>
-                <Typography textAlign="center" sx={{ color: "black" }}>
-                  Market Place
-                </Typography>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <NavLink
+                  to="/market"
+                  className={({ isActive }) =>
+                    `nav-link ${isActive ? "active-link" : ""}`
+                  }
+                >
+                  <Typography textAlign="center" sx={{ color: "black" }}>
+                    Market Place
+                  </Typography>
+                </NavLink>
               </MenuItem>
-              <MenuItem>
-                <Typography textAlign="center" sx={{ color: "black" }}>
-                  Contact us
-                </Typography>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <NavLink
+                  to="/about"
+                  className={({ isActive }) =>
+                    `nav-link ${isActive ? "active-link" : ""}`
+                  }
+                >
+                  <Typography textAlign="center" sx={{ color: "black" }}>
+                    About us
+                  </Typography>
+                </NavLink>
               </MenuItem>
-              <MenuItem>
-                <Typography textAlign="center" sx={{ color: "black" }}>
-                  About us
-                </Typography>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <NavLink
+                  to="/contact"
+                  className={({ isActive }) =>
+                    `nav-link ${isActive ? "active-link" : ""}`
+                  }
+                >
+                  <Typography textAlign="center" sx={{ color: "black" }}>
+                    Contact Us
+                  </Typography>
+                </NavLink>
               </MenuItem>
             </Menu>
           </Box>
@@ -136,30 +167,62 @@ function Header() {
               display: { xs: "none", md: "flex" },
             }}
           >
-            <Button
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, display: "block", color: "black" }}
+            <NavLink
+              to="/home"
+              className={({ isActive }) =>
+                `nav-link ${isActive ? "active-link" : ""}`
+              }
             >
-              Home
-            </Button>
-            <Button
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, display: "block", color: "black" }}
+              <Typography
+                variant="button"
+                className="link"
+                sx={{ mx: 2, my: 2 }}
+              >
+                Home
+              </Typography>
+            </NavLink>
+            <NavLink
+              to="/market"
+              className={({ isActive }) =>
+                `nav-link ${isActive ? "active-link" : ""}`
+              }
             >
-              Market Place
-            </Button>
-            <Button
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, display: "block", color: "black" }}
+              <Typography
+                variant="button"
+                className="link"
+                sx={{ mx: 2, my: 2 }}
+              >
+                Market Place
+              </Typography>
+            </NavLink>
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                `nav-link ${isActive ? "active-link" : ""}`
+              }
             >
-              Contact Us
-            </Button>
-            <Button
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, display: "block", color: "black" }}
+              <Typography
+                variant="button"
+                className="link"
+                sx={{ mx: 2, my: 2 }}
+              >
+                About Us
+              </Typography>
+            </NavLink>
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                `nav-link ${isActive ? "active-link" : ""}`
+              }
             >
-              About Us
-            </Button>
+              <Typography
+                variant="button"
+                className="link"
+                sx={{ mx: 2, my: 2 }}
+              >
+                Contact Us
+              </Typography>
+            </NavLink>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>

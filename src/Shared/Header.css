@@ -1,0 +1,11 @@
+.active-link .link {
+  border-bottom: #780000 2px solid;
+
+  color: #780000 !important;
+}
+.nav-link {
+  color: black;
+  text-decoration: none;
+
+  display: flex;
+}
