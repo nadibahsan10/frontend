@@ -1,5 +1,6 @@
 .active-link .link {
-  border-bottom: #780000 2px solid;
+  border-bottom: #780000 3px solid;
+  font-weight: bold;
 
   color: #780000 !important;
 }
