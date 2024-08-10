@@ -15,7 +15,11 @@ const Login = () => {
   };
   return (
     <div className="login-main">
-      {isLoginMode ? <LoginMode /> : <SignupMode />}
+      {isLoginMode ? (
+        <LoginMode changeMode={signupMode} />
+      ) : (
+        <SignupMode changeMode={loginMode} />
+      )}
     </div>
   );
 };

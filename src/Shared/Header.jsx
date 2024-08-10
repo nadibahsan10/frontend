@@ -49,10 +49,7 @@ function Header() {
           <Login />
         </Box>
       </Modal>
-      <AppBar
-        position="static"
-        sx={{ backgroundColor: "white", boxShadow: "none" }}
-      >
+      <AppBar position="static" sx={{ boxShadow: "none" }} color="white">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Typography
