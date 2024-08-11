@@ -1,7 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SignupMode.css";
-import { Grid, Button, TextField, Select, MenuItem, Link } from "@mui/material";
+import {
+  Grid,
+  Button,
+  TextField,
+  Select,
+  MenuItem,
+  Link,
+  FormControl,
+  InputLabel,
+  FormLabel,
+  RadioGroup,
+  Radio,
+  FormControlLabel,
+  FormHelperText,
+  FormGroup,
+} from "@mui/material";
 const SignupMode = (props) => {
+  const [userType, setUserType] = useState("");
+  const [gender, setGender] = useState("");
+
+  const handleChange = (event) => {
+    setUserType(event.target.value);
+  };
+
+  const handleGender = (event) => {
+    setGender(event.target.value);
+  };
   return (
     <Grid
       container
@@ -36,32 +61,38 @@ const SignupMode = (props) => {
           />
 
           <Grid container sx={{ width: "100%", marginTop: "10px" }}>
-            <Grid xs={6} item>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={10}
-                label="User Type"
-                sx={{ width: "95%" }}
-              >
-                <MenuItem value={10}>Student</MenuItem>
-                <MenuItem value={20}>Alumni</MenuItem>
-                <MenuItem value={30}>Guest User</MenuItem>
-              </Select>
+            <Grid xs={5.8} item>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={gender}
+                  label="Gender"
+                  onChange={handleGender}
+                >
+                  <MenuItem value="male">Male</MenuItem>
+                  <MenuItem value="female">Female</MenuItem>
+                  <MenuItem value="other">Other</MenuItem>
+                </Select>
+              </FormControl>
             </Grid>
-
-            <Grid xs={6} item>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={10}
-                label="Gender"
-                sx={{ width: "100%" }}
-              >
-                <MenuItem value={10}>Male</MenuItem>
-                <MenuItem value={20}>Female</MenuItem>
-                <MenuItem value={30}>Others</MenuItem>
-              </Select>
+            <Grid item xs={0.4}></Grid>
+            <Grid xs={5.8} item>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">User Type</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={userType}
+                  label="User Type"
+                  onChange={handleChange}
+                >
+                  <MenuItem value="student">Student</MenuItem>
+                  <MenuItem value="alumni">Alumni</MenuItem>
+                  <MenuItem value="guest">Guest</MenuItem>
+                </Select>
+              </FormControl>
             </Grid>
           </Grid>
 
@@ -99,7 +130,7 @@ const SignupMode = (props) => {
           />
           <p>
             Already have an account?
-            <Link onClick={props.changeMode}>Login</Link>
+            <Link onClick={props.changeMode}> Login</Link>
           </p>
         </form>
       </Grid>
