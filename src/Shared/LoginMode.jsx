@@ -1,18 +1,21 @@
 import React, { useRef, useState } from "react";
 import { Grid, Button, TextField } from "@mui/material";
-import { CSSTransition } from "react-transition-group";
+import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "@mui/material/IconButton";
+
 import "./LoginMode.css";
 
 const LoginMode = (props) => {
-  const [inProp, setIn] = useState(false);
-  const on = () => {
-    setIn(true);
-  };
-  const off = () => {
-    setIn(false);
-  };
   return (
     <Grid container sx={{ height: "100%", width: "100%" }}>
+      <IconButton
+        aria-label="delete"
+        size="large"
+        sx={{ position: "absolute", top: "10px", right: "10px" }}
+        onClick={props.onClose}
+      >
+        <CloseIcon fontSize="inherit" />
+      </IconButton>
       <Grid xs={6} item className="login-left">
         <h1 style={{ color: "white", fontSize: "60px", margin: 1 }}>
           Hello, There!

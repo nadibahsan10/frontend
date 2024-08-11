@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./SignupMode.css";
 import {
   Grid,
@@ -9,24 +9,44 @@ import {
   Link,
   FormControl,
   InputLabel,
-  FormLabel,
-  RadioGroup,
-  Radio,
-  FormControlLabel,
-  FormHelperText,
-  FormGroup,
+  Typography,
 } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "@mui/material/IconButton";
 const SignupMode = (props) => {
   const [userType, setUserType] = useState("");
   const [gender, setGender] = useState("");
 
-  const handleChange = (event) => {
+  const imgRef = useRef([]);
+  const uploadImage = () => {
+    imgRef.current.click();
+  };
+
+  const [img, setImg] = useState(null);
+  const [imgName, setImgName] = useState(null);
+  const imgPreview = (event) => {
+    let file = event.target.files[0];
+    if (!file) {
+      setImg(null);
+      setImgName(null);
+    } else {
+      setImg(URL.createObjectURL(file));
+      setImgName(file.name);
+    }
+  };
+
+  const handleUser = (event) => {
     setUserType(event.target.value);
   };
 
   const handleGender = (event) => {
     setGender(event.target.value);
   };
+
+  const SubmitHandler = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <Grid
       container
@@ -37,6 +57,14 @@ const SignupMode = (props) => {
         borderRadius: "4px",
       }}
     >
+      <IconButton
+        aria-label="delete"
+        size="large"
+        sx={{ position: "absolute", top: "10px", right: "10px" }}
+        onClick={props.onClose}
+      >
+        <CloseIcon fontSize="inherit" color="white" />
+      </IconButton>
       <Grid xs={6} item className="signup-left">
         <h2>Create a new account</h2>
         <hr
@@ -46,7 +74,11 @@ const SignupMode = (props) => {
             width: "100%",
           }}
         />
-        <form action="">
+        <form
+          onSubmit={SubmitHandler}
+          method="POST"
+          enctype="multipart/form-data"
+        >
           <TextField
             label="First Name"
             type="Text"
@@ -86,7 +118,7 @@ const SignupMode = (props) => {
                   id="demo-simple-select"
                   value={userType}
                   label="User Type"
-                  onChange={handleChange}
+                  onChange={handleUser}
                 >
                   <MenuItem value="student">Student</MenuItem>
                   <MenuItem value="alumni">Alumni</MenuItem>
@@ -110,6 +142,7 @@ const SignupMode = (props) => {
           />
 
           <Button
+            type="submit"
             variant="contained"
             color="primary"
             sx={{
@@ -130,20 +163,35 @@ const SignupMode = (props) => {
           />
           <p>
             Already have an account?
-            <Link onClick={props.changeMode}> Login</Link>
+            <Button
+              type="button"
+              variant="text"
+              disableRipple
+              size="small"
+              onClick={props.changeMode}
+            >
+              Login
+            </Button>
           </p>
+          <input
+            type="file"
+            onChange={imgPreview}
+            ref={imgRef}
+            style={{ display: "none" }}
+          />
         </form>
       </Grid>
 
       <Grid xs={6} item className="signup-right">
-        <img src="./profileImage.webp" alt="profilePicture" />
-        <h4>This is picture</h4>
+        <img src={img ? img : "./profileImage.webp"} alt="profilePicture" />
+        <h4>{imgName ? imgName : "Upload you profile Picture"}</h4>
         <Button
           variant="contained"
           color="white"
           sx={{ width: "100%", padding: "10px 0", color: "primary.main" }}
+          onClick={uploadImage}
         >
-          UPLOAD A PROFILE PICTURE
+          UPLOAD
         </Button>
       </Grid>
     </Grid>

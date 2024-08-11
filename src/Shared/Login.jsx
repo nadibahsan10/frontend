@@ -5,7 +5,7 @@ import "./Login.css";
 import LoginMode from "./LoginMode";
 import SignupMode from "./SignupMode";
 
-const Login = () => {
+const Login = (props) => {
   const [isLoginMode, setIsLoginMode] = useState(true);
   const loginMode = () => {
     setIsLoginMode(true);
@@ -16,9 +16,9 @@ const Login = () => {
   return (
     <div className="login-main">
       {isLoginMode ? (
-        <LoginMode changeMode={signupMode} />
+        <LoginMode changeMode={signupMode} onClose={props.onClose} />
       ) : (
-        <SignupMode changeMode={loginMode} />
+        <SignupMode changeMode={loginMode} onClose={props.onClose} />
       )}
     </div>
   );

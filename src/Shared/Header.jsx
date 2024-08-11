@@ -46,7 +46,7 @@ function Header() {
         aria-describedby="login-modal-description"
       >
         <Box>
-          <Login />
+          <Login onClose={closeLoginModal} />
         </Box>
       </Modal>
       <AppBar position="static" sx={{ boxShadow: "none" }} color="white">
