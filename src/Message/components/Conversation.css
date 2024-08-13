@@ -1,0 +1,5 @@
+.message-conversation {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}

@@ -3,6 +3,7 @@ import { Container, TextField, Grid, Button } from "@mui/material";
 
 import ProfilePicture from "../../Shared/Avatar";
 import Participants from "../components/Participants";
+import Conversation from "../components/Conversation";
 import "./Message.css";
 
 const Message = () => {
@@ -30,8 +31,7 @@ const Message = () => {
         </Grid>
         <Grid item xs={8}>
           <div className="conversation">
-            <br />
-            <h1>how..How Cool is thi</h1>
+            <Conversation />
           </div>
         </Grid>
       </Grid>
