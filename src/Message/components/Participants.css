@@ -1,0 +1,17 @@
+.dp {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: row !important;
+  padding: 20px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  background-color: rgb(221, 221, 221);
+  position: relative;
+}
+.time {
+  position: absolute;
+  top: -5px;
+  right: 10px;
+  font-size: 12px;
+}

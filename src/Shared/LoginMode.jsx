@@ -4,7 +4,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 
 import "./LoginMode.css";
-import { Password } from "@mui/icons-material";
 
 const LoginMode = (props) => {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -72,6 +71,7 @@ const LoginMode = (props) => {
         />
         <br />
         <TextField
+          required
           onChange={handleChange}
           name="password"
           type="password"
