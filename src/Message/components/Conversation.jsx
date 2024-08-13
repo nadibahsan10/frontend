@@ -6,22 +6,13 @@ import "./Conversation.css";
 const Conversation = () => {
   return (
     <div className="message-conversation">
-      <Sent />
-      <Recived />
-      <Sent />
-      <Recived />
-      <Sent />
-      <Recived />
-      <Sent />
-      <Recived />
-      <Sent />
-      <Recived />
-      <Sent />
-      <Recived />
-      <Sent />
-      <Recived />
-      <Sent />
-      <Recived />
+      <Sent message="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex culpa quisquam quas assumenda autem ullam ipsam sint ad dolor similique." />
+      <Recived message="Lorem ipsum dolor sit amet consectetur adipisicing elit" />
+
+      <Recived message="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex culpa quisquam quas assumenda autem ullam ipsa" />
+      <Sent message="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
+      <Recived message="Lorem ipsum dolor sit " />
+      <Sent message="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex culpa quisquam quas assumenda autem" />
     </div>
   );
 };
