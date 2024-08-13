@@ -7,3 +7,35 @@
   left: 50%;
   translate: -50% -50%;
 }
+@media (max-width: 1200px) {
+  .login-main {
+    width: 80%;
+    height: auto; /* Adjust height as needed */
+  }
+}
+
+/* For screens smaller than 992px */
+@media (max-width: 992px) {
+  .login-main {
+    width: 90%;
+    height: auto; /* Adjust height as needed */
+  }
+}
+
+/* For screens smaller than 768px */
+@media (max-width: 768px) {
+  .login-main {
+    width: 95%;
+    height: auto; /* Adjust height as needed */
+  }
+}
+
+/* For screens smaller than 576px */
+@media (max-width: 576px) {
+  .login-main {
+    width: 100%;
+    height: auto; /* Adjust height as needed */
+    padding: 10px; /* Add padding if needed for better spacing */
+    box-sizing: border-box; /* Ensure padding is included in width calculation */
+  }
+}

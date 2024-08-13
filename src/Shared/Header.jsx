@@ -41,7 +41,6 @@ function Header() {
     <>
       <Modal
         open={loginModal}
-        onClose={closeLoginModal}
         aria-labelledby="login-modal-title"
         aria-describedby="login-modal-description"
       >

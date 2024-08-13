@@ -25,6 +25,7 @@ const SignupMode = (props) => {
   const [img, setImg] = useState(null);
   const [imgName, setImgName] = useState(null);
   const imgPreview = (event) => {
+    let { name } = event.target;
     let file = event.target.files[0];
     if (!file) {
       setImg(null);
@@ -32,19 +33,61 @@ const SignupMode = (props) => {
     } else {
       setImg(URL.createObjectURL(file));
       setImgName(file.name);
+      setForm((prev) => {
+        return {
+          ...prev,
+          [name]: file,
+        };
+      });
     }
   };
 
   const handleUser = (event) => {
     setUserType(event.target.value);
+    const { name, value } = event.target;
+    setForm((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
   };
 
   const handleGender = (event) => {
     setGender(event.target.value);
+    const { name, value } = event.target;
+    setForm((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
   };
 
   const SubmitHandler = (event) => {
     event.preventDefault();
+    console.log(form);
+  };
+
+  //Form state
+  const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    gender: "",
+    userType: "",
+    profilePicture: "",
+  });
+
+  const handleChange = (event) => {
+    let { name, value } = event.target;
+    setForm((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
   };
 
   return (
@@ -77,16 +120,22 @@ const SignupMode = (props) => {
         <form
           onSubmit={SubmitHandler}
           method="POST"
-          enctype="multipart/form-data"
+          encType="multipart/form-data"
         >
           <TextField
             label="First Name"
+            name="firstName"
+            onChange={handleChange}
+            required
             type="Text"
             variant="outlined"
             sx={{ marginTop: "10px", width: "100%" }}
           />
           <TextField
             label="Last Name"
+            name="lastName"
+            onChange={handleChange}
+            required
             type="Text"
             variant="outlined"
             sx={{ marginTop: "10px", width: "100%" }}
@@ -97,6 +146,8 @@ const SignupMode = (props) => {
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Gender</InputLabel>
                 <Select
+                  required
+                  name="gender"
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   value={gender}
@@ -114,6 +165,8 @@ const SignupMode = (props) => {
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">User Type</InputLabel>
                 <Select
+                  required
+                  name="userType"
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   value={userType}
@@ -129,13 +182,19 @@ const SignupMode = (props) => {
           </Grid>
 
           <TextField
+            required
+            name="email"
             label="Personal Email / University Email "
-            type="Text"
+            type="email"
             variant="outlined"
+            onChange={handleChange}
             sx={{ marginTop: "10px", width: "100%" }}
           />
           <TextField
+            required
+            name="password"
             label="Password"
+            onChange={handleChange}
             type="Password"
             variant="outlined"
             sx={{ marginTop: "10px", width: "100%" }}
@@ -174,6 +233,7 @@ const SignupMode = (props) => {
             </Button>
           </p>
           <input
+            name="profilePicture"
             type="file"
             onChange={imgPreview}
             ref={imgRef}
