@@ -4,6 +4,7 @@ import { Container, TextField, Grid, Button } from "@mui/material";
 import ProfilePicture from "../../Shared/Avatar";
 import Participants from "../components/Participants";
 import Conversation from "../components/Conversation";
+import SendIcon from "@mui/icons-material/Send";
 import "./Message.css";
 
 const Message = () => {
@@ -32,6 +33,27 @@ const Message = () => {
         <Grid item xs={8}>
           <div className="conversation">
             <Conversation />
+          </div>
+          <div className="message-input">
+            <Grid container>
+              <Grid item xs={10}>
+                <TextField
+                  variant="outlined"
+                  label="Write a Message"
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={2}>
+                <Button
+                  variant="contained"
+                  color="white"
+                  fullWidth
+                  sx={{ marginLeft: "5px", height: "55px" }}
+                >
+                  <SendIcon color="primary" />
+                </Button>
+              </Grid>
+            </Grid>
           </div>
         </Grid>
       </Grid>
