@@ -46,11 +46,11 @@ const Message = () => {
               <Grid item xs={2}>
                 <Button
                   variant="contained"
-                  color="white"
+                  color="primary"
                   fullWidth
                   sx={{ marginLeft: "5px", height: "55px" }}
                 >
-                  <SendIcon color="primary" />
+                  <SendIcon />
                 </Button>
               </Grid>
             </Grid>
