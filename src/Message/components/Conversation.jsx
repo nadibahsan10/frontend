@@ -10,7 +10,7 @@ const Conversation = () => {
       <Recived message="Lorem ipsum dolor sit amet consectetur adipisicing elit" />
 
       <Recived message="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex culpa quisquam quas assumenda autem ullam ipsa" />
-      <Sent message="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
+      <Sent message="Lorem ipsum dolor sit amet consectetur g elit." />
       <Recived message="Lorem ipsum dolor sit " />
       <Sent message="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex culpa quisquam quas assumenda autem" />
     </div>
