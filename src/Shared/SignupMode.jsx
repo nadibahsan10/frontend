@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import axios from "axios";
 import "./SignupMode.css";
 import {
@@ -14,9 +14,12 @@ import CircularProgress from "@mui/material/CircularProgress";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 
+import { AuthContext } from "../Auth/AuthContext";
 import ErrorModal from "./ErrorModal";
 
 const SignupMode = (props) => {
+  const auth = useContext(AuthContext);
+
   const [userType, setUserType] = useState("");
   const [gender, setGender] = useState("");
   const [error, setError] = useState(null);
@@ -103,6 +106,9 @@ const SignupMode = (props) => {
         }
       );
       console.log(response.data);
+      var user = response.data.user;
+
+      auth.login(user);
       setSuccess(true);
       setIsloading(false);
       props.onClose();

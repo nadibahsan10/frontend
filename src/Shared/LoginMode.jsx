@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import { Grid, Button, TextField } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
@@ -8,7 +8,10 @@ import "./LoginMode.css";
 import axios from "axios";
 
 import ErrorModal from "./ErrorModal";
+import { AuthContext } from "../Auth/AuthContext";
 const LoginMode = (props) => {
+  const auth = useContext(AuthContext);
+
   const [isLoading, setIsloading] = useState(false);
   const [error, setError] = useState(null);
   const closeError = () => {
@@ -32,8 +35,11 @@ const LoginMode = (props) => {
         ...form,
       });
 
-      console.log(response.data);
+      var user = response.data.user;
+
+      auth.login(user);
       setIsloading(false);
+
       props.onClose();
     } catch (err) {
       setError(err);
