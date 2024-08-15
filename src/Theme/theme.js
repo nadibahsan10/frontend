@@ -8,6 +8,12 @@ const theme = createTheme({
     white: {
       main: "#ffffff",
     },
+    black: {
+      main: "#000000",
+    },
+    success: {
+      main: "#4CAF50", // Replace with your desired green color
+    },
   },
 });
 
