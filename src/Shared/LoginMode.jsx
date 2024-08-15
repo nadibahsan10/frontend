@@ -4,6 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 
 import "./LoginMode.css";
+import axios from "axios";
 
 const LoginMode = (props) => {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -14,9 +15,24 @@ const LoginMode = (props) => {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(form);
+
+    axios
+      .post("http://localhost:3000/auth/login", { email, password })
+      .then((response) => {
+        console.log(response.data.message);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.error("Error response:", error.response.data.message);
+          console.error("Status code:", error.response.status);
+        } else if (error.request) {
+          console.error("Error request:", error.request);
+        } else {
+          console.error("Error message:", error.message);
+        }
+      });
   };
 
   return (

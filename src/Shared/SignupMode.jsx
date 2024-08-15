@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import axios from "axios";
 import "./SignupMode.css";
 import {
   Grid,
@@ -62,9 +63,34 @@ const SignupMode = (props) => {
     });
   };
 
-  const SubmitHandler = (event) => {
+  const SubmitHandler = async (event) => {
     event.preventDefault();
-    console.log(form);
+
+    const data = new FormData();
+    data.append("firstName", form.firstName);
+    data.append("lastName", form.lastName);
+    data.append("email", form.email);
+    data.append("password", form.password);
+    data.append("gender", form.gender);
+    data.append("userType", form.userType);
+    if (form.profilePicture) {
+      data.append("profilePicture", form.profilePicture); // Append file to FormData
+    }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/auth/signup",
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log("sent Data");
+    } catch (error) {
+      console.error("There was an error!", error.message);
+    }
   };
 
   //Form state
