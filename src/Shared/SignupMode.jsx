@@ -107,7 +107,7 @@ const SignupMode = (props) => {
       );
 
       var user = response.data.user;
-      ocalStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("user", JSON.stringify(user));
       auth.login(user);
       setSuccess(true);
       setIsloading(false);

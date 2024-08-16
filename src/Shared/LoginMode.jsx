@@ -44,6 +44,10 @@ const LoginMode = (props) => {
 
       props.onClose();
     } catch (err) {
+      if (err.request) {
+        console.log("");
+      }
+
       setError(err);
       setIsloading(false);
     }
