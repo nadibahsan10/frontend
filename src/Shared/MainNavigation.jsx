@@ -1,0 +1,195 @@
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { Typography } from "@mui/material";
+const StudentMainNav = () => {
+  return (
+    <>
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          `nav-link ${isActive ? "active-link" : ""}`
+        }
+      >
+        <Typography variant="button" className="link" sx={{ mx: 2, my: 2 }}>
+          Home
+        </Typography>
+      </NavLink>
+      <NavLink
+        to="/feed"
+        className={({ isActive }) =>
+          `nav-link ${isActive ? "active-link" : ""}`
+        }
+      >
+        <Typography variant="button" className="link" sx={{ mx: 2, my: 2 }}>
+          Student's Feed
+        </Typography>
+      </NavLink>
+      <NavLink
+        to="/market"
+        className={({ isActive }) =>
+          `nav-link ${isActive ? "active-link" : ""}`
+        }
+      >
+        <Typography variant="button" className="link" sx={{ mx: 2, my: 2 }}>
+          Market Place
+        </Typography>
+      </NavLink>
+      <NavLink
+        to="/alumni"
+        className={({ isActive }) =>
+          `nav-link ${isActive ? "active-link" : ""}`
+        }
+      >
+        <Typography variant="button" className="link" sx={{ mx: 2, my: 2 }}>
+          Alumni
+        </Typography>
+      </NavLink>
+      <NavLink
+        to="/about"
+        className={({ isActive }) =>
+          `nav-link ${isActive ? "active-link" : ""}`
+        }
+      >
+        <Typography variant="button" className="link" sx={{ mx: 2, my: 2 }}>
+          About Us
+        </Typography>
+      </NavLink>
+      <NavLink
+        to="/contact"
+        className={({ isActive }) =>
+          `nav-link ${isActive ? "active-link" : ""}`
+        }
+      >
+        <Typography variant="button" className="link" sx={{ mx: 2, my: 2 }}>
+          Contact Us
+        </Typography>
+      </NavLink>
+    </>
+  );
+};
+
+const AlumniMainNav = () => {
+  return (
+    <>
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          `nav-link ${isActive ? "active-link" : ""}`
+        }
+      >
+        <Typography variant="button" className="link" sx={{ mx: 2, my: 2 }}>
+          Home
+        </Typography>
+      </NavLink>
+      <NavLink
+        to="/alumnipanel"
+        className={({ isActive }) =>
+          `nav-link ${isActive ? "active-link" : ""}`
+        }
+      >
+        <Typography variant="button" className="link" sx={{ mx: 2, my: 2 }}>
+          Alumni Panel
+        </Typography>
+      </NavLink>
+      <NavLink
+        to="/feed"
+        className={({ isActive }) =>
+          `nav-link ${isActive ? "active-link" : ""}`
+        }
+      >
+        <Typography variant="button" className="link" sx={{ mx: 2, my: 2 }}>
+          Student's Feed
+        </Typography>
+      </NavLink>
+      <NavLink
+        to="/market"
+        className={({ isActive }) =>
+          `nav-link ${isActive ? "active-link" : ""}`
+        }
+      >
+        <Typography variant="button" className="link" sx={{ mx: 2, my: 2 }}>
+          Market Place
+        </Typography>
+      </NavLink>
+      <NavLink
+        to="/alumni"
+        className={({ isActive }) =>
+          `nav-link ${isActive ? "active-link" : ""}`
+        }
+      >
+        <Typography variant="button" className="link" sx={{ mx: 2, my: 2 }}>
+          Alumni
+        </Typography>
+      </NavLink>
+      <NavLink
+        to="/about"
+        className={({ isActive }) =>
+          `nav-link ${isActive ? "active-link" : ""}`
+        }
+      >
+        <Typography variant="button" className="link" sx={{ mx: 2, my: 2 }}>
+          About Us
+        </Typography>
+      </NavLink>
+      <NavLink
+        to="/contact"
+        className={({ isActive }) =>
+          `nav-link ${isActive ? "active-link" : ""}`
+        }
+      >
+        <Typography variant="button" className="link" sx={{ mx: 2, my: 2 }}>
+          Contact Us
+        </Typography>
+      </NavLink>
+    </>
+  );
+};
+
+const GuestMainNav = () => {
+  return (
+    <>
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          `nav-link ${isActive ? "active-link" : ""}`
+        }
+      >
+        <Typography variant="button" className="link" sx={{ mx: 2, my: 2 }}>
+          Home
+        </Typography>
+      </NavLink>
+      <NavLink
+        to="/market"
+        className={({ isActive }) =>
+          `nav-link ${isActive ? "active-link" : ""}`
+        }
+      >
+        <Typography variant="button" className="link" sx={{ mx: 2, my: 2 }}>
+          Market Place
+        </Typography>
+      </NavLink>
+      <NavLink
+        to="/about"
+        className={({ isActive }) =>
+          `nav-link ${isActive ? "active-link" : ""}`
+        }
+      >
+        <Typography variant="button" className="link" sx={{ mx: 2, my: 2 }}>
+          About Us
+        </Typography>
+      </NavLink>
+      <NavLink
+        to="/contact"
+        className={({ isActive }) =>
+          `nav-link ${isActive ? "active-link" : ""}`
+        }
+      >
+        <Typography variant="button" className="link" sx={{ mx: 2, my: 2 }}>
+          Contact Us
+        </Typography>
+      </NavLink>
+    </>
+  );
+};
+
+export { GuestMainNav, StudentMainNav, AlumniMainNav };
