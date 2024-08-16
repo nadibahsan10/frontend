@@ -37,6 +37,8 @@ const LoginMode = (props) => {
 
       var user = response.data.user;
 
+      localStorage.setItem("user", JSON.stringify(user));
+
       auth.login(user);
       setIsloading(false);
 

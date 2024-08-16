@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -22,6 +22,12 @@ import Login from "./Login";
 import LoginMode from "./LoginMode";
 function Header() {
   const auth = useContext(AuthContext);
+  useEffect(() => {
+    var user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      auth.login(user);
+    }
+  }, []);
 
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);

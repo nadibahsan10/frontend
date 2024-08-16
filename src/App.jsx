@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Header from "./Shared/Header";
 import Message from "./Message/pages/Message";
 import { AuthContext } from "./Auth/AuthContext";
@@ -7,6 +7,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 
 const App = () => {
+  
+
+
+
   let [isLoggedIn, setIsLoggedIn] = useState(false);
   let [email, setEmail] = useState(null);
   let [id, setId] = useState(null);
@@ -25,6 +29,7 @@ const App = () => {
     setId(null);
     setProfilePicture(null);
     setName(null);
+    localStorage.removeItem("user");
   });
 
   return (
