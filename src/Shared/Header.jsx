@@ -13,7 +13,7 @@ import Button from "@mui/material/Button";
 import { Modal } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../Auth/AuthContext";
 import { GuestMainNav, StudentMainNav, AlumniMainNav } from "./MainNavigation";
@@ -24,24 +24,11 @@ import Login from "./Login";
 import LoginMode from "./LoginMode";
 
 function Header() {
+  const navigate = useNavigate();
   const [menuNavBar, setMenuNavBar] = useState(null);
   const [mainNavBar, setMainNavBar] = useState(null);
   const auth = useContext(AuthContext);
-  const student = [
-    { name: "Home", link: "/" },
-    { name: "Market Place", link: "/market" },
-    { name: "News Feed", link: "/feed" },
-    { name: "Alumni", link: "/alumni" },
-    { name: "About Us", link: "/about" },
-    { name: "Contact Us", link: "/contact" },
-  ];
 
-  const guest = [
-    { name: "Home", link: "/" },
-    { name: "Market Place", link: "/market" },
-    { name: "About Us", link: "/about" },
-    { name: "Contact Us", link: "/contact" },
-  ];
   useEffect(() => {
     var user = JSON.parse(localStorage.getItem("user"));
 
@@ -49,6 +36,11 @@ function Header() {
       auth.login(user);
     }
   }, []);
+  useEffect(() => {
+    if (!auth.isLoggedIn) {
+      navigate("/");
+    }
+  }, [auth]);
 
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -228,7 +220,7 @@ function Header() {
                   color="primary"
                   onClick={openLoginModal}
                 >
-                  LOGIN
+                  JOIN
                 </Button>
               )}
             </Box>
