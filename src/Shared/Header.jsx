@@ -12,7 +12,11 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import { Modal } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import Tooltip from "@mui/material/Tooltip";
+
+import MessageIcon from "@mui/icons-material/Message";
+
 import { NavLink, Link, useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../Auth/AuthContext";
@@ -25,8 +29,7 @@ import LoginMode from "./LoginMode";
 
 function Header() {
   const navigate = useNavigate();
-  const [menuNavBar, setMenuNavBar] = useState(null);
-  const [mainNavBar, setMainNavBar] = useState(null);
+
   const auth = useContext(AuthContext);
 
   useEffect(() => {
@@ -72,6 +75,19 @@ function Header() {
   const loginContent = (
     <>
       <div className="header-avatar">
+        <div style={{ marginRight: "20px" }}>
+          <Tooltip title="Messages">
+            <IconButton component={Link} to="/inbox">
+              <MessageIcon color="primary" />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Notifications">
+            <IconButton component={Link} to="/notification">
+              <NotificationsIcon color="primary" />
+            </IconButton>
+          </Tooltip>
+        </div>
+
         <h4 style={{ marginRight: "10px" }}>{auth.name}</h4>
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
           <Avatar

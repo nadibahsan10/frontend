@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect, useContext } from "react";
 import Header from "./Shared/Header";
 import Message from "./Message/pages/Message";
 import { AuthContext } from "./Auth/AuthContext";
+import Feed from "./Feed/pages/Feed";
 
 import {
   BrowserRouter as Router,
@@ -12,7 +13,6 @@ import {
 import "./App.css";
 
 const App = () => {
-  
   let [isLoggedIn, setIsLoggedIn] = useState(false);
   let [email, setEmail] = useState(null);
   let [id, setId] = useState(null);
@@ -36,8 +36,6 @@ const App = () => {
     setName(null);
     setRole(null);
     localStorage.removeItem("user");
-
-    
   }, []);
 
   const auth = useContext(AuthContext);
@@ -58,7 +56,13 @@ const App = () => {
       >
         <Header />
         <Routes>
-          <Route path="/" element={<Message />} />
+          <Route path="/" element={<h1>This is my Home</h1>} />
+          <Route
+            path="/notification"
+            element={<h1>This is my notification</h1>}
+          />
+          <Route path="/feed" element={<Feed />} />
+          <Route path="/inbox" element={<Message />} />
           <Route path="/market" element={<h2>Hello there</h2>} />
           <Route path="/about" element={<h2>Hello there from about</h2>} />
         </Routes>

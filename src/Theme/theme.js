@@ -14,6 +14,9 @@ const theme = createTheme({
     success: {
       main: "#4CAF50", // Replace with your desired green color
     },
+    secondary: {
+      main: "#999999",
+    },
   },
 });
 
