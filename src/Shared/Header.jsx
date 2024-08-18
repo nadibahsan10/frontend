@@ -10,7 +10,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import { Modal } from "@mui/material";
+import { Modal, CircularProgress } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Tooltip from "@mui/material/Tooltip";
@@ -25,26 +25,39 @@ import { Student, Guest, Alumni } from "./Navigation";
 
 import "./Header.css";
 import Login from "./Login";
-import LoginMode from "./LoginMode";
 
 function Header() {
+  const [isLoading, setIsloading] = useState(true);
+  const loadingOn = () => {
+    setIsloading(true);
+  };
+  const loadingOff = () => {
+    setIsloading(false);
+  };
+
   const navigate = useNavigate();
 
   const auth = useContext(AuthContext);
 
   useEffect(() => {
-    var user = JSON.parse(localStorage.getItem("user"));
+    var token = JSON.parse(localStorage.getItem("token"));
 
-    if (user) {
-      auth.login(user);
+    if (token) {
+      const user = JSON.parse(atob(token.split(".")[1]));
+      if (user.exp * 1000 < Date.now()) {
+        handleLogOut();
+      } else {
+        console.log(user.exp, Date.now());
+        auth.login(user);
+      }
     }
+    loadingOff();
   }, []);
-  useEffect(() => {
-    if (!auth.isLoggedIn) {
-      navigate("/");
-    }
-  }, [auth]);
 
+  const handleLogOut = () => {
+    auth.logout();
+    navigate("/");
+  };
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [loginModal, setLoginModal] = useState(false);
@@ -113,7 +126,7 @@ function Header() {
         onClose={handleCloseUserMenu}
       >
         <MenuItem key="1" onClick={handleCloseUserMenu}>
-          <Typography textAlign="center" onClick={auth.logout}>
+          <Typography textAlign="center" onClick={handleLogOut}>
             Logout
           </Typography>
         </MenuItem>
@@ -125,6 +138,17 @@ function Header() {
 
   return (
     <>
+      <Modal open={isLoading}>
+        <Box
+          display="flex"
+          alignItems="center"
+          height="100vh"
+          justifyContent="center"
+        >
+          <CircularProgress size={100} />
+        </Box>
+      </Modal>
+
       <Modal
         open={loginModal}
         aria-labelledby="login-modal-title"
