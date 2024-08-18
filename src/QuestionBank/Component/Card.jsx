@@ -23,14 +23,14 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 
-function Card() {
+function Card(props) {
     return (
-        <Box sx={{ flexGrow: 1, background: '#EBEBEB' }}>
+        <Box sx={{ flexGrow: 1, background: '#EBEBEB', borderRadius: "10px", width: "90%", margin: "1% 5%"}}>
             <Grid container spacing={1}>
                 <Grid item xs={8}>
                     <Item>
-                        <h2>Software Engineering</h2>
-                        <p>Final Examination - Fall 2022</p>
+                        <h2>{props.name}</h2>
+                        <p>{props.type} - {props.trimester}</p>
                     </Item>
                 </Grid>
                 <Grid item xs={4}>
@@ -50,7 +50,7 @@ function Card() {
                     <Item>
                         <div className='likeBtn'>
                             <FavoriteIcon sx={{ color: "red" }} />
-                            <span>787</span>
+                            <span>{props.likes}</span>
                         </div>
                     </Item>
                 </Grid>
