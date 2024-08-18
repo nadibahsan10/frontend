@@ -1,12 +1,23 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import { Grid, Button, TextField } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import "./LoginMode.css";
 import axios from "axios";
 
+import ErrorModal from "./ErrorModal";
+import { AuthContext } from "../Auth/AuthContext";
 const LoginMode = (props) => {
+  const auth = useContext(AuthContext);
+
+  const [isLoading, setIsloading] = useState(false);
+  const [error, setError] = useState(null);
+  const closeError = () => {
+    setError(null);
+  };
+
   const [form, setForm] = useState({ email: "", password: "" });
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -18,100 +29,126 @@ const LoginMode = (props) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    axios
-      .post("http://localhost:3000/auth/login", { email, password })
-      .then((response) => {
-        console.log(response.data.message);
-      })
-      .catch((error) => {
-        if (error.response) {
-          console.error("Error response:", error.response.data.message);
-          console.error("Status code:", error.response.status);
-        } else if (error.request) {
-          console.error("Error request:", error.request);
-        } else {
-          console.error("Error message:", error.message);
-        }
+    try {
+      setIsloading(true);
+      const response = await axios.post("http://localhost:3000/auth/login", {
+        ...form,
       });
+
+      var user = response.data.user;
+
+      localStorage.setItem("user", JSON.stringify(user));
+
+      auth.login(user);
+      setIsloading(false);
+
+      props.onClose();
+    } catch (err) {
+      if (err.request) {
+        console.log("");
+      }
+
+      setError(err);
+      setIsloading(false);
+    }
   };
 
-  return (
-    <Grid container sx={{ height: "100%", width: "100%" }}>
-      <IconButton
-        aria-label="delete"
-        size="large"
-        sx={{ position: "absolute", top: "10px", right: "10px" }}
-        onClick={props.onClose}
-      >
-        <CloseIcon fontSize="inherit" />
-      </IconButton>
-      <Grid xs={6} item className="login-left">
-        <h1 style={{ color: "white", fontSize: "60px", margin: 1 }}>
-          Hello, There!
-        </h1>
-        <p style={{ fontSize: "20px", textAlign: "center", color: "white" }}>
-          Enter your details and start your journey with <br />
-          us
-        </p>
-        <br />
-        <Button
-          variant="contained"
-          sx={{
-            width: "100%",
-            color: "primary.main",
-            padding: "10px 0px",
-            fontSize: "20px",
-          }}
-          color="white"
-          onClick={props.changeMode}
-        >
-          Signup
-        </Button>
-      </Grid>
-      <Grid
-        component="form"
-        onSubmit={handleSubmit}
-        item
-        xs={6}
-        className="login-right"
-      >
-        <h1>LOGIN</h1>
-        <TextField
-          required
-          onChange={handleChange}
-          name="email"
-          type="email"
-          sx={{ width: "100%" }}
-          label="Email"
-          variant="outlined"
-        />
-        <br />
-        <TextField
-          required
-          onChange={handleChange}
-          name="password"
-          type="password"
-          sx={{ width: "100%" }}
-          label="Password"
-          variant="outlined"
-        />
-        <br />
-        <br />
-        <Button
-          type="submit"
-          variant="contained"
-          sx={{
-            width: "100%",
+  const content = (
+    <>
+      <h1>LOGIN</h1>
+      <TextField
+        required
+        onChange={handleChange}
+        value={form.email}
+        name="email"
+        type="email"
+        sx={{ width: "100%" }}
+        label="Email"
+        variant="outlined"
+      />
+      <br />
+      <TextField
+        required
+        onChange={handleChange}
+        value={form.password}
+        name="password"
+        type="password"
+        sx={{ width: "100%" }}
+        label="Password"
+        variant="outlined"
+      />
+      <br />
+      <br />
+      <Button
+        type="submit"
+        variant="contained"
+        sx={{
+          width: "100%",
 
-            padding: "10px 0px",
-            fontSize: "20px",
-          }}
+          padding: "10px 0px",
+          fontSize: "20px",
+        }}
+        color="primary"
+      >
+        LOGIN
+      </Button>
+    </>
+  );
+
+  return (
+    <>
+      {error && (
+        <ErrorModal
           color="primary"
+          handleClose={closeError}
+          title="Login Failed"
+          message={error.response.data.message}
+        />
+      )}
+
+      <Grid container sx={{ height: "100%", width: "100%" }}>
+        <IconButton
+          aria-label="delete"
+          size="large"
+          sx={{ position: "absolute", top: "10px", right: "10px" }}
+          onClick={props.onClose}
         >
-          LOGIN
-        </Button>
+          <CloseIcon fontSize="inherit" />
+        </IconButton>
+        <Grid xs={6} item className="login-left">
+          <h1 style={{ color: "white", fontSize: "60px", margin: 1 }}>
+            Hello, There!
+          </h1>
+          <p style={{ fontSize: "20px", textAlign: "center", color: "white" }}>
+            Enter your details and start your journey with <br />
+            us
+          </p>
+          <br />
+          <Button
+            variant="contained"
+            sx={{
+              width: "100%",
+              color: "primary.main",
+              padding: "10px 0px",
+              fontSize: "20px",
+            }}
+            color="white"
+            onClick={props.changeMode}
+          >
+            Signup
+          </Button>
+        </Grid>
+        <Grid
+          component="form"
+          onSubmit={handleSubmit}
+          item
+          xs={6}
+          className="login-right"
+        >
+          {isLoading ? <CircularProgress /> : content}
+        </Grid>
       </Grid>
-    </Grid>
+    </>
   );
 };
 

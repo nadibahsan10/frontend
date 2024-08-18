@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -12,14 +12,41 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import { Modal } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
-import { NavLink, Link } from "react-router-dom";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import Tooltip from "@mui/material/Tooltip";
+
+import MessageIcon from "@mui/icons-material/Message";
+
+import { NavLink, Link, useNavigate } from "react-router-dom";
+
+import { AuthContext } from "../Auth/AuthContext";
+import { GuestMainNav, StudentMainNav, AlumniMainNav } from "./MainNavigation";
+import { Student, Guest, Alumni } from "./Navigation";
 
 import "./Header.css";
 import Login from "./Login";
 import LoginMode from "./LoginMode";
+
 function Header() {
+  const navigate = useNavigate();
+
+  const auth = useContext(AuthContext);
+
+  useEffect(() => {
+    var user = JSON.parse(localStorage.getItem("user"));
+
+    if (user) {
+      auth.login(user);
+    }
+  }, []);
+  useEffect(() => {
+    if (!auth.isLoggedIn) {
+      navigate("/");
+    }
+  }, [auth]);
+
   const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
   const [loginModal, setLoginModal] = useState(false);
 
   const handleOpenNavMenu = (event) => {
@@ -30,12 +57,71 @@ function Header() {
     setAnchorElNav(null);
   };
 
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
   const openLoginModal = () => {
     setLoginModal(true);
   };
   const closeLoginModal = () => {
     setLoginModal(false);
   };
+
+  const loginContent = (
+    <>
+      <div className="header-avatar">
+        <div style={{ marginRight: "20px" }}>
+          <Tooltip title="Messages">
+            <IconButton component={Link} to="/inbox">
+              <MessageIcon color="primary" />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Notifications">
+            <IconButton component={Link} to="/notification">
+              <NotificationsIcon color="primary" />
+            </IconButton>
+          </Tooltip>
+        </div>
+
+        <h4 style={{ marginRight: "10px" }}>{auth.name}</h4>
+        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+          <Avatar
+            alt="Remy Sharp"
+            src={`http://localhost:3000/${auth.profilePicture}`}
+          />
+        </IconButton>
+      </div>
+      <Menu
+        sx={{ mt: "45px" }}
+        id="menu-appbar"
+        anchorEl={anchorElUser}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        keepMounted
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        open={Boolean(anchorElUser)}
+        onClose={handleCloseUserMenu}
+      >
+        <MenuItem key="1" onClick={handleCloseUserMenu}>
+          <Typography textAlign="center" onClick={auth.logout}>
+            Logout
+          </Typography>
+        </MenuItem>
+      </Menu>
+    </>
+  );
+
+  // const [headers, setHeaders] = useState([]);
 
   return (
     <>
@@ -99,70 +185,15 @@ function Header() {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                <MenuItem onClick={handleCloseNavMenu}>
-                  <NavLink
-                    to="/"
-                    className={({ isActive }) =>
-                      `nav-link ${isActive ? "active-link" : ""}`
-                    }
-                  >
-                    <Typography
-                      className="link"
-                      textAlign="center"
-                      sx={{ color: "black" }}
-                    >
-                      Home
-                    </Typography>
-                  </NavLink>
-                </MenuItem>
-                <MenuItem onClick={handleCloseNavMenu}>
-                  <NavLink
-                    to="/market"
-                    className={({ isActive }) =>
-                      `nav-link ${isActive ? "active-link" : ""}`
-                    }
-                  >
-                    <Typography
-                      className="link"
-                      textAlign="center"
-                      sx={{ color: "black" }}
-                    >
-                      Market Place
-                    </Typography>
-                  </NavLink>
-                </MenuItem>
-                <MenuItem onClick={handleCloseNavMenu}>
-                  <NavLink
-                    to="/about"
-                    className={({ isActive }) =>
-                      `nav-link ${isActive ? "active-link" : ""}`
-                    }
-                  >
-                    <Typography
-                      className="link"
-                      textAlign="center"
-                      sx={{ color: "black" }}
-                    >
-                      About us
-                    </Typography>
-                  </NavLink>
-                </MenuItem>
-                <MenuItem onClick={handleCloseNavMenu}>
-                  <NavLink
-                    to="/contact"
-                    className={({ isActive }) =>
-                      `nav-link ${isActive ? "active-link" : ""}`
-                    }
-                  >
-                    <Typography
-                      className="link"
-                      textAlign="center"
-                      sx={{ color: "black" }}
-                    >
-                      Contact Us
-                    </Typography>
-                  </NavLink>
-                </MenuItem>
+                {auth.role === "student" && (
+                  <Student handleCloseNavMenu={handleCloseNavMenu} />
+                )}
+                {auth.role === "alumni" && (
+                  <Alumni handleCloseNavMenu={handleCloseNavMenu} />
+                )}
+                {auth.role === null && (
+                  <Guest handleCloseNavMenu={handleCloseNavMenu} />
+                )}
               </Menu>
             </Box>
 
@@ -191,72 +222,23 @@ function Header() {
                 display: { xs: "none", md: "flex" },
               }}
             >
-              <NavLink
-                to="/"
-                className={({ isActive }) =>
-                  `nav-link ${isActive ? "active-link" : ""}`
-                }
-              >
-                <Typography
-                  variant="button"
-                  className="link"
-                  sx={{ mx: 2, my: 2 }}
-                >
-                  Home
-                </Typography>
-              </NavLink>
-              <NavLink
-                to="/market"
-                className={({ isActive }) =>
-                  `nav-link ${isActive ? "active-link" : ""}`
-                }
-              >
-                <Typography
-                  variant="button"
-                  className="link"
-                  sx={{ mx: 2, my: 2 }}
-                >
-                  Market Place
-                </Typography>
-              </NavLink>
-              <NavLink
-                to="/about"
-                className={({ isActive }) =>
-                  `nav-link ${isActive ? "active-link" : ""}`
-                }
-              >
-                <Typography
-                  variant="button"
-                  className="link"
-                  sx={{ mx: 2, my: 2 }}
-                >
-                  About Us
-                </Typography>
-              </NavLink>
-              <NavLink
-                to="/contact"
-                className={({ isActive }) =>
-                  `nav-link ${isActive ? "active-link" : ""}`
-                }
-              >
-                <Typography
-                  variant="button"
-                  className="link"
-                  sx={{ mx: 2, my: 2 }}
-                >
-                  Contact Us
-                </Typography>
-              </NavLink>
+              {auth.role === "student" && <StudentMainNav />}
+              {auth.role === "alumni" && <AlumniMainNav />}
+              {auth.role === null && <GuestMainNav />}
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={openLoginModal}
-              >
-                LOGIN
-              </Button>
+              {auth.isLoggedIn ? (
+                loginContent
+              ) : (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={openLoginModal}
+                >
+                  JOIN
+                </Button>
+              )}
             </Box>
           </Toolbar>
         </Container>

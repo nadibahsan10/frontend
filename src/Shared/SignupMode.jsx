@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import axios from "axios";
 import "./SignupMode.css";
 import {
@@ -10,11 +10,28 @@ import {
   FormControl,
   InputLabel,
 } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
+
+import { AuthContext } from "../Auth/AuthContext";
+import ErrorModal from "./ErrorModal";
+
 const SignupMode = (props) => {
+  const auth = useContext(AuthContext);
+
   const [userType, setUserType] = useState("");
   const [gender, setGender] = useState("");
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
+  const closeSuccess = () => {
+    setSuccess(false);
+  };
+
+  const closeError = () => {
+    setError(false);
+  };
+  const [isLoading, setIsloading] = useState(false);
 
   const imgRef = useRef([]);
   const uploadImage = () => {
@@ -78,6 +95,7 @@ const SignupMode = (props) => {
     }
 
     try {
+      setIsloading(true);
       const response = await axios.post(
         "http://localhost:3000/auth/signup",
         data,
@@ -87,9 +105,16 @@ const SignupMode = (props) => {
           },
         }
       );
-      console.log("sent Data");
+
+      var user = response.data.user;
+      localStorage.setItem("user", JSON.stringify(user));
+      auth.login(user);
+      setSuccess(true);
+      setIsloading(false);
+      props.onClose();
     } catch (error) {
-      console.error("There was an error!", error.message);
+      setIsloading(false);
+      setError(error);
     }
   };
 
@@ -113,172 +138,198 @@ const SignupMode = (props) => {
       };
     });
   };
-
-  return (
-    <Grid
-      container
-      sx={{
-        height: "100%",
-        width: "100%",
-        backgroundColor: "White",
-        borderRadius: "4px",
-      }}
-    >
-      <IconButton
-        aria-label="delete"
-        size="large"
-        sx={{ position: "absolute", top: "10px", right: "10px" }}
-        onClick={props.onClose}
+  const formContent = (
+    <>
+      <h2>Create a new account</h2>
+      <hr
+        style={{
+          border: "1px solid #780000",
+          margin: "5px 0",
+          width: "100%",
+        }}
+      />
+      <form
+        onSubmit={SubmitHandler}
+        method="POST"
+        encType="multipart/form-data"
       >
-        <CloseIcon fontSize="inherit" color="white" />
-      </IconButton>
-      <Grid xs={6} item className="signup-left">
-        <h2>Create a new account</h2>
+        <TextField
+          label="First Name"
+          value={form.firstName}
+          name="firstName"
+          onChange={handleChange}
+          required
+          type="Text"
+          variant="outlined"
+          sx={{ marginTop: "10px", width: "100%" }}
+        />
+        <TextField
+          label="Last Name"
+          value={form.lastName}
+          name="lastName"
+          onChange={handleChange}
+          required
+          type="Text"
+          variant="outlined"
+          sx={{ marginTop: "10px", width: "100%" }}
+        />
+
+        <Grid container sx={{ width: "100%", marginTop: "10px" }}>
+          <Grid xs={5.8} item>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+              <Select
+                required
+                name="gender"
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={gender}
+                label="Gender"
+                onChange={handleGender}
+              >
+                <MenuItem value="male">Male</MenuItem>
+                <MenuItem value="female">Female</MenuItem>
+                <MenuItem value="other">Other</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={0.4}></Grid>
+          <Grid xs={5.8} item>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">User Type</InputLabel>
+              <Select
+                required
+                name="userType"
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={userType}
+                label="User Type"
+                onChange={handleUser}
+              >
+                <MenuItem value="student">Student</MenuItem>
+                <MenuItem value="alumni">Alumni</MenuItem>
+                <MenuItem value="guest">Guest</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+        </Grid>
+
+        <TextField
+          required
+          value={form.email}
+          name="email"
+          label="Personal Email / University Email "
+          type="email"
+          variant="outlined"
+          onChange={handleChange}
+          sx={{ marginTop: "10px", width: "100%" }}
+        />
+        <TextField
+          required
+          value={form.password}
+          name="password"
+          label="Password"
+          onChange={handleChange}
+          type="Password"
+          variant="outlined"
+          sx={{ marginTop: "10px", width: "100%" }}
+        />
+
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          sx={{
+            width: "100%",
+            padding: "10px 0",
+            color: "white",
+            marginTop: "10px",
+          }}
+        >
+          SIGNUP
+        </Button>
         <hr
           style={{
             border: "1px solid #780000",
-            margin: "5px 0",
+            margin: "10px 0",
             width: "100%",
           }}
         />
-        <form
-          onSubmit={SubmitHandler}
-          method="POST"
-          encType="multipart/form-data"
-        >
-          <TextField
-            label="First Name"
-            name="firstName"
-            onChange={handleChange}
-            required
-            type="Text"
-            variant="outlined"
-            sx={{ marginTop: "10px", width: "100%" }}
-          />
-          <TextField
-            label="Last Name"
-            name="lastName"
-            onChange={handleChange}
-            required
-            type="Text"
-            variant="outlined"
-            sx={{ marginTop: "10px", width: "100%" }}
-          />
-
-          <Grid container sx={{ width: "100%", marginTop: "10px" }}>
-            <Grid xs={5.8} item>
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Gender</InputLabel>
-                <Select
-                  required
-                  name="gender"
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={gender}
-                  label="Gender"
-                  onChange={handleGender}
-                >
-                  <MenuItem value="male">Male</MenuItem>
-                  <MenuItem value="female">Female</MenuItem>
-                  <MenuItem value="other">Other</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={0.4}></Grid>
-            <Grid xs={5.8} item>
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">User Type</InputLabel>
-                <Select
-                  required
-                  name="userType"
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={userType}
-                  label="User Type"
-                  onChange={handleUser}
-                >
-                  <MenuItem value="student">Student</MenuItem>
-                  <MenuItem value="alumni">Alumni</MenuItem>
-                  <MenuItem value="guest">Guest</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-          </Grid>
-
-          <TextField
-            required
-            name="email"
-            label="Personal Email / University Email "
-            type="email"
-            variant="outlined"
-            onChange={handleChange}
-            sx={{ marginTop: "10px", width: "100%" }}
-          />
-          <TextField
-            required
-            name="password"
-            label="Password"
-            onChange={handleChange}
-            type="Password"
-            variant="outlined"
-            sx={{ marginTop: "10px", width: "100%" }}
-          />
-
+        <p>
+          Already have an account?
           <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            sx={{
-              width: "100%",
-              padding: "10px 0",
-              color: "white",
-              marginTop: "10px",
-            }}
+            type="button"
+            variant="text"
+            disableRipple
+            size="small"
+            onClick={props.changeMode}
           >
-            SIGNUP
+            Login
           </Button>
-          <hr
-            style={{
-              border: "1px solid #780000",
-              margin: "10px 0",
-              width: "100%",
-            }}
-          />
-          <p>
-            Already have an account?
-            <Button
-              type="button"
-              variant="text"
-              disableRipple
-              size="small"
-              onClick={props.changeMode}
-            >
-              Login
-            </Button>
-          </p>
-          <input
-            name="profilePicture"
-            type="file"
-            onChange={imgPreview}
-            ref={imgRef}
-            style={{ display: "none" }}
-          />
-        </form>
-      </Grid>
+        </p>
+        <input
+          name="profilePicture"
+          type="file"
+          onChange={imgPreview}
+          ref={imgRef}
+          style={{ display: "none" }}
+        />
+      </form>
+    </>
+  );
 
-      <Grid xs={6} item className="signup-right">
-        <img src={img ? img : "./profileImage.webp"} alt="profilePicture" />
-        <h4>{imgName ? imgName : "Upload you profile Picture"}</h4>
-        <Button
-          variant="contained"
-          color="white"
-          sx={{ width: "100%", padding: "10px 0", color: "primary.main" }}
-          onClick={uploadImage}
+  return (
+    <>
+      {success && (
+        <ErrorModal
+          title="Congratulations"
+          message="Signup Has been Completed"
+          handleClose={closeSuccess}
+        />
+      )}
+      {error && (
+        <ErrorModal
+          title="Signup Failed"
+          color="primary"
+          message={error.response.data.message}
+          handleClose={closeError}
+        />
+      )}
+      <Grid
+        container
+        sx={{
+          height: "100%",
+          width: "100%",
+          backgroundColor: "White",
+          borderRadius: "4px",
+        }}
+      >
+        <IconButton
+          aria-label="delete"
+          size="large"
+          sx={{ position: "absolute", top: "10px", right: "10px" }}
+          onClick={props.onClose}
         >
-          UPLOAD
-        </Button>
+          <CloseIcon fontSize="inherit" color="white" />
+        </IconButton>
+        <Grid xs={6} item className="signup-left">
+          {isLoading ? <CircularProgress /> : formContent}
+        </Grid>
+
+        <Grid xs={6} item className="signup-right">
+          <img src={img ? img : "./profileImage.webp"} alt="profilePicture" />
+          <h4>{imgName ? imgName : "Upload you profile Picture"}</h4>
+          <Button
+            variant="contained"
+            color="white"
+            sx={{ width: "100%", padding: "10px 0", color: "primary.main" }}
+            onClick={uploadImage}
+          >
+            UPLOAD
+          </Button>
+        </Grid>
       </Grid>
-    </Grid>
+    </>
   );
 };
 
