@@ -5,6 +5,7 @@ import { AuthContext } from "./Auth/AuthContext";
 import Feed from "./Feed/pages/Feed";
 import Footer from "./Shared/Footer";
 import Home from "./Home/Home";
+
 import MainQuestionBank from "./QuestionBank/Pages/MainQuestionBank";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
@@ -16,7 +17,14 @@ const App = () => {
   let [name, setName] = useState(null);
   let [profilePicture, setProfilePicture] = useState(null);
   let [role, setRole] = useState(null);
-  
+  useEffect(() => {
+    var token = JSON.parse(localStorage.getItem("token"));
+
+    if (token) {
+      const user = JSON.parse(atob(token.split(".")[1]));
+      auth.login(user);
+    }
+  }, []);
 
   const login = useCallback((user) => {
     setIsLoggedIn(true);
