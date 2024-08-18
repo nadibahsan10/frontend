@@ -55,7 +55,7 @@ const StudentMainNav = () => {
         </Typography>
       </NavLink>
       <NavLink
-        to="/contact"
+        to="/question"
         className={({ isActive }) =>
           `nav-link ${isActive ? "active-link" : ""}`
         }
