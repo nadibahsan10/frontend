@@ -7,6 +7,7 @@ const theme = createTheme({
     },
     white: {
       main: "#ffffff",
+      text: "#ffffff",
     },
     black: {
       main: "#000000",

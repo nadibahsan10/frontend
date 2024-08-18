@@ -3,6 +3,8 @@ import Header from "./Shared/Header";
 import Message from "./Message/pages/Message";
 import { AuthContext } from "./Auth/AuthContext";
 import Feed from "./Feed/pages/Feed";
+import Footer from "./Shared/Footer";
+import Home from "./Home/Home";
 
 import {
   BrowserRouter as Router,
@@ -56,7 +58,7 @@ const App = () => {
       >
         <Header />
         <Routes>
-          <Route path="/" element={<h1>This is my Home</h1>} />
+          <Route path="/" element={<Home />} />
           <Route
             path="/notification"
             element={<h1>This is my notification</h1>}
@@ -66,6 +68,7 @@ const App = () => {
           <Route path="/market" element={<h2>Hello there</h2>} />
           <Route path="/about" element={<h2>Hello there from about</h2>} />
         </Routes>
+        <Footer />
       </AuthContext.Provider>
     </Router>
   );

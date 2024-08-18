@@ -20,12 +20,16 @@ const Feed = () => {
         <Grid container spacing={2}>
           <Grid item xs={3}>
             <UserInfo />
+            <br />
+            <Top />
           </Grid>
           <Grid item xs={6}>
             <FeedPost />
             <PostWall />
           </Grid>
           <Grid item xs={3}>
+            <Top />
+            <br />
             <Top />
           </Grid>
         </Grid>

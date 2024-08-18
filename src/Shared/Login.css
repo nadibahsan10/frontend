@@ -39,3 +39,6 @@
     box-sizing: border-box; /* Ensure padding is included in width calculation */
   }
 }
+.c{
+  background-color: rgba(0, 0, 0, 0.692);
+}

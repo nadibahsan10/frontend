@@ -18,9 +18,12 @@ import ImageItems from "./subComponentsPost/ImageItems";
 import CommentBox from "./subComponentsPost/CommentBox";
 import "./Post.css";
 const Post = () => {
-  const [expanded, setExpanded] = useState(false);
-  const handleExpansion = () => {
-    setExpanded((prevExpanded) => !prevExpanded);
+  const [commentModal, setModal] = useState(false);
+  const openModal = () => {
+    setModal(true);
+  };
+  const closeModal = () => {
+    setModal(close);
   };
 
   return (
@@ -65,13 +68,13 @@ const Post = () => {
 
           <Button
             startIcon={<AddCommentIcon />}
-            onClick={handleExpansion}
+            onClick={openModal}
             variant="outlined"
           >
             Awnser
           </Button>
         </Box>
-        <CommentBox expanded={expanded} handleExpansion={handleExpansion} />
+        <CommentBox show={commentModal} handleClose={closeModal} />
       </Grid>
     </Grid>
   );
