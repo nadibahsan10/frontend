@@ -54,22 +54,6 @@ const Guest = (props) => {
           </Typography>
         </NavLink>
       </MenuItem>
-      <MenuItem onClick={handleCloseNavMenu}>
-        <NavLink
-          to="/contact"
-          className={({ isActive }) =>
-            `nav-link ${isActive ? "active-link" : ""}`
-          }
-        >
-          <Typography
-            className="link"
-            textAlign="center"
-            sx={{ color: "black" }}
-          >
-            Contact Us
-          </Typography>
-        </NavLink>
-      </MenuItem>
     </>
   );
 };
@@ -160,7 +144,7 @@ const Student = (props) => {
       </MenuItem>
       <MenuItem onClick={handleCloseNavMenu}>
         <NavLink
-          to="/contact"
+          to="/question"
           className={({ isActive }) =>
             `nav-link ${isActive ? "active-link" : ""}`
           }
@@ -170,7 +154,7 @@ const Student = (props) => {
             textAlign="center"
             sx={{ color: "black" }}
           >
-            Contact Us
+            Question Bank
           </Typography>
         </NavLink>
       </MenuItem>
@@ -280,7 +264,7 @@ const Alumni = (props) => {
       </MenuItem>
       <MenuItem onClick={handleCloseNavMenu}>
         <NavLink
-          to="/contact"
+          to="/question"
           className={({ isActive }) =>
             `nav-link ${isActive ? "active-link" : ""}`
           }
@@ -290,7 +274,7 @@ const Alumni = (props) => {
             textAlign="center"
             sx={{ color: "black" }}
           >
-            Contact Us
+            Question Bank
           </Typography>
         </NavLink>
       </MenuItem>
