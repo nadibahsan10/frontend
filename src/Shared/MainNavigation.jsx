@@ -25,6 +25,16 @@ const StudentMainNav = () => {
         </Typography>
       </NavLink>
       <NavLink
+        to="/question"
+        className={({ isActive }) =>
+          `nav-link ${isActive ? "active-link" : ""}`
+        }
+      >
+        <Typography variant="button" className="link" sx={{ mx: 2, my: 2 }}>
+          Question Bank
+        </Typography>
+      </NavLink>
+      <NavLink
         to="/market"
         className={({ isActive }) =>
           `nav-link ${isActive ? "active-link" : ""}`
@@ -52,16 +62,6 @@ const StudentMainNav = () => {
       >
         <Typography variant="button" className="link" sx={{ mx: 2, my: 2 }}>
           About Us
-        </Typography>
-      </NavLink>
-      <NavLink
-        to="/question"
-        className={({ isActive }) =>
-          `nav-link ${isActive ? "active-link" : ""}`
-        }
-      >
-        <Typography variant="button" className="link" sx={{ mx: 2, my: 2 }}>
-          Contact Us
         </Typography>
       </NavLink>
     </>
@@ -102,6 +102,16 @@ const AlumniMainNav = () => {
         </Typography>
       </NavLink>
       <NavLink
+        to="/question"
+        className={({ isActive }) =>
+          `nav-link ${isActive ? "active-link" : ""}`
+        }
+      >
+        <Typography variant="button" className="link" sx={{ mx: 2, my: 2 }}>
+          Question Bank
+        </Typography>
+      </NavLink>
+      <NavLink
         to="/market"
         className={({ isActive }) =>
           `nav-link ${isActive ? "active-link" : ""}`
@@ -129,16 +139,6 @@ const AlumniMainNav = () => {
       >
         <Typography variant="button" className="link" sx={{ mx: 2, my: 2 }}>
           About Us
-        </Typography>
-      </NavLink>
-      <NavLink
-        to="/contact"
-        className={({ isActive }) =>
-          `nav-link ${isActive ? "active-link" : ""}`
-        }
-      >
-        <Typography variant="button" className="link" sx={{ mx: 2, my: 2 }}>
-          Contact Us
         </Typography>
       </NavLink>
     </>
@@ -176,16 +176,6 @@ const GuestMainNav = () => {
       >
         <Typography variant="button" className="link" sx={{ mx: 2, my: 2 }}>
           About Us
-        </Typography>
-      </NavLink>
-      <NavLink
-        to="/contact"
-        className={({ isActive }) =>
-          `nav-link ${isActive ? "active-link" : ""}`
-        }
-      >
-        <Typography variant="button" className="link" sx={{ mx: 2, my: 2 }}>
-          Contact Us
         </Typography>
       </NavLink>
     </>
