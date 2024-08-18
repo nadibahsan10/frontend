@@ -106,8 +106,10 @@ const SignupMode = (props) => {
         }
       );
 
-      var user = response.data.user;
-      localStorage.setItem("user", JSON.stringify(user));
+      var token = response.data.token;
+      localStorage.setItem("user", JSON.stringify(token));
+
+      const user = JSON.parse(atob(token.split(".")[1]));
       auth.login(user);
       setSuccess(true);
       setIsloading(false);

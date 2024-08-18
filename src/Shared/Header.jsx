@@ -33,18 +33,23 @@ function Header() {
   const auth = useContext(AuthContext);
 
   useEffect(() => {
-    var user = JSON.parse(localStorage.getItem("user"));
+    var token = JSON.parse(localStorage.getItem("token"));
 
-    if (user) {
-      auth.login(user);
+    if (token) {
+      const user = JSON.parse(atob(token.split(".")[1]));
+      if (user.exp * 1000 < Date.now()) {
+        auth.logout();
+      } else {
+        console.log(user.exp, Date.now());
+        auth.login(user);
+      }
     }
   }, []);
-  useEffect(() => {
-    if (!auth.isLoggedIn) {
-      navigate("/");
-    }
-  }, [auth]);
 
+  const handleLogOut = () => {
+    auth.logout();
+    navigate("/");
+  };
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [loginModal, setLoginModal] = useState(false);
@@ -113,7 +118,7 @@ function Header() {
         onClose={handleCloseUserMenu}
       >
         <MenuItem key="1" onClick={handleCloseUserMenu}>
-          <Typography textAlign="center" onClick={auth.logout}>
+          <Typography textAlign="center" onClick={handleLogOut}>
             Logout
           </Typography>
         </MenuItem>

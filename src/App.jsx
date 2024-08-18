@@ -6,12 +6,7 @@ import Feed from "./Feed/pages/Feed";
 import Footer from "./Shared/Footer";
 import Home from "./Home/Home";
 import MainQuestionBank from "./QuestionBank/Pages/MainQuestionBank";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 
 const App = () => {
@@ -21,6 +16,7 @@ const App = () => {
   let [name, setName] = useState(null);
   let [profilePicture, setProfilePicture] = useState(null);
   let [role, setRole] = useState(null);
+  
 
   const login = useCallback((user) => {
     setIsLoggedIn(true);
@@ -37,7 +33,7 @@ const App = () => {
     setProfilePicture(null);
     setName(null);
     setRole(null);
-    localStorage.removeItem("user");
+    localStorage.removeItem("token");
   }, []);
 
   const auth = useContext(AuthContext);

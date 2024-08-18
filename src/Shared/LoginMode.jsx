@@ -35,9 +35,11 @@ const LoginMode = (props) => {
         ...form,
       });
 
-      var user = response.data.user;
+      var token = response.data.token;
+      console.log(token);
 
-      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("token", JSON.stringify(token));
+      const user = JSON.parse(atob(token.split(".")[1]));
 
       auth.login(user);
       setIsloading(false);
@@ -102,7 +104,7 @@ const LoginMode = (props) => {
           color="primary"
           handleClose={closeError}
           title="Login Failed"
-          message={error.response.data.message}
+          message={error?.response.data.message}
         />
       )}
 
