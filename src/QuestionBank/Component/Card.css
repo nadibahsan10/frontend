@@ -1,0 +1,33 @@
+
+h2 {
+    color: black;
+    margin: 0 0 0 2%;
+    text-align: left;
+}
+
+p {
+    margin: 0 0 0 2%;
+    text-align: left;
+}
+
+.proPic {
+    display: flex;
+    justify-content: flex-end;
+    align-content: center;
+    gap: 3%;
+    margin: 0 2% 0 0;
+}
+
+
+.likeBtn {
+    display: flex;
+    gap: 1%;
+    align-items: center;
+   margin-left: 2%;
+}
+
+.downloadBtn {
+    display: flex;
+    justify-content: end;
+    margin-right: 3%;
+}
