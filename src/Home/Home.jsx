@@ -164,8 +164,9 @@ const Home = () => {
           marginTop={10}
           sx={{
             backgroundColor: "#011627 !important",
-            height: "450px",
+            height: "600px",
             width: "100%",
+            paddingTop: "200px",
           }}
         >
           <Container maxWidth="xl">
@@ -239,6 +240,57 @@ const Home = () => {
               </Box>
             </Box>
           </Container>
+        </Box>
+
+        <Box
+          sx={{
+            backgroundColor: "#EDF2F4 !important",
+            height: "700px",
+            width: "100%",
+          }}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Box display="flex" alignItems="center" gap={0}>
+            <img
+              src="./profileImage.webp"
+              style={{ height: "500px", width: "600px" }}
+              alt=""
+            />
+            <div
+              style={{
+                height: "350px",
+                width: "10px",
+                backgroundColor: "#780000",
+              }}
+            ></div>
+            <Box
+              sx={{
+                height: "500px",
+                width: "600px",
+                backgroundColor: "#EDF2F4",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
+              }}
+            >
+              <Typography variant="h3" color="primary">
+                OUR GOAL
+              </Typography>
+              <Typography variant="subtitle1" padding={8} textAlign="justify">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Placeat vel asperiores reprehenderit incidunt! Ut dolorem nobis
+                necessitatibus, dolore enim recusandae. Lorem ipsum dolor sit
+                amet consectetur, adipisicing elit. Adipisci explicabo deserunt
+                voluptatum illo provident tempora perspiciatis eaque
+                dignissimos. Quia nisi facilis, temporibus possimus consequatur
+                cumque ea eum officiis eos. Quae et deleniti nihil perspiciatis
+                amet odit qui cumque dolores fugit.
+              </Typography>
+            </Box>
+          </Box>
         </Box>
       </Box>
     </Box>
