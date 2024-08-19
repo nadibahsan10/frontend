@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import DownloadForOfflineOutlinedIcon from '@mui/icons-material/DownloadForOfflineOutlined';
 
 import "./Card.css";
+
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#00000000',
     ...theme.typography.body2,
@@ -25,7 +26,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function Card(props) {
     return (
-        <Box sx={{ flexGrow: 1, background: '#EBEBEB', borderRadius: "10px", width: "90%", margin: "1% 5%"}}>
+        <Box sx={{ flexGrow: 1, background: '#EBEBEB', borderRadius: "10px", width: "82%", margin: "1% 9%"}}>
             <Grid container spacing={1}>
                 <Grid item xs={8}>
                     <Item>
