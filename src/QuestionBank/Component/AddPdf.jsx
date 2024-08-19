@@ -39,7 +39,7 @@ function AddPdf() {
     <div>
       <form action="" method="get">
         <Box sx={{ flexGrow: 1 }}>
-          <Grid container spacing={2} columnGap={3}>
+          <Grid container spacing={1} columnGap={3}>
 
             <Grid item xs={8}>
               <Item sx={{ display: 'flex', alignItems: "center", margin: "1% 5%", boxShadow: "none" }}>
@@ -49,16 +49,25 @@ function AddPdf() {
             </Grid>
 
             <Grid item xs={12}>
-              <Item 
-              sx={{ 
-                height: "10vh", 
-                border: "2px dashed", 
-                margin: "0 5%", 
-                boxShadow: "none", 
-                display: "flex",
-                justifyContent: "center", 
-                alignItems: "center" }}>
+              <Item
+                sx={{
+                  height: "6vh",
+                  border: "2px dashed",
+                  margin: "0 5%",
+                  boxShadow: "none",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}>
                 Upload a File
+              </Item>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Item sx={{ boxShadow: "none"}}>
+                <Button variant="contained" sx={{ width: "60%"}}>
+                  CHOOSE A FILE
+                </Button>
               </Item>
             </Grid>
 
