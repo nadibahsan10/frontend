@@ -1,18 +1,18 @@
-import React from 'react';
-
+import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-
 import DeleteIcon from '@mui/icons-material/Delete';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { Avatar } from '@mui/material';
+import { Avatar, Modal, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import DownloadForOfflineOutlinedIcon from '@mui/icons-material/DownloadForOfflineOutlined';
 
+import AddPdf from './AddPdf';
 import "./Card.css";
+import UpdatePdf from './UpdatePdf';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#00000000',
@@ -23,8 +23,17 @@ const Item = styled(Paper)(({ theme }) => ({
     boxShadow: 'none',
 }));
 
-
 function Card(props) {
+    const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+
+    const handleOpenAddModal = () => {
+        setIsAddModalOpen(true);
+    };
+
+    const handleCloseAddModal = () => {
+        setIsAddModalOpen(false);
+    };
+
     return (
         <Box sx={{ flexGrow: 1, background: '#EBEBEB', borderRadius: "10px", width: "82%", margin: "1% 9%"}}>
             <Grid container spacing={1}>
@@ -38,10 +47,10 @@ function Card(props) {
                     <Item>
                         <div className='proPic'>
                             <DeleteIcon />
-                            <MoreVertIcon />
+                            <MoreVertIcon onClick={handleOpenAddModal} style={{ cursor: 'pointer' }} />
                             <Avatar
                                 sx={{ height: 25, width: 25, marginRight: 2 }}
-                                alt="Remy Sharp"
+                                alt="Profile Image"
                                 src="/profileImage.webp"
                             />
                         </div>
@@ -65,8 +74,25 @@ function Card(props) {
                     </Item>
                 </Grid>
             </Grid>
+
+            
+            <Modal open={isAddModalOpen} onClose={handleCloseAddModal}>
+                <div
+                    style={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)", 
+                        width: "60vh",
+                        backgroundColor: "white",
+                        borderRadius: "4px",
+                    }}
+                >
+                    <UpdatePdf />
+                </div>
+            </Modal>
         </Box>
-    )
+    );
 }
 
-export default Card
+export default Card;

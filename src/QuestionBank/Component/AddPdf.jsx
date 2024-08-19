@@ -26,15 +26,6 @@ const currentYear = new Date().getFullYear();
 
 
 function AddPdf() {
-
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
-
-  const [Trimester, setAge] = React.useState('');
-
-  const [value, setValue] = React.useState(null);
-
   return (
     <div>
       <Box component="form" method="POST" sx={{ flexGrow: 1 }}>
@@ -122,7 +113,7 @@ function AddPdf() {
           </Grid>
 
           <Grid item xs={4}>
-            <Item sx={{boxShadow: "none"}}>
+            <Item sx={{ boxShadow: "none" }}>
               <Box sx={{ minWidth: 120 }}>
                 <FormControl fullWidth>
                   <InputLabel variant="standard" htmlFor="uncontrolled-native">
@@ -136,9 +127,9 @@ function AddPdf() {
                     }}
                   >
                     <option value={currentYear}>{currentYear}</option>
-                    <option value={currentYear-1}>{currentYear-1}</option>
-                    <option value={currentYear-2}>{currentYear-2}</option>
-                    <option value={currentYear-3}>{currentYear-3}</option>
+                    <option value={currentYear - 1}>{currentYear - 1}</option>
+                    <option value={currentYear - 2}>{currentYear - 2}</option>
+                    <option value={currentYear - 3}>{currentYear - 3}</option>
                   </NativeSelect>
                 </FormControl>
               </Box>
@@ -147,7 +138,7 @@ function AddPdf() {
 
           <Grid item xs={12}>
             <Item sx={{ boxShadow: "none" }}>
-              <Button variant="contained" sx={{ width: "100%" }}>
+              <Button variant="contained" sx={{ width: "100%", height: "6vh", marginBottom: "0.7%" }}>
                 Upload
               </Button>
             </Item>
