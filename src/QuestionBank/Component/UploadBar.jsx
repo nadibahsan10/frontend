@@ -24,7 +24,6 @@ export default function UploadBar() {
             top: "50%",
             left: "50%",
             translate: "-50% -50%",
-            height: "60vh",
             width: "60vh",
             backgroundColor: "white",
             borderRadius: "4px",
