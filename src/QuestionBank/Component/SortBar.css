@@ -2,10 +2,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 90%;
-    margin-left: 4%;
     border-radius: 10px;
-    padding: 0 1%;
+    margin: 1% 10%;
 }
 
 .sortBtn {
@@ -13,5 +11,5 @@
     justify-content: flex-end;
     align-items: center;
     width: 30%;
-    gap: 2%;
+    gap: 5%;
 }

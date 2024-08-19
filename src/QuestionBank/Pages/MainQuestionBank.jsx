@@ -29,62 +29,101 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
+const department = ["CSE", "EEE", "CE", "BBA", "Eco"];
+const trimester = ["FALL", "SUMMER", "SPRING"];
+const currentYear = new Date().getFullYear();
+const year = [currentYear, currentYear-1, currentYear-2, currentYear-3];
+
 
 function MainQuestionBank() {
     return (
         <div>
-            <Box sx={{ flexGrow: 1 }}>
-                <Grid container spacing={2}>
-                    <Grid item xs={3}>
-                        <Item>
-                            <div>
-                                <Accordion>
-                                    <AccordionSummary
-                                        sx={{ height: 0 }}
-                                        expandIcon={<ExpandMoreIcon />}
-                                        aria-controls="panel1-content"
-                                        id="panel1-header"
-                                    >
-                                        <h4>Department</h4>
-                                    </AccordionSummary>
-                                    <AccordionDetails>
-                                        <div className='checkBox'>
-                                            <Checkbox />
-                                            <span>CSE</span>
-                                        </div>
-                                        <div className='checkBox'>
-                                            <Checkbox />
-                                            <span>EEE</span>
-                                        </div>
-                                    </AccordionDetails>
-                                </Accordion>
-                            </div>
-                        </Item>
+            <form action="" method="post">
+                <Box sx={{ flexGrow: 1 }}>
+                    <Grid container spacing={1}>
+                        <Grid item xs={3}>
+                            <Item sx={{ boxShadow: "none", marginLeft: "5%", display: "flex", flexDirection: "column", gap: "2vh"}}>
+                                <div>
+                                    <Accordion>
+                                        <AccordionSummary
+                                            sx={{ height: 0, }}
+                                            expandIcon={<ExpandMoreIcon />}
+                                            aria-controls="panel1-content"
+                                            id="panel1-header"
+                                        >
+                                            <h3>Department</h3>
+                                        </AccordionSummary>
+                                        <AccordionDetails sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+                                            {department.map(x => <div className='checkBox'>
+                                                <Checkbox />
+                                                <span>{x}</span>
+                                            </div>)}
+                                        </AccordionDetails>
+                                    </Accordion>
+                                </div>
+
+                                <div>
+                                    <Accordion>
+                                        <AccordionSummary
+                                            sx={{ height: 0, }}
+                                            expandIcon={<ExpandMoreIcon />}
+                                            aria-controls="panel1-content"
+                                            id="panel1-header"
+                                        >
+                                            <h3>Trimester</h3>
+                                        </AccordionSummary>
+                                        <AccordionDetails sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+                                            {trimester.map(x => <div className='checkBox'>
+                                                <Checkbox />
+                                                <span>{x}</span>
+                                            </div>)}
+                                        </AccordionDetails>
+                                    </Accordion>
+                                </div>
+
+                                <div>
+                                    <Accordion>
+                                        <AccordionSummary
+                                            sx={{ height: 0, }}
+                                            expandIcon={<ExpandMoreIcon />}
+                                            aria-controls="panel1-content"
+                                            id="panel1-header"
+                                        >
+                                            <h3>Year</h3>
+                                        </AccordionSummary>
+                                        <AccordionDetails sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+                                            {year.map(x => <div className='checkBox'>
+                                                <Checkbox />
+                                                <span>{x}</span>
+                                            </div>)}
+                                        </AccordionDetails>
+                                    </Accordion>
+                                </div>
+                            </Item>
+                        </Grid>
+                        <Grid item xs={9}>
+                            <Item sx={{ marginRight: "5%" }}>
+
+                                <UploadBar />
+                                <SortBar />
+                                <div className='searchBar'>
+                                    <TextField id="outlined-basic" label={<SearchIcon />} variant="outlined"
+                                        sx={{
+                                            backgroundColor: "transparent",
+                                            width: "80%",
+                                        }}
+                                    />
+                                    <Button variant="contained" sx={{ width: "15%" }}>Search</Button>
+                                </div>
+
+                                <Card name="Software Engineering" type="Final Examination" trimester="Fall 2022" likes="975" />
+
+                            </Item>
+
+                        </Grid>
                     </Grid>
-                    <Grid item xs={9}>
-                        <Item>
-
-                            <UploadBar />
-                            <SortBar />
-                            <div className='searchBar'>
-                                <TextField id="outlined-basic" label={<SearchIcon />} variant="outlined"
-                                    sx={{
-                                        backgroundColor: "transparent",
-                                        width: "80%"
-                                    }}
-                                />
-                                <Button variant="contained">Search</Button>
-                            </div>
-
-                            <Card name="Software Engineering" type="Final Examination" trimester="Fall 2022" likes="975" />
-
-                        </Item>
-
-                    </Grid>
-                </Grid>
-            </Box>
-
-
+                </Box>
+            </form>
         </div>
     )
 }
