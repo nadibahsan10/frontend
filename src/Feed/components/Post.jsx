@@ -12,12 +12,21 @@ import {
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import SettingsIcon from "@mui/icons-material/Settings";
-import AddCommentIcon from "@mui/icons-material/AddComment";
+import CommentIcon from "@mui/icons-material/Comment";
 
 import ImageItems from "./subComponentsPost/ImageItems";
 import CommentBox from "./subComponentsPost/CommentBox";
 import "./Post.css";
-const Post = () => {
+const Post = ({
+  id,
+  name,
+  uid,
+  profilePicture,
+  date,
+  title,
+  content,
+  imageUrl,
+}) => {
   const [commentModal, setModal] = useState(false);
   const openModal = () => {
     setModal(true);
@@ -27,39 +36,42 @@ const Post = () => {
   };
 
   return (
-    <Grid container spacing={1} sx={{ position: "relative" }}>
+    <Grid
+      container
+      padding={1.5}
+      sx={{
+        marginBottom: "15px",
+        backgroundColor: "#FFFFFF",
+        minHeight: "100px",
+        borderRadius: "4px",
+        position: "relative",
+      }}
+    >
       <IconButton
         color="primary"
-        sx={{ position: "absolute", top: "10px", right: "0px" }}
+        sx={{ position: "absolute", top: "10px", right: "10px" }}
       >
         <SettingsIcon />
       </IconButton>
-      <Grid item xs={1}>
-        <Avatar src="./profileImage.webp" />
+      <Grid item xs={1.2}>
+        <Avatar src={`http://localhost:3000/${profilePicture}`} />
       </Grid>
       <Grid item xs={10}>
         <Typography variant="body1" sx={{ fontWeight: "500" }}>
-          MD Nadib Ahsan
+          {name}
         </Typography>
-        <Typography variant="caption">10 Minutes Ago, 1 July 2024</Typography>
+        <Typography variant="caption">{date}</Typography>
 
         <Typography
           sx={{ marginTop: "10px", marginBottom: "5px" }}
           variant="h6"
         >
-          Title of the Question
+          {title}
         </Typography>
 
-        <Typography variant="subtitle1">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione fuga
-          quos molestiae ab. Exercitationem quam repellat neque laborum, dolore
-          nesciunt? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Tenetur, sit animi numquam esse ipsa aliquam ullam velit! Quia animi
-          dolorem, similique provident aperiam porro enim, cupiditate
-          accusantium nulla doloremque quod.
-        </Typography>
+        <Typography variant="subtitle1">{content}</Typography>
 
-        <ImageItems />
+        <ImageItems image={imageUrl} />
 
         <Box display="flex" gap={1}>
           <Button startIcon={<FavoriteBorderIcon />} variant="outlined">
@@ -67,7 +79,7 @@ const Post = () => {
           </Button>
 
           <Button
-            startIcon={<AddCommentIcon />}
+            startIcon={<CommentIcon />}
             onClick={openModal}
             variant="outlined"
           >
