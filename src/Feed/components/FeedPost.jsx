@@ -116,7 +116,7 @@ const FeedPost = () => {
           },
         }
       );
-      console.log(response.data.message);
+      console.log(response.data);
     } catch (err) {
       setError({
         value: err,
