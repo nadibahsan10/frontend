@@ -10,7 +10,6 @@ import { Avatar, Modal, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import DownloadForOfflineOutlinedIcon from '@mui/icons-material/DownloadForOfflineOutlined';
 
-import AddPdf from './AddPdf';
 import "./Card.css";
 import UpdatePdf from './UpdatePdf';
 
@@ -75,7 +74,6 @@ function Card(props) {
                 </Grid>
             </Grid>
 
-            
             <Modal open={isAddModalOpen} onClose={handleCloseAddModal}>
                 <div
                     style={{
@@ -91,6 +89,7 @@ function Card(props) {
                     <UpdatePdf />
                 </div>
             </Modal>
+
         </Box>
     );
 }
