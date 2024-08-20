@@ -57,7 +57,7 @@ function UpdatePdf() {
 
                     <Grid item xs={12}>
                         <Item sx={{ boxShadow: "none", marginTop: 1 }}>
-                            <TextField id="outlined-basic" label="Course Name" variant="outlined" sx={{ width: "100%" }} />
+                            <TextField id="outlined-basic" value="Software Engineering" variant="outlined" sx={{ width: "100%" }} />
                         </Item>
                     </Grid>
 
