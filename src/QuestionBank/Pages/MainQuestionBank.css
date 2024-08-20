@@ -6,3 +6,8 @@
     
 }
 
+.cardHolder {
+    height: 40vh;
+    overflow:  auto;
+    scrollbar-color:  #780000 #EBEBEB;
+}

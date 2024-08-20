@@ -32,7 +32,7 @@ const Item = styled(Paper)(({ theme }) => ({
 const department = ["CSE", "EEE", "CE", "BBA", "Eco"];
 const trimester = ["FALL", "SUMMER", "SPRING"];
 const currentYear = new Date().getFullYear();
-const year = [currentYear, currentYear-1, currentYear-2, currentYear-3];
+const year = [currentYear, currentYear - 1, currentYear - 2, currentYear - 3];
 
 
 function MainQuestionBank() {
@@ -42,7 +42,7 @@ function MainQuestionBank() {
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={1}>
                         <Grid item xs={3}>
-                            <Item sx={{ boxShadow: "none", marginLeft: "5%", display: "flex", flexDirection: "column", gap: "2vh"}}>
+                            <Item sx={{ boxShadow: "none", marginLeft: "5%", display: "flex", flexDirection: "column", gap: "2vh" }}>
                                 <div>
                                     <Accordion>
                                         <AccordionSummary
@@ -102,7 +102,7 @@ function MainQuestionBank() {
                             </Item>
                         </Grid>
                         <Grid item xs={9}>
-                            <Item sx={{ marginRight: "5%" }}>
+                            <Item sx={{ marginRight: "2%" }}>
 
                                 <UploadBar />
                                 <SortBar />
@@ -116,8 +116,11 @@ function MainQuestionBank() {
                                     <Button variant="contained" sx={{ width: "15%" }}>Search</Button>
                                 </div>
 
-                                <Card name="Software Engineering" type="Final Examination" trimester="Fall 2022" likes="975" />
-
+                                <div className='cardHolder'>
+                                    <Card name="Software Engineering" type="Final Examination" trimester="Fall 2022" likes="975" />
+                                    <Card name="Software Engineering" type="Final Examination" trimester="Fall 2022" likes="975" />
+                                    <Card name="Software Engineering" type="Final Examination" trimester="Fall 2022" likes="975" />
+                                </div>
                             </Item>
 
                         </Grid>
