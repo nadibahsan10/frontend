@@ -99,10 +99,13 @@ const FeedPost = () => {
     const form = new FormData();
     form.append("title", state.title);
     form.append("description", state.description);
-    const imageArray = Array.from(state.files);
-    imageArray.forEach((item, index) => {
-      form.append("files", item);
-    });
+    if (state.files !== null) {
+      let imageArray = Array.from(state.files);
+      imageArray.forEach((item, index) => {
+        form.append("files", item);
+      });
+    }
+
     console.log(state);
     try {
       const token = "Bearer " + JSON.parse(localStorage.getItem("token"));

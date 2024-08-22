@@ -32,6 +32,8 @@ const PostWall = () => {
         return (
           <Post
             key={item.id}
+            id={item.id}
+            profilePicture={item.profile_picture}
             name={item.first_name + " " + item.last_name}
             date={item.created_at}
             title={item.title}
