@@ -9,6 +9,7 @@ import Home from "./Home/Home";
 import MainQuestionBank from "./QuestionBank/Pages/MainQuestionBank";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+import Z from "./Z";
 
 const App = () => {
   let [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -67,10 +68,11 @@ const App = () => {
             path="/notification"
             element={<h1>This is my notification</h1>}
           />
+
           <Route path="/feed" element={<Feed />} />
           <Route path="/inbox" element={<Message />} />
           <Route path="/market" element={<MainQuestionBank />} />
-          <Route path="/about" element={<h2>Hello there from about</h2>} />
+          <Route path="/about" element={<Z />} />
           <Route path="/question" element={<MainQuestionBank />} />
         </Routes>
         <Footer />

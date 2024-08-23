@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Grid,
   Avatar,
@@ -9,6 +9,8 @@ import {
   Box,
   Button,
 } from "@mui/material";
+
+import { AuthContext } from "../../Auth/AuthContext";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -16,7 +18,10 @@ import CommentIcon from "@mui/icons-material/Comment";
 
 import ImageItems from "./subComponentsPost/ImageItems";
 import CommentBox from "./subComponentsPost/CommentBox";
+import Likes from "./subComponentsPost/Likes";
 import "./Post.css";
+import axios from "axios";
+
 const Post = ({
   id,
   name,
@@ -27,6 +32,7 @@ const Post = ({
   content,
   imageUrl,
 }) => {
+  const auth = useContext(AuthContext);
   const [commentModal, setModal] = useState(false);
   const openModal = () => {
     setModal(true);
@@ -35,6 +41,24 @@ const Post = ({
     setModal(close);
   };
 
+  // const like = async () => {
+  //   try {
+  //     console.log(id);
+  //     const response = await axios.post(
+  //       "http://localhost:3000/feed/like",
+  //       { userId: auth.id, postId: id },
+  //       {
+  //         headers: {
+  //           Authorization:
+  //             "baerer " + JSON.parse(localStorage.getItem("token")),
+  //         },
+  //       }
+  //     );
+  //     console.log(response.data.message);
+  //   } catch (error) {
+  //     console.log(error.response.data.message);
+  //   }
+  // };
   return (
     <Grid
       container
@@ -71,13 +95,10 @@ const Post = ({
 
         <Typography variant="subtitle1">{content}</Typography>
 
-        <ImageItems image={imageUrl} />
+        {imageUrl.length !== 0 && <ImageItems image={imageUrl} />}
 
         <Box display="flex" gap={1}>
-          <Button startIcon={<FavoriteBorderIcon />} variant="outlined">
-            Like
-          </Button>
-
+          <Likes postId={id} />
           <Button
             startIcon={<CommentIcon />}
             onClick={openModal}
