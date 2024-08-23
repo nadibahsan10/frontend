@@ -55,6 +55,16 @@ const StudentMainNav = () => {
         </Typography>
       </NavLink>
       <NavLink
+        to="/individual"
+        className={({ isActive }) =>
+          `nav-link ${isActive ? "active-link" : ""}`
+        }
+      >
+        <Typography variant="button" className="link" sx={{ mx: 2, my: 2 }}>
+          Individual Product
+        </Typography>
+      </NavLink>
+      <NavLink
         to="/about"
         className={({ isActive }) =>
           `nav-link ${isActive ? "active-link" : ""}`
