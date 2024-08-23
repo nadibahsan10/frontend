@@ -3,7 +3,7 @@ import Header from "./Shared/Header";
 import Message from "./Message/pages/Message";
 import { AuthContext } from "./Auth/AuthContext";
 import Feed from "./Feed/pages/Feed";
-import Footer from "./Shared/Footer";
+import Footer from "./Common/Footer";
 import Home from "./Home/Home";
 
 import MainQuestionBank from "./QuestionBank/Pages/MainQuestionBank";
@@ -12,6 +12,7 @@ import "./App.css";
 import Z from "./Z";
 import Market from "./Marketplace/Pages/Market"
 import Find from "./Marketplace/Pages/Find"
+import IndividualProduct from "./Marketplace/Pages/IndividualProduct";
 
 const App = () => {
   let [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -75,7 +76,7 @@ const App = () => {
           <Route path="/inbox" element={<Message />} />
           <Route path="/market" element={<Market />} />
           <Route path="/alumni" element={<Find />} />
-          <Route path="/about" element={<Z />} />
+          <Route path="/about" element={<IndividualProduct />} />
           <Route path="/question" element={<MainQuestionBank />} />
         </Routes>
         <Footer />
