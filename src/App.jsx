@@ -10,6 +10,8 @@ import MainQuestionBank from "./QuestionBank/Pages/MainQuestionBank";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Z from "./Z";
+import Market from "./Marketplace/Pages/Market"
+import Find from "./Marketplace/Pages/Find"
 
 const App = () => {
   let [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -71,7 +73,8 @@ const App = () => {
 
           <Route path="/feed" element={<Feed />} />
           <Route path="/inbox" element={<Message />} />
-          <Route path="/market" element={<MainQuestionBank />} />
+          <Route path="/market" element={<Market />} />
+          <Route path="/alumni" element={<Find />} />
           <Route path="/about" element={<Z />} />
           <Route path="/question" element={<MainQuestionBank />} />
         </Routes>
