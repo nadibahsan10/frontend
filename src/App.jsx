@@ -3,7 +3,7 @@ import Header from "./Shared/Header";
 import Message from "./Message/pages/Message";
 import { AuthContext } from "./Auth/AuthContext";
 import Feed from "./Feed/pages/Feed";
-import Footer from "./Common/Footer";
+import Footer from "./Shared/Footer";
 import Home from "./Home/Home";
 import About from "./About/About";
 

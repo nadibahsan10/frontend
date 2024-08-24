@@ -1,6 +1,6 @@
 import React from 'react'
 import Search from '../Components/Search'
-import Footer from '../../Common/Footer'
+import Footer from '../../Shared/Footer'
 // ashdu 
 const Market = () => {
   return (

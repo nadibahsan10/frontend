@@ -17,7 +17,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function About() {
   return (
-    <Container maxWidth>
+    <Box>
         <Typography
                 variant="h4"
                 gutterBottom
@@ -29,7 +29,7 @@ function About() {
               >
                 WAY TO UIU+
               </Typography>
-      <Box sx={{ flexGrow: 1, marginTop: "%" ,borderRadius: '10px'}}>
+      <Box sx={{ flexGrow: 1}} fullWidth>
         <Grid container spacing={0}>
           <Grid item xs={6} className="aboutusF">
             <img src="./design/UIU.jpg" alt="" />
@@ -81,7 +81,7 @@ function About() {
           </Grid>
         </Grid>
       </Box>
-    </Container>
+    </Box>
   );
 }
 
