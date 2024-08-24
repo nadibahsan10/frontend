@@ -26,7 +26,7 @@ function Footer() {
           position: "relative",
           overflow: "hidden",
           padding: "100px",
-          boxShadow: "0 7px 30px -10px rgba(150,170,180,0.5)",
+
           "&::before": {
             content: '""',
             position: "absolute",
@@ -121,19 +121,20 @@ function Footer() {
           </Grid>
         </Grid>
       </Box>
-      <Grid xs={12}>
-        <Item
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <p>
-            Copyright © 2024 Team Mayer Doa.Ak, Natunbazar,Vatara,Dhaka.All
-            rights reserved.{" "}
-          </p>
-        </Item>
+      <Grid
+        xs={12}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "#343A40",
+          padding: "20px 0px",
+        }}
+      >
+        <Typography variant="body1" sx={{ color: "white !important" }}>
+          Copyright © 2024 Team Mayer Doa.Ak, Natunbazar,Vatara,Dhaka.All rights
+          reserved.
+        </Typography>
       </Grid>
     </Box>
   );
