@@ -1,0 +1,138 @@
+.second ul {
+  list-style: none;
+  padding: 0 10px;
+  margin: 0;
+}
+.third ul {
+  list-style: none;
+  padding: 0 10px;
+  margin: 0;
+}
+.fourth ul {
+  list-style: none;
+  padding: 0 10px;
+  margin: 0;
+}
+.second ul li {
+  padding: 10px 10px;
+  color: #fffbfb ;
+}
+.third ul li {
+  padding: 10px 10px;
+  color: #fffbfb ;
+}
+.fourth ul li {
+  padding: 10px 10px;
+  color: #fffbfb ;
+}
+.second ul li a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 500;
+  position: relative;
+}
+.third ul li a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 500;
+  position: relative;
+}
+.fourth ul li a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 500;
+  position: relative;
+}
+.second ul li a:hover {
+  color: #fffbfb ;
+  text-decoration: none;
+  font-weight: bold;
+  position: relative;
+}
+.third ul li a:hover {
+  color: #fffbfb ;
+  text-decoration: none;
+  font-weight: bold;
+  position: relative;
+}
+.fourth ul li a:hover {
+  color: #fffbfb ;
+  text-decoration: none;
+  font-weight: bold;
+  position: relative;
+}
+.second ul li a:hover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 2px;
+  background-color: #fffbfb;
+  box-shadow: 0 1px 2px #fffbfb(0, 0, 0, 0.8);
+}
+.third ul li a:hover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 2px;
+  background-color: #fffbfb;
+  box-shadow: 0 1px 2px #fffbfb(0, 0, 0, 0.8);
+}
+.fourth ul li a:hover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 2px;
+  background-color: #fffbfb;
+  box-shadow: 0 1px 2px #fffbfb(0, 0, 0, 0.8);
+}
+.second h4 {
+  color: #f6f0f0;
+  padding: 0 10px;
+}
+.third h4 {
+  color: #f6f0f0;
+  padding: 0 10px;
+}
+.fourth h4 {
+  color: #f6f0f0;
+  padding: 0 10px;
+}
+.first h4 a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 500;
+  position: relative;
+  color: #fffbfb !important;
+}
+.first h4 a:hover {
+  color: #fffbfb !important;
+  text-decoration: none;
+  font-weight: bold;
+  position: relative;
+}
+.first h4 a:hover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 2px;
+  background-color: #fffbfb;
+  box-shadow: 0 1px 2px #fffbfb(0, 0, 0, 0.8);
+}
+.first h1 {
+  color: #fffbfb;
+}
+.second ul li a {
+  text-decoration: none;
+  color: #fffbfb;
+}
+.first p{
+  color:#fffbfb;
+}
