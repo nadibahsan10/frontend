@@ -52,10 +52,15 @@ const CommentBox = ({ show, handleClose, postId }) => {
     event.preventDefault();
 
     const token = "Baerer " + JSON.parse(localStorage.getItem("token"));
+    const Data = new FormData();
+    Data.append("content", formData.content);
+    if (formData.imageFile) {
+      Data.append("image", formData.imageFile);
+    }
     try {
       const response = await axios.post(
         `http://localhost:3000/feed/comment/${postId}`,
-        { message: "hello" },
+        Data,
         {
           headers: {
             "Content-Type": "multipart/form-data",
