@@ -5,11 +5,11 @@ import { AuthContext } from "./Auth/AuthContext";
 import Feed from "./Feed/pages/Feed";
 import Footer from "./Shared/Footer";
 import Home from "./Home/Home";
+import About from "./About/About";
 
 import MainQuestionBank from "./QuestionBank/Pages/MainQuestionBank";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import MainProfile from "./Profile/Pages/MainProfile";
 
 const App = () => {
   let [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -68,9 +68,10 @@ const App = () => {
             path="/notification"
             element={<h1>This is my notification</h1>}
           />
+
           <Route path="/feed" element={<Feed />} />
           <Route path="/inbox" element={<Message />} />
-          <Route path="/market" element={<MainProfile />} />
+          <Route path="/market" element={<MainQuestionBank />} />
           <Route path="/about" element={<h2>Hello there from about</h2>} />
           <Route path="/question" element={<MainQuestionBank />} />
         </Routes>
