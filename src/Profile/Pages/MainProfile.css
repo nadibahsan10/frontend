@@ -1,0 +1,16 @@
+.linkCard {
+    display: flex;
+    align-items: center;
+    margin: 5% 2%;
+    position: relative;
+}
+
+.deleteIcon {
+    position: absolute;
+    left: 90%;
+    opacity: 0;
+}
+
+.linkCard:hover .deleteIcon {
+   opacity: 1;
+}

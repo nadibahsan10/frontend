@@ -9,6 +9,7 @@ import Home from "./Home/Home";
 import MainQuestionBank from "./QuestionBank/Pages/MainQuestionBank";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+import MainProfile from "./Profile/Pages/MainProfile";
 
 const App = () => {
   let [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -69,7 +70,7 @@ const App = () => {
           />
           <Route path="/feed" element={<Feed />} />
           <Route path="/inbox" element={<Message />} />
-          <Route path="/market" element={<MainQuestionBank />} />
+          <Route path="/market" element={<MainProfile />} />
           <Route path="/about" element={<h2>Hello there from about</h2>} />
           <Route path="/question" element={<MainQuestionBank />} />
         </Routes>
