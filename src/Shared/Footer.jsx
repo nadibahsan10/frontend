@@ -122,6 +122,7 @@ function Footer() {
         </Grid>
       </Box>
       <Grid
+        item
         xs={12}
         sx={{
           display: "flex",
