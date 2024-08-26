@@ -2,6 +2,8 @@ import React, { useEffect, useState, useContext } from "react";
 import { Button } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import axios from "axios";
+import NorthWestIcon from "@mui/icons-material/NorthWest";
+import SouthEastIcon from "@mui/icons-material/SouthEast";
 
 const Likes = ({ postId }) => {
   const [likes, setLikes] = useState(null);
@@ -68,7 +70,6 @@ const Likes = ({ postId }) => {
           },
         }
       );
-      console.log(response.data);
     } catch (error) {
       console.log(error.response.data);
     }
@@ -101,7 +102,6 @@ const Likes = ({ postId }) => {
           },
         }
       );
-      console.log(response.data);
     } catch (error) {
       console.log(error.response.data);
     }
@@ -111,17 +111,17 @@ const Likes = ({ postId }) => {
     <>
       <Button
         onClick={handleLikes}
-        startIcon={<FavoriteBorderIcon />}
+        startIcon={<NorthWestIcon />}
         variant={userReaction == "like" ? "contained" : "outlined"}
       >
-        {likes} Likes
+        {likes} Highlight
       </Button>
       <Button
         onClick={handleDislikes}
-        startIcon={<FavoriteBorderIcon />}
+        startIcon={<SouthEastIcon />}
         variant={userReaction === "dislike" ? "contained" : "outlined"}
       >
-        {disLikes} Dislikes
+        {disLikes} Dim
       </Button>
     </>
   );

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Box, Typography, Grid } from "@mui/material";
+import { Box, Typography, Grid, Avatar } from "@mui/material";
 
 import "./UserInfo.css";
 import { AuthContext } from "../../Auth/AuthContext";
@@ -16,8 +16,17 @@ const UserInfo = () => {
         borderRadius: "4px",
       }}
     >
-      <Typography variant="h6">{auth.name}</Typography>
-      <Typography variant="subtitle1">@nadib_ahsan</Typography>
+      <Box display="flex" alignItems="center">
+        <Avatar
+          src={`http://localhost:3000/${auth.profilePicture}`}
+          sx={{ marginRight: "10px", height: 50, width: 50 }}
+        />
+        <Box>
+          <Typography variant="h6">{auth.name}</Typography>
+          <Typography variant="subtitle1">@nadib_ahsan</Typography>
+        </Box>
+      </Box>
+
       <hr />
       <Grid container>
         <Grid item xs={6}>
