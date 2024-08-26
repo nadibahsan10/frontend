@@ -72,7 +72,7 @@ const App = () => {
           <Route path="/feed" element={<Feed />} />
           <Route path="/inbox" element={<Message />} />
           <Route path="/market" element={<MainQuestionBank />} />
-          <Route path="/about" element={<h2>Hello there from about</h2>} />
+          <Route path="/about" element={<About />} />
           <Route path="/question" element={<MainQuestionBank />} />
         </Routes>
         <Footer />

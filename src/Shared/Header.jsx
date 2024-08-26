@@ -128,13 +128,13 @@ function Header() {
         <MenuItem key="1" onClick={handleCloseUserMenu}>
           <Typography textAlign="center">Activity</Typography>
         </MenuItem>
-        <MenuItem key="1" onClick={handleCloseUserMenu}>
+        <MenuItem key="2" onClick={handleCloseUserMenu}>
           <Typography textAlign="center">My Account</Typography>
         </MenuItem>
-        <MenuItem key="1" onClick={handleCloseUserMenu}>
+        <MenuItem key="3" onClick={handleCloseUserMenu}>
           <Typography textAlign="center">Help & Support</Typography>
         </MenuItem>
-        <MenuItem key="1" onClick={handleCloseUserMenu}>
+        <MenuItem key="4" onClick={handleCloseUserMenu}>
           <Typography textAlign="center" onClick={handleLogOut}>
             Logout
           </Typography>

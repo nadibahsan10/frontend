@@ -35,6 +35,7 @@ const Post = ({
     setAnchorEl(event.currentTarget);
   };
   const [commentModal, setModal] = useState(false);
+
   const openModal = () => {
     setModal(true);
   };
