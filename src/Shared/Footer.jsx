@@ -26,6 +26,7 @@ function Footer() {
           position: "relative",
           overflow: "hidden",
           padding: "100px",
+
           "&::before": {
             content: '""',
             position: "absolute",
@@ -121,7 +122,19 @@ function Footer() {
         </Grid>
       </Box>
       <Grid xs={12}>
-              </Grid>
+        <Item
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <p>
+            Copyright © 2024 Team Mayer Doa.Ak, Natunbazar,Vatara,Dhaka.All
+            rights reserved.{" "}
+          </p>
+        </Item>
+      </Grid>
     </Box>
   );
 }

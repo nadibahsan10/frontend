@@ -17,71 +17,57 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function About() {
   return (
-    <Box>
-        <Typography
-                variant="h4"
-                gutterBottom
+    <Container>
+      <Box>
+        <Box sx={{ flexGrow: 1 }} fullWidth>
+          <Grid container spacing={0}>
+            <Grid item xs={6} className="aboutusF">
+              <img src="./design/UIU.jpg" alt="" />
+            </Grid>
+            <Grid item xs={6}>
+              <Box
                 sx={{
-                  fontWeight: "bold",
-                  textAlign: "center",
-                  color: "#343A40",
+                  flexGrow: 1,
+                  display: "flex",
+                  alignItem: "center",
+                  justifyContent: "center",
+                  flexDirection: "column",
+
+                  padding: "15%",
                 }}
               >
-                WAY TO UIU+
-              </Typography>
-      <Box sx={{ flexGrow: 1}} fullWidth>
-        <Grid container spacing={0}>
-          <Grid item xs={6} className="aboutusF">
-            <img src="./design/UIU.jpg" alt="" />
+                <Typography
+                  variant="h3"
+                  gutterBottom
+                  sx={{
+                    fontWeight: "bold",
+                    textAlign: "center",
+                  }}
+                >
+                  Our Story
+                </Typography>
+                <Typography variant="subtitle1" gutterBottom>
+                  Welcome to UIU+, the platform of United International
+                  University (UIU) that connects the vibrant community of alumni
+                  and current students. UIU+ is more than just a digital space;
+                  it's a dynamic bridge that fosters communication,
+                  collaboration, and support among the UIU family.
+                </Typography>
+                <br />
+                <Typography variant="subtitle1" gutterBottom>
+                  At UIU+, we believe in the power of community. Our platform is
+                  built to empower you, providing the tools and resources you
+                  need to succeed, both during your time at UIU and beyond. Join
+                  us today and be part of a supportive network that continues to
+                  grow and thrive. Together, we are stronger. Together, we are
+                  UIU+.
+                </Typography>
+              </Box>
+            </Grid>
           </Grid>
-          <Grid item xs={6}>
-            <Box
-              sx={{
-                flexGrow: 1,
-                display: "flex",
-                alignItem: "center",
-                justifyContent: "center",
-                flexDirection: "column",
-                backgroundColor: "#2B2D42",
-                padding: "15%",
-              }}
-            >
-              <Typography
-                variant="h3"
-                gutterBottom
-                sx={{
-                  fontWeight: "bold",
-                  textAlign: "center",
-                  color: "white !important",
-                }}
-              >
-                Our Story
-              </Typography>
-              <Typography
-                variant="body1"
-                gutterBottom
-                sx={{
-                  fontWeight: "bold",
-                  color: "#EDF2F190",
-                }}
-              >
-                Welcome to UIU+, the platform of United International University (UIU) that connects the vibrant community of alumni and current students. UIU+ is more than just a digital space; it's a dynamic bridge that fosters communication, collaboration, and support among the UIU family.
-              </Typography>
-              <br />
-              <Typography
-                variant="body2"
-                gutterBottom
-                sx={{
-                  color: "#8D99AE",
-                }}
-              >
-                At UIU+, we believe in the power of community. Our platform is built to empower you, providing the tools and resources you need to succeed, both during your time at UIU and beyond. Join us today and be part of a supportive network that continues to grow and thrive. Together, we are stronger. Together, we are UIU+.
-              </Typography>
-            </Box>
-          </Grid>
-        </Grid>
+        </Box>
       </Box>
-    </Box>
+    </Container>
   );
 }
 

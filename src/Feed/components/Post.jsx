@@ -38,7 +38,7 @@ const Post = ({
     setModal(true);
   };
   const closeModal = () => {
-    setModal(close);
+    setModal(false);
   };
 
   // const like = async () => {
@@ -107,7 +107,7 @@ const Post = ({
             Awnser
           </Button>
         </Box>
-        <CommentBox show={commentModal} handleClose={closeModal} />
+        <CommentBox show={commentModal} postId={id} handleClose={closeModal} />
       </Grid>
     </Grid>
   );
