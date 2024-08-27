@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -16,6 +16,14 @@ import desktopIcon from "./SubComponent/Icon/desktop.png";
 import laptopIcon from "./SubComponent/Icon/laptop.png";
 import mobileIcon from "./SubComponent/Icon/mobile.png";
 import droneCameraIcon from "./SubComponent/Icon/camera.png";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from "@mui/material";
+import Addproduct from "./Addproduct";
+import CloseIcon from "@mui/icons-material/Close";
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -37,8 +45,16 @@ const category = [
   { icon: droneCameraIcon, name: "Drone & Camera" },
 ];
 
-
 function Search() {
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <div component="form" method="post">
       <Box sx={{ flexGrow: 1 }}>
@@ -51,8 +67,31 @@ function Search() {
           >
             <h2>MarketPlace For UIU Students</h2>
           </Grid>
-          <Grid item xs={3} sx={{  position: "absolute" ,top: '100px',right: '100px'}}>
-            <Button variant="contained" color="green">Add products</Button>
+          <Grid
+            item
+            xs={3}
+            sx={{ position: "absolute", top: "30px", right: "100px" }}
+          >
+            <Button variant="contained" color="green" onClick={handleClickOpen}>
+              Add products
+            </Button>
+
+            <Dialog
+              open={open}
+              onClose={handleClose}
+              maxWidth="lg"
+              fullWidth={true}
+            >
+              {/* <DialogTitle>Add a product </DialogTitle> */}
+              <DialogActions>
+                <Button onClick={handleClose} color="primary">
+                  <CloseIcon />
+                </Button>
+              </DialogActions>
+              <DialogContent>
+                <Addproduct />
+              </DialogContent>
+            </Dialog>
           </Grid>
         </Grid>
       </Box>

@@ -122,18 +122,21 @@ function Footer() {
         </Grid>
       </Box>
       <Grid xs={12}>
-        <Item
+        <Box
           sx={{
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            backgroundColor: "#0D7C66 !important",
+            padding: "10px",
+            color: "white !important",
           }}
         >
           <p>
             Copyright © 2024 Team Mayer Doa.Ak, Natunbazar,Vatara,Dhaka.All
             rights reserved.{" "}
           </p>
-        </Item>
+        </Box>
       </Grid>
     </Box>
   );

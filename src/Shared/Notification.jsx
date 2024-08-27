@@ -28,7 +28,7 @@ const notification = [
 function Notification() {
   return (
     <Box sx={{ flexGrow: 1 }}>
-        <h2 style={{textAlign: 'center',color: '#780000',margin:'10px'}}>Notifications</h2>
+        <h2 style={{textAlign: 'center',color: '#780000',marginTOp:'40px'}}>Notifications</h2>
     <Grid container spacing={1}>
       <Grid item xs={12} wrap>
         {notification.map((x) => (

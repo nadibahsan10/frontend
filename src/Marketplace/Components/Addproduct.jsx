@@ -4,13 +4,14 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { Avatar,IconButton } from "@mui/material";
+import { Avatar, IconButton } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import CloseIcon from "@mui/icons-material/Close";
+import ImageIcon from "@mui/icons-material/Image";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -94,14 +95,14 @@ function Addproduct() {
           gap: "2%",
         }}
       >
-        <h2 style={{ textAlign: "center" }}>Add Product</h2>
+        <h2 style={{ textAlign: "center", marginBottom: "10px" }}>Add a product</h2>
 
         <TextField
           id="outlined-basic"
           name="title"
           label="Give your product a short and clear name"
           variant="outlined"
-          style={{ margin: "10px", width: "40%" }}
+          style={{ margin: "10px", width: "60%" }}
           onChange={handleChange}
         />
 
@@ -110,7 +111,7 @@ function Addproduct() {
           name="content"
           label="Give your product short and clear description"
           variant="outlined"
-          style={{ margin: "10px", width: "40%" }}
+          style={{ margin: "10px", width: "60%" }}
           multiline
           minRows={2}
           onChange={handleChange}
@@ -120,10 +121,10 @@ function Addproduct() {
           name="price"
           label="Give your product price"
           variant="outlined"
-          sx={{ margin: "10px", width: "40%" }}
+          sx={{ margin: "10px", width: "60%" }}
           onChange={handleChange}
         />
-        <FormControl sx={{ margin: "10px", width: "40%" }}>
+        <FormControl sx={{ margin: "10px", width: "60%" }}>
           <InputLabel id="demo-simple-select-label">Select category</InputLabel>
           <Select
             required
@@ -147,7 +148,7 @@ function Addproduct() {
         <div
           style={{
             border: "2px black dashed",
-            padding: "6% 14% ",
+            padding: "6% 22% ",
             borderRadius: "10px",
             display: "flex",
             alignItems: "center",
@@ -156,17 +157,26 @@ function Addproduct() {
             gap: "30px",
           }}
         >
-          <p style={{ marginBottom: "30px" }}>Drop your image here</p>
+          <ImageIcon style={{ height: "50px", width: "50px",margin: '0' }} />
+          <h5
+            style={{
+              marginBottom: "10px",
+              minWidthidth: "60%",
+              fontWeight: "400",
+            }}
+          >
+            Drop your product image here
+          </h5>
 
           {file && (
             <Box
-            sx={{
-              width: "200px",
-              height: "200px",
-             
-              position: "relative",
-            }}
-          >
+              sx={{
+                width: "200px",
+                height: "200px",
+
+                position: "relative",
+              }}
+            >
               <Avatar
                 variant="rounded"
                 src={URL.createObjectURL(file)}
