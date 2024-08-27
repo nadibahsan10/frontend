@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -11,7 +11,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Accordion from '@mui/material/Accordion';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import Card from '../Component/Card';
 import ChangeProfilePicture from '../Component/ChngeProfilePicture';
@@ -24,7 +23,10 @@ import './MainProfile.css';
 import githubImage from 'E:/Projec/github.png'; // adjust the path accordingly
 import jsImage from 'E:/Projec/js.png';
 import schoolImage from 'E:/Projec/school.png';
-import HobbyCard from '../Component/HobbyCard';
+import HobbyCard from '../Component/SubComponent/HobbyCard';
+import LinkCard from '../Component/SubComponent/LinkCard';
+import DegreeCard from '../Component/SubComponent/DegreeCard';
+import SkillCard from '../Component/SubComponent/SkillCard';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -100,16 +102,6 @@ function MainProfile() {
                   boxShadow: 'none'
                 }}>
                   <SemiBiography />
-                  <Button
-                    onClick={() => handleMenuItemClick('modal1')}
-                    sx={{
-                      position: 'absolute',
-                      right: '10%',
-                      bottom: '2%'
-                    }}
-                  >
-                    <AddCircleIcon />
-                  </Button>
                 </Item>
               </Grid>
 
@@ -147,34 +139,7 @@ function MainProfile() {
                   </AccordionSummary>
 
                   <AccordionDetails>
-
-                    <div className='linkCard'>
-                      <Avatar
-                        sx={{ height: 20, width: 20, marginRight: "10px" }}
-                        alt="Remy Sharp"
-                        src={githubImage}
-                      />
-                      <a href="https://github.com/dksaddy" target="_blank" rel="noopener noreferrer">Github</a>
-
-                      <div className='deleteIcon'>
-                        <IconButton sx={{ padding: 0 }}>
-                          <CloseIcon sx={{ fontSize: '15px' }} />
-                        </IconButton>
-                      </div>
-                    </div>
-
-                    <Button
-                      onClick={() => handleMenuItemClick('modal2')}
-                      sx={{
-                        position: 'absolute',
-                        right: '0%',
-                        bottom: '0%',
-                        padding: 0
-                      }}
-                    >
-                      <AddCircleIcon />
-                    </Button>
-
+                    <LinkCard image={githubImage} mediaLink="https://github.com/dksaddy" mediaName="GIthub" />
                   </AccordionDetails>
 
                 </Accordion>
@@ -189,35 +154,7 @@ function MainProfile() {
                   </AccordionSummary>
 
                   <AccordionDetails>
-
-                    <div className='linkCard'>
-                      <Avatar
-                        sx={{ height: 20, width: 20, marginRight: "10px" }}
-                        alt="Remy Sharp"
-                        src={schoolImage}
-                        variant='rounded'
-                      />
-                      <p style={{ textWrap: 'wrap' }}>passing Year like Share Institute,</p>
-
-                      <div className='deleteIcon'>
-                        <IconButton sx={{ padding: 0 }}>
-                          <CloseIcon sx={{ fontSize: '15px' }} />
-                        </IconButton>
-                      </div>
-                    </div>
-
-                    <Button
-                      onClick={() => handleMenuItemClick('modal3')}
-                      sx={{
-                        position: 'absolute',
-                        right: '0%',
-                        bottom: '0%',
-                        padding: 0
-                      }}
-                    >
-                      <AddCircleIcon />
-                    </Button>
-
+                    <DegreeCard image={schoolImage} />
                   </AccordionDetails>
 
                 </Accordion>
@@ -233,57 +170,13 @@ function MainProfile() {
                   </AccordionSummary>
 
                   <AccordionDetails>
-
-                    <div className='linkCard'>
-                      <Avatar
-                        sx={{ height: 20, width: 20, marginRight: "10px" }}
-                        alt="Remy Sharp"
-                        src={jsImage}
-                        variant='rounded'
-                      />
-                      <p>passing Year if you like to Share Institute,</p>
-
-                      <div className='deleteIcon'>
-                        <IconButton sx={{ padding: 0 }}>
-                          <CloseIcon sx={{ fontSize: '15px' }} />
-                        </IconButton>
-                      </div>
-                    </div>
-
-                    <Button
-                      onClick={() => handleMenuItemClick('modal4')}
-                      sx={{
-                        position: 'absolute',
-                        right: '0%',
-                        bottom: '0%',
-                        padding: 0
-                      }}
-                    >
-                      <AddCircleIcon />
-                    </Button>
-
+                    <SkillCard image={jsImage} />
                   </AccordionDetails>
 
                 </Accordion>
 
               </Grid>
 
-              <Grid item xs={12}>
-                <Item sx={{ display: 'flex', marginTop: 1, flexWrap: 'wrap', position: 'relative', gap: 2 }}>
-                  <HobbyCard hobby="Cricket" image={jsImage} />
-                  <Button
-                    onClick={() => handleMenuItemClick('modal3')}
-                    sx={{
-                      position: 'absolute',
-                      right: '0%',
-                      bottom: '0%',
-                      padding: 0
-                    }}
-                  >
-                    <AddCircleIcon />
-                  </Button>
-                </Item>
-              </Grid>
             </Item>
           </Grid>
 
@@ -302,6 +195,17 @@ function MainProfile() {
 
             </Item>
           </Grid>
+
+
+
+          <Grid item xs={6}>
+            <Item sx={{ display: 'flex', marginTop: 1, flexWrap: 'wrap', position: 'relative', gap: 2 }}>
+              <HobbyCard hobby="Cricket" image={jsImage} />
+            </Item>
+          </Grid>
+
+
+          
 
         </Grid>
 

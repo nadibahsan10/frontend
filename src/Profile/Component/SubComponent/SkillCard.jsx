@@ -1,31 +1,28 @@
-import { Avatar } from '@mui/material';
-import React from 'react';
+import React from 'react'
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import './HobbyCard.css';
+import { Avatar } from '@mui/material';
 
-function HobbyCard(props) {
+function SkillCard(props) {
     return (
-        <div style={{width: '20%', marginBottom: '5%'}}>
-            <div className='hobbyCard'>
-
+        <div>
+            <div className='linkCard'>
                 <Avatar
-                    sx={{ height: 40, width: 40, }}
+                    sx={{ height: 20, width: 20, marginRight: "10px" }}
                     alt="Remy Sharp"
                     src={props.image}
                     variant='rounded'
                 />
-                <p><strong>{props.hobby}</strong></p>
+                <p>Skill you like share</p>
 
-                <div className='deleteIconForHobby'>
+                <div className='deleteIcon'>
                     <IconButton sx={{ padding: 0 }}>
                         <CloseIcon sx={{ fontSize: '15px' }} />
                     </IconButton>
                 </div>
-
             </div>
         </div>
     )
 }
 
-export default HobbyCard
+export default SkillCard

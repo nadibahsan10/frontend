@@ -14,3 +14,30 @@
 .linkCard:hover .deleteIcon {
     opacity: 1;
 }
+
+.hobbyCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-shadow: 1px 1px 1px 1px;
+    padding: 1%;
+}
+
+.hobbyCard p {
+    text-align: center;
+}
+
+.deleteIconForHobby {
+    position: absolute;
+    right: 0%;
+    top: 0%;
+    opacity: 0;
+    background-color: rgb(252, 133, 64);
+
+}
+
+.hobbyCard:hover .deleteIconForHobby {
+    opacity: 1;
+}
