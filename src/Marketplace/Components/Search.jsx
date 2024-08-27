@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -8,14 +8,22 @@ import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
 import SearchCategory from "./SubComponent/SearchCategory";
 import "./Search.css";
-import electronicsIcon from './SubComponent/Icon/electronics.png';
-import furnituresIcon from './SubComponent/Icon/furnitures.png';
-import bookIcon from './SubComponent/Icon/book.png';
-import cpuIcon from './SubComponent/Icon/cpu.png';
-import desktopIcon from './SubComponent/Icon/desktop.png';
-import laptopIcon from './SubComponent/Icon/laptop.png'
-import mobileIcon from './SubComponent/Icon/mobile.png'
-import droneCameraIcon from './SubComponent/Icon/camera.png'
+import electronicsIcon from "./SubComponent/Icon/electronics.png";
+import furnituresIcon from "./SubComponent/Icon/furnitures.png";
+import bookIcon from "./SubComponent/Icon/book.png";
+import cpuIcon from "./SubComponent/Icon/cpu.png";
+import desktopIcon from "./SubComponent/Icon/desktop.png";
+import laptopIcon from "./SubComponent/Icon/laptop.png";
+import mobileIcon from "./SubComponent/Icon/mobile.png";
+import droneCameraIcon from "./SubComponent/Icon/camera.png";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from "@mui/material";
+import Addproduct from "./Addproduct";
+import CloseIcon from "@mui/icons-material/Close";
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -38,14 +46,52 @@ const category = [
 ];
 
 function Search() {
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <div component="form" method="post">
       <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sx={{ margin: "20px 25%" }}>
-            <Item className="searchHeader">
-              <h2>MarketPlace For UIU Students</h2>
-            </Item>
+        <Grid container spacing={2} sx={{ position: "relative" }}>
+          <Grid
+            item
+            xs={9}
+            sx={{ margin: "20px 25%" }}
+            className="searchHeader"
+          >
+            <h2>MarketPlace For UIU Students</h2>
+          </Grid>
+          <Grid
+            item
+            xs={3}
+            sx={{ position: "absolute", top: "30px", right: "100px" }}
+          >
+            <Button variant="contained" color="green" onClick={handleClickOpen}>
+              Add products
+            </Button>
+
+            <Dialog
+              open={open}
+              onClose={handleClose}
+              maxWidth="lg"
+              fullWidth={true}
+            >
+              {/* <DialogTitle>Add a product </DialogTitle> */}
+              <DialogActions>
+                <Button onClick={handleClose} color="primary">
+                  <CloseIcon />
+                </Button>
+              </DialogActions>
+              <DialogContent>
+                <Addproduct />
+              </DialogContent>
+            </Dialog>
           </Grid>
         </Grid>
       </Box>
@@ -96,11 +142,11 @@ function Search() {
       </Box>
 
       <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={4} sx={{padding: "0 20%", marginTop: '1%'}}>
+        <Grid container spacing={4} sx={{ padding: "0 20%", marginTop: "1%" }}>
           {category.map((x) => (
             <Grid item xs={3}>
               <Item>
-                <SearchCategory name={x.name} icon={x.icon}/>
+                <SearchCategory name={x.name} icon={x.icon} />
               </Item>
             </Grid>
           ))}
