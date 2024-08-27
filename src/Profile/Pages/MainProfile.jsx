@@ -18,11 +18,13 @@ import ChangeProfilePicture from '../Component/ChngeProfilePicture';
 import SemiBiography from '../Component/SemiBiography'
 import LinksAdd from '../Component/LinksAdd';
 import DegreesAdd from '../Component/DegreesAdd';
+import SkillsAdd from '../Component/SkillsAdd';
 import './MainProfile.css';
 
 import githubImage from 'E:/Projec/github.png'; // adjust the path accordingly
 import jsImage from 'E:/Projec/js.png';
 import schoolImage from 'E:/Projec/school.png';
+import HobbyCard from '../Component/HobbyCard';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -265,6 +267,23 @@ function MainProfile() {
                 </Accordion>
 
               </Grid>
+
+              <Grid item xs={12}>
+                <Item sx={{ display: 'flex', marginTop: 1, flexWrap: 'wrap', position: 'relative', gap: 2 }}>
+                  <HobbyCard hobby="Cricket" image={jsImage} />
+                  <Button
+                    onClick={() => handleMenuItemClick('modal3')}
+                    sx={{
+                      position: 'absolute',
+                      right: '0%',
+                      bottom: '0%',
+                      padding: 0
+                    }}
+                  >
+                    <AddCircleIcon />
+                  </Button>
+                </Item>
+              </Grid>
             </Item>
           </Grid>
 
@@ -362,7 +381,7 @@ function MainProfile() {
             >
               <CloseIcon />
             </IconButton>
-           <h2>lol</h2>
+            <SkillsAdd onClose={handleModalClose} />
           </Box>
         </Modal>
 
