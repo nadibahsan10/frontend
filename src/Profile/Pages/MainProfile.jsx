@@ -4,8 +4,6 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Button from "@mui/material/Button";
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import { Avatar, Modal } from '@mui/material';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -13,11 +11,13 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Accordion from '@mui/material/Accordion';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import Card from '../Component/Card';
 import ChangeProfilePicture from '../Component/ChngeProfilePicture';
 import SemiBiography from '../Component/SemiBiography'
 import LinksAdd from '../Component/LinksAdd';
+import DegreesAdd from '../Component/DegreesAdd';
 import './MainProfile.css';
 
 import githubImage from 'E:/Projec/github.png'; // adjust the path accordingly
@@ -94,9 +94,20 @@ function MainProfile() {
                 <Item sx={{
                   display: "flex",
                   alignItems: "center",
-                  boxShadow: "none",
+                  position: 'relative',
+                  boxShadow: 'none'
                 }}>
                   <SemiBiography />
+                  <Button
+                    onClick={() => handleMenuItemClick('modal1')}
+                    sx={{
+                      position: 'absolute',
+                      right: '10%',
+                      bottom: '2%'
+                    }}
+                  >
+                    <AddCircleIcon />
+                  </Button>
                 </Item>
               </Grid>
 
@@ -109,35 +120,7 @@ function MainProfile() {
                   height: "100px",
                   boxShadow: "none"
                 }}>
-
-                  <div>
-                    <Button
-                      id="basic-button"
-                      aria-controls={open ? 'basic-menu' : undefined}
-                      aria-haspopup="true"
-                      aria-expanded={open ? 'true' : undefined}
-                      onClick={handleMenuClick}
-                      variant='contained'
-                    >
-                      Update Profile
-                    </Button>
-                    <Menu
-                      id="basic-menu"
-                      anchorEl={anchorEl}
-                      open={open}
-                      onClose={handleClose}
-                      MenuListProps={{
-                        'aria-labelledby': 'basic-button',
-                      }}
-                    >
-                      <MenuItem onClick={() => handleMenuItemClick('modal1')} sx={menuItemStyle}>Introduction</MenuItem>
-                      <MenuItem onClick={() => handleMenuItemClick('modal2')} sx={menuItemStyle}>Links</MenuItem>
-                      <MenuItem onClick={() => handleMenuItemClick('modal3')} sx={[menuItemStyle, menuItemStyle1]}>Open Modal 3</MenuItem>
-                    </Menu>
-                  </div>
-
                   <Button variant="contained">Activity Log</Button>
-
                 </Item>
               </Grid>
 
@@ -170,8 +153,25 @@ function MainProfile() {
                         src={githubImage}
                       />
                       <a href="https://github.com/dksaddy" target="_blank" rel="noopener noreferrer">Github</a>
-                      <div className='deleteIcon'><IconButton> <CloseIcon /></IconButton></div>
+
+                      <div className='deleteIcon'>
+                        <IconButton sx={{ padding: 0 }}>
+                          <CloseIcon sx={{ fontSize: '15px' }} />
+                        </IconButton>
+                      </div>
                     </div>
+
+                    <Button
+                      onClick={() => handleMenuItemClick('modal2')}
+                      sx={{
+                        position: 'absolute',
+                        right: '0%',
+                        bottom: '0%',
+                        padding: 0
+                      }}
+                    >
+                      <AddCircleIcon />
+                    </Button>
 
                   </AccordionDetails>
 
@@ -188,16 +188,33 @@ function MainProfile() {
 
                   <AccordionDetails>
 
-                    <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5%' }}>
+                    <div className='linkCard'>
                       <Avatar
                         sx={{ height: 20, width: 20, marginRight: "10px" }}
                         alt="Remy Sharp"
                         src={schoolImage}
                         variant='rounded'
                       />
-                      <p>passing Year if you like to Share Institute,</p>
+                      <p style={{ textWrap: 'wrap' }}>passing Year like Share Institute,</p>
 
+                      <div className='deleteIcon'>
+                        <IconButton sx={{ padding: 0 }}>
+                          <CloseIcon sx={{ fontSize: '15px' }} />
+                        </IconButton>
+                      </div>
                     </div>
+
+                    <Button
+                      onClick={() => handleMenuItemClick('modal3')}
+                      sx={{
+                        position: 'absolute',
+                        right: '0%',
+                        bottom: '0%',
+                        padding: 0
+                      }}
+                    >
+                      <AddCircleIcon />
+                    </Button>
 
                   </AccordionDetails>
 
@@ -215,7 +232,7 @@ function MainProfile() {
 
                   <AccordionDetails>
 
-                    <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5%' }}>
+                    <div className='linkCard'>
                       <Avatar
                         sx={{ height: 20, width: 20, marginRight: "10px" }}
                         alt="Remy Sharp"
@@ -224,7 +241,24 @@ function MainProfile() {
                       />
                       <p>passing Year if you like to Share Institute,</p>
 
+                      <div className='deleteIcon'>
+                        <IconButton sx={{ padding: 0 }}>
+                          <CloseIcon sx={{ fontSize: '15px' }} />
+                        </IconButton>
+                      </div>
                     </div>
+
+                    <Button
+                      onClick={() => handleMenuItemClick('modal4')}
+                      sx={{
+                        position: 'absolute',
+                        right: '0%',
+                        bottom: '0%',
+                        padding: 0
+                      }}
+                    >
+                      <AddCircleIcon />
+                    </Button>
 
                   </AccordionDetails>
 
@@ -252,8 +286,6 @@ function MainProfile() {
 
         </Grid>
 
-
-
         {/* Modal 1 */}
         <Modal
           open={openModal === 'modal1'}
@@ -273,10 +305,6 @@ function MainProfile() {
             <ChangeProfilePicture onClose={handleModalClose} />
           </Box>
         </Modal>
-
-
-
-
 
         {/* Modal 2 */}
         <Modal
@@ -298,8 +326,6 @@ function MainProfile() {
           </Box>
         </Modal>
 
-
-
         {/* Modal 3 */}
         <Modal
           open={openModal === 'modal3'}
@@ -316,10 +342,28 @@ function MainProfile() {
             >
               <CloseIcon />
             </IconButton>
-            <h2>Modal 3</h2>
-            <p>Content Degree</p>
+            <DegreesAdd onClose={handleModalClose} />
           </Box>
+        </Modal>
 
+        {/* Modal 4 */}
+        <Modal
+          open={openModal === 'modal4'}
+          onClose={handleModalClose}
+          // Prevent closing on backdrop click
+          disableBackdropClick
+          // Stop propagation on backdrop click
+          BackdropProps={{ onClick: (e) => e.stopPropagation() }}
+        >
+          <Box sx={modalStyle}>
+            <IconButton
+              onClick={handleModalClose}
+              sx={{ position: 'absolute', top: 0, right: 0 }}
+            >
+              <CloseIcon />
+            </IconButton>
+           <h2>lol</h2>
+          </Box>
         </Modal>
 
 
