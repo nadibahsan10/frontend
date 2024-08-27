@@ -1,0 +1,15 @@
+.aboutShort {
+    background-color: rgb(255, 255, 255);
+}
+
+.aboutShort p {
+    margin: 1% 0;
+    font-size: 0.8rem;
+}
+
+.aboutShort h3 {
+    margin: 0;
+    text-align: left;
+    font-size:  1.1rem;
+    color: black;
+}
