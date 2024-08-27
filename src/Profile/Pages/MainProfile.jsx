@@ -23,6 +23,8 @@ import './MainProfile.css';
 import githubImage from 'E:/Projec/github.png'; // adjust the path accordingly
 import jsImage from 'E:/Projec/js.png';
 import schoolImage from 'E:/Projec/school.png';
+import pic from 'E:/Projec/pic.jpg';
+
 import HobbyCard from '../Component/SubComponent/HobbyCard';
 import LinkCard from '../Component/SubComponent/LinkCard';
 import DegreeCard from '../Component/SubComponent/DegreeCard';
@@ -129,7 +131,7 @@ function MainProfile() {
                   I have been working as a software Engineer for 10 years. Learnig and implementing is something I like to do.
                 </p>
 
-                <Accordion sx={{ marginTop: '3%' }}>
+                <Accordion sx={{ marginTop: '3%' }} defaultExpanded>
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1-content"
@@ -137,14 +139,12 @@ function MainProfile() {
                   >
                     <h3 style={{ margin: 0 }}>Links</h3>
                   </AccordionSummary>
-
                   <AccordionDetails>
                     <LinkCard image={githubImage} mediaLink="https://github.com/dksaddy" mediaName="GIthub" />
                   </AccordionDetails>
-
                 </Accordion>
 
-                <Accordion sx={{ marginTop: '3%' }}>
+                <Accordion sx={{ marginTop: '3%' }} defaultExpanded>
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1-content"
@@ -152,15 +152,12 @@ function MainProfile() {
                   >
                     <h3 style={{ margin: 0 }}>Degrees</h3>
                   </AccordionSummary>
-
                   <AccordionDetails>
                     <DegreeCard image={schoolImage} />
                   </AccordionDetails>
-
                 </Accordion>
 
-                <Accordion sx={{ marginTop: '3%' }}>
-
+                <Accordion sx={{ marginTop: '3%' }} defaultExpanded>
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1-content"
@@ -168,11 +165,9 @@ function MainProfile() {
                   >
                     <h3 style={{ margin: 0 }}>Skills</h3>
                   </AccordionSummary>
-
                   <AccordionDetails>
                     <SkillCard image={jsImage} />
                   </AccordionDetails>
-
                 </Accordion>
 
               </Grid>
@@ -198,9 +193,21 @@ function MainProfile() {
 
 
 
-          <Grid item xs={6}>
-            <Item sx={{ display: 'flex', marginTop: 1, flexWrap: 'wrap', position: 'relative', gap: 2 }}>
+          <Grid item xs={4}>
+          <h3 style={{ margin: 0 }}>Achivement</h3>
+          <hr />
+            <Item sx={{ display: 'flex', marginTop: 1, flexWrap: 'wrap', position: 'relative', justifyContent: 'space-between'}}>
               <HobbyCard hobby="Cricket" image={jsImage} />
+              <HobbyCard hobby="Cricket" image={githubImage} />
+              <HobbyCard hobby="Cricket" image={pic} />
+            </Item>
+          </Grid>
+
+          <Grid item xs={8}>
+          <h3 style={{ margin: 0 }}>Publications & Projects</h3>
+          <hr />
+            <Item sx={{ display: 'flex', marginTop: 1, flexWrap: 'wrap', position: 'relative', justifyContent: 'space-between'}}>
+              
             </Item>
           </Grid>
 

@@ -21,8 +21,9 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    box-shadow: 1px 1px 1px 1px;
-    padding: 1%;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, 
+                rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;    
+    border-radius: 10px;
 }
 
 .hobbyCard p {

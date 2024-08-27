@@ -5,16 +5,16 @@ import CloseIcon from '@mui/icons-material/Close';
 
 function HobbyCard(props) {
     return (
-        <div style={{width: '20%', marginBottom: '5%'}}>
+        <div style={{width: '25%', margin: '2% 2.4%'}}>
             <div className='hobbyCard'>
 
                 <Avatar
-                    sx={{ height: 40, width: 40, }}
+                    sx={{ height: 80, width: '100%', borderStartEndRadius: '10px', borderStartStartRadius: '10px'}}
                     alt="Remy Sharp"
                     src={props.image}
-                    variant='rounded'
+                    variant='square'
                 />
-                <p><strong>{props.hobby}</strong></p>
+                <p style={{marginTop: 2}}><strong>{props.hobby}</strong></p>
 
                 <div className='deleteIconForHobby'>
                     <IconButton sx={{ padding: 0 }}>
