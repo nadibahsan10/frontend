@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import {
   Grid,
   Avatar,
@@ -18,17 +19,23 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import "./Post.css";
 import axios from "axios";
+import { AuthContext } from "../../Auth/AuthContext";
 
 const Post = ({
   id,
+  uid,
   name,
-
   profilePicture,
   date,
   title,
   content,
   imageUrl,
+  reload,
+  loading,
+
+  setChange,
 }) => {
+  const auth = useContext(AuthContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -47,24 +54,27 @@ const Post = ({
     setAnchorEl(null);
   };
 
-  // const like = async () => {
-  //   try {
-  //     console.log(id);
-  //     const response = await axios.post(
-  //       "http://localhost:3000/feed/like",
-  //       { userId: auth.id, postId: id },
-  //       {
-  //         headers: {
-  //           Authorization:
-  //             "baerer " + JSON.parse(localStorage.getItem("token")),
-  //         },
-  //       }
-  //     );
-  //     console.log(response.data.message);
-  //   } catch (error) {
-  //     console.log(error.response.data.message);
-  //   }
-  // };
+  const handleDeletePost = async () => {
+    handleClose();
+
+    try {
+      const token = JSON.parse(localStorage.getItem("token"));
+      const response = await axios.delete(
+        `http://localhost:3000/feed/deletepost/${id}`,
+        {
+          headers: {
+            Authorization: "Baerer " + token,
+          },
+        }
+      );
+      console.log(response.data);
+      loading();
+      setChange((prev) => prev + 1);
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
+
   return (
     <Grid
       container
@@ -97,9 +107,22 @@ const Post = ({
             "aria-labelledby": "basic-button",
           }}
         >
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
-          <MenuItem onClick={handleClose}>My account</MenuItem>
-          <MenuItem onClick={handleClose}>Logout</MenuItem>
+          <MenuItem onClick={handleClose}>Save</MenuItem>
+          {auth.id === uid && (
+            <MenuItem onClick={handleClose}>
+              <Link
+                style={{ textDecoration: "none", color: "inherit" }}
+                to={`edit/${id}`}
+              >
+                Edit
+              </Link>
+            </MenuItem>
+          )}
+
+          <MenuItem onClick={handleClose}>Report</MenuItem>
+          {auth.id === uid && (
+            <MenuItem onClick={handleDeletePost}>Delete</MenuItem>
+          )}
         </Menu>
       </Box>
       <Grid item xs={1.2}>

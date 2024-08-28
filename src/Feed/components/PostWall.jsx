@@ -4,9 +4,15 @@ import { Box, Skeleton } from "@mui/material";
 import axios from "axios";
 import Post from "./Post";
 import "./PostWall.css";
-const PostWall = ({ posts, setPosts }) => {
+const PostWall = ({ posts, setPosts, change, setChange }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const reloadPage = () => {
+    setPosts(null);
+  };
+  const loadingOn = () => {
+    setIsLoading(true);
+  };
 
   useEffect(() => {
     const token = "Baerer " + JSON.parse(localStorage.getItem("token"));
@@ -30,7 +36,7 @@ const PostWall = ({ posts, setPosts }) => {
       }
     };
     fetchData();
-  }, [posts]);
+  }, [change]);
   return (
     <Box marginTop={2}>
       {isLoading && (
@@ -121,14 +127,18 @@ const PostWall = ({ posts, setPosts }) => {
       {posts?.map((item) => {
         return (
           <Post
+            setChange={setChange}
             key={item.id}
             id={item.id}
+            uid={item.uid}
             profilePicture={item.profile_picture}
             name={item.first_name + " " + item.last_name}
             date={item.created_at}
             title={item.title}
             content={item.content}
             imageUrl={item.image_url}
+            reload={reloadPage}
+            loading={loadingOn}
           />
         );
       })}

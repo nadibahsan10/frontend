@@ -6,6 +6,7 @@ import Feed from "./Feed/pages/Feed";
 import Footer from "./Shared/Footer";
 import Home from "./Home/Home";
 import About from "./About/About";
+import Market from "./Marketplace/Pages/Market";
 
 import MainQuestionBank from "./QuestionBank/Pages/MainQuestionBank";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -69,9 +70,9 @@ const App = () => {
             element={<h1>This is my notification</h1>}
           />
 
-          <Route path="/feed" element={<Feed />} />
+          <Route path="/feed/*" element={<Feed />} />
           <Route path="/inbox" element={<Message />} />
-          <Route path="/market" element={<MainQuestionBank />} />
+          <Route path="/market" element={<Market />} />
           <Route path="/about" element={<About />} />
           <Route path="/question" element={<MainQuestionBank />} />
         </Routes>

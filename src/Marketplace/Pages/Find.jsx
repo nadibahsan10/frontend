@@ -24,7 +24,6 @@ import Slider from "@mui/material/Slider";
 import { useState } from "react";
 import upperFooter from "../Components/SubComponent/upperFooter.jsx";
 
-
 const products = [
   {
     id: 1,
@@ -89,15 +88,12 @@ const SearchCategory = ({ name, icon }) => (
   </Box>
 );
 
-
-function selectRange() {
-  
-}
+function selectRange() {}
 function Find() {
-  const [value, setValue] = useState([0,500]);
-  function handleChange(event){
+  const [value, setValue] = useState([0, 500]);
+  function handleChange(event) {
     const value = event.target.value;
-    setValue(value)
+    setValue(value);
   }
   return (
     <form method="post">
@@ -147,7 +143,7 @@ function Find() {
         </Grid>
       </Box>
 
-      <Box sx={{ flexGrow: 1, margin: "0 5%"}}>
+      <Box sx={{ flexGrow: 1, margin: "0 5%" }}>
         <Grid
           container
           spacing={2}
@@ -155,11 +151,10 @@ function Find() {
             marginTop: "20px",
             // backgroundColor: "beige",
             padding: "10px 10px",
-            
           }}
         >
-          <Grid item xs={3} >
-            <Item sx= {{marginRight: '5%'}}>
+          <Grid item xs={3}>
+            <Item sx={{ marginRight: "5%" }}>
               <Accordion>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
@@ -227,13 +222,13 @@ function Find() {
                   Price Range
                 </AccordionSummary>
                 <AccordionDetails>
-                  <Box sx={{ width: '95%' }}>
+                  <Box sx={{ width: "95%" }}>
                     <Slider
                       getAriaLabel={() => "Price range"}
                       value={value}
                       onChange={handleChange}
                       valueLabelDisplay="auto"
-                      sx={{display: 'flex'}}
+                      sx={{ display: "flex" }}
                       max={50000}
                     />
                   </Box>
@@ -242,7 +237,10 @@ function Find() {
             </Item>
           </Grid>
           <Grid item xs={9}>
-            <Typography variant="body2" sx={{ marginBottom: "15px",marginLeft: "10px" }}>
+            <Typography
+              variant="body2"
+              sx={{ marginBottom: "15px", marginLeft: "10px" }}
+            >
               298 Results found
               <Typography
                 variant="caption"
@@ -258,10 +256,16 @@ function Find() {
                 gap: "30px",
               }}
             >
-              {products.map((product) => (
+              {products.map((product, index) => (
                 <Card
-                  key={product.id}
-                  sx={{ maxWidth: "190px", borderRadius: "10px",padding: '10px',boxShadow: 'rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em' }}
+                  key={index}
+                  sx={{
+                    maxWidth: "190px",
+                    borderRadius: "10px",
+                    padding: "10px",
+                    boxShadow:
+                      "rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em",
+                  }}
                 >
                   <CardMedia
                     component="img"
@@ -301,7 +305,6 @@ function Find() {
             </Box>
           </Grid>
         </Grid>
-        
       </Box>
       <upperFooter />
     </form>
