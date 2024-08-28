@@ -4,20 +4,19 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Button from "@mui/material/Button";
-import { Avatar, Modal } from '@mui/material';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Accordion from '@mui/material/Accordion';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
+import MenuIcon from '@mui/icons-material/Menu';
 
-import Card from '../Component/Card';
 import ChangeProfilePicture from '../Component/ChngeProfilePicture';
-import SemiBiography from '../Component/SemiBiography'
 import LinksAdd from '../Component/LinksAdd';
 import DegreesAdd from '../Component/DegreesAdd';
 import SkillsAdd from '../Component/SkillsAdd';
+import ModalFram from '../Component/ModalFram';
 import './MainProfile.css';
 
 import githubImage from 'E:/Projec/github.png'; // adjust the path accordingly
@@ -25,6 +24,8 @@ import jsImage from 'E:/Projec/js.png';
 import schoolImage from 'E:/Projec/school.png';
 import pic from 'E:/Projec/pic.jpg';
 
+import SemiBiography from '../Component/SemiBiography'
+import Card from '../Component/Card';
 import HobbyCard from '../Component/SubComponent/HobbyCard';
 import LinkCard from '../Component/SubComponent/LinkCard';
 import DegreeCard from '../Component/SubComponent/DegreeCard';
@@ -39,30 +40,12 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const menuItemStyle = {
-  background: '#780000',
-  color: '#ffffff',
-  marginBottom: '5%',
   borderRadius: '4px',
 
   '&:hover': {
-    backgroundColor: '#EBEBEB', // Change the background color on hover
-    color: '#000000', // Change the text color on hover
+    background: '#780000',
+    color: '#ffffff',
   },
-}
-
-const menuItemStyle1 = {
-  marginBottom: '0',
-}
-
-const modalStyle = {
-  backgroundColor: 'white',
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  translate: "-50% -50%",
-  width: "60vh",
-  background: "white",
-  borderRadius: "4px"
 }
 
 function MainProfile() {
@@ -116,12 +99,36 @@ function MainProfile() {
                   height: "100px",
                   boxShadow: "none"
                 }}>
-                  <Button variant="contained">Activity Log</Button>
+                  <Button
+                    id="basic-button"
+                    aria-controls={open ? 'basic-menu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
+                    onClick={handleMenuClick}
+                    variant='contained'
+                  >
+                    <MenuIcon />
+                  </Button>
+                  <Menu
+                    id="basic-menu"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    MenuListProps={{
+                      'aria-labelledby': 'basic-button',
+                    }}
+                  >
+                    <MenuItem onClick={() => handleMenuItemClick('modal1')} sx={menuItemStyle}>Update Profile</MenuItem>
+                    <MenuItem onClick={() => handleMenuItemClick('modal2')} sx={menuItemStyle}>Add Links</MenuItem>
+                    <MenuItem onClick={() => handleMenuItemClick('modal3')} sx={menuItemStyle}>Add Degrees</MenuItem>
+                    <MenuItem onClick={() => handleMenuItemClick('modal4')} sx={menuItemStyle}>Add Skills</MenuItem>
+                  </Menu>
                 </Item>
               </Grid>
 
             </Item>
-          </Grid>
+          </Grid> {/*Grid 12*/}
+
 
           <Grid item xs={4}>
             <Item>
@@ -173,7 +180,8 @@ function MainProfile() {
               </Grid>
 
             </Item>
-          </Grid>
+          </Grid> {/*Grid 4*/}
+
 
           <Grid item xs={8}>
             <Item>
@@ -189,113 +197,61 @@ function MainProfile() {
               </Grid>
 
             </Item>
-          </Grid>
-
+          </Grid> {/*Grid 8*/}
 
 
           <Grid item xs={4}>
-          <h3 style={{ margin: 0 }}>Achivement</h3>
-          <hr />
-            <Item sx={{ display: 'flex', marginTop: 1, flexWrap: 'wrap', position: 'relative', justifyContent: 'space-between'}}>
+            <h3 style={{ margin: 0 }}>Achivement</h3>
+            <hr />
+            <Item sx={{ display: 'flex', marginTop: 1, flexWrap: 'wrap', position: 'relative', justifyContent: 'space-between' }}>
               <HobbyCard hobby="Cricket" image={jsImage} />
               <HobbyCard hobby="Cricket" image={githubImage} />
               <HobbyCard hobby="Cricket" image={pic} />
+
             </Item>
-          </Grid>
+          </Grid> {/*Grid 4*/}
+
 
           <Grid item xs={8}>
-          <h3 style={{ margin: 0 }}>Publications & Projects</h3>
-          <hr />
-            <Item sx={{ display: 'flex', marginTop: 1, flexWrap: 'wrap', position: 'relative', justifyContent: 'space-between'}}>
-              
+            <h3 style={{ margin: 0 }}>Publications & Projects</h3>
+            <hr />
+            <Item sx={{ display: 'flex', marginTop: 1, flexWrap: 'wrap', position: 'relative', justifyContent: 'space-between' }}>
+
             </Item>
-          </Grid>
-
-
-          
+          </Grid> {/*Grid 8*/}
 
         </Grid>
 
-        {/* Modal 1 */}
-        <Modal
+
+        {/*  CustomModal  */}
+
+        <ModalFram
           open={openModal === 'modal1'}
           onClose={handleModalClose}
-          // Prevent closing on backdrop click
-          disableBackdropClick
-          // Stop propagation on backdrop click
-          BackdropProps={{ onClick: (e) => e.stopPropagation() }}
         >
-          <Box sx={modalStyle}>
-            <IconButton
-              onClick={handleModalClose}
-              sx={{ position: 'absolute', top: 0, right: 0 }}
-            >
-              <CloseIcon />
-            </IconButton>
-            <ChangeProfilePicture onClose={handleModalClose} />
-          </Box>
-        </Modal>
+          <ChangeProfilePicture onClose={handleModalClose} />
+        </ModalFram>
 
-        {/* Modal 2 */}
-        <Modal
+        <ModalFram
           open={openModal === 'modal2'}
           onClose={handleModalClose}
-          // Prevent closing on backdrop click
-          disableBackdropClick
-          // Stop propagation on backdrop click
-          BackdropProps={{ onClick: (e) => e.stopPropagation() }}
         >
-          <Box sx={modalStyle}>
-            <IconButton
-              onClick={handleModalClose}
-              sx={{ position: 'absolute', top: 0, right: 0 }}
-            >
-              <CloseIcon />
-            </IconButton>
-            <LinksAdd onClose={handleModalClose} />
-          </Box>
-        </Modal>
+          <LinksAdd onClose={handleModalClose} />
+        </ModalFram>
 
-        {/* Modal 3 */}
-        <Modal
+        <ModalFram
           open={openModal === 'modal3'}
           onClose={handleModalClose}
-          // Prevent closing on backdrop click
-          disableBackdropClick
-          // Stop propagation on backdrop click
-          BackdropProps={{ onClick: (e) => e.stopPropagation() }}
         >
-          <Box sx={modalStyle}>
-            <IconButton
-              onClick={handleModalClose}
-              sx={{ position: 'absolute', top: 0, right: 0 }}
-            >
-              <CloseIcon />
-            </IconButton>
-            <DegreesAdd onClose={handleModalClose} />
-          </Box>
-        </Modal>
+          <DegreesAdd onClose={handleModalClose} />
+        </ModalFram>
 
-        {/* Modal 4 */}
-        <Modal
+        <ModalFram
           open={openModal === 'modal4'}
           onClose={handleModalClose}
-          // Prevent closing on backdrop click
-          disableBackdropClick
-          // Stop propagation on backdrop click
-          BackdropProps={{ onClick: (e) => e.stopPropagation() }}
         >
-          <Box sx={modalStyle}>
-            <IconButton
-              onClick={handleModalClose}
-              sx={{ position: 'absolute', top: 0, right: 0 }}
-            >
-              <CloseIcon />
-            </IconButton>
-            <SkillsAdd onClose={handleModalClose} />
-          </Box>
-        </Modal>
-
+          <SkillsAdd onClose={handleModalClose} />
+        </ModalFram>
 
       </Box>
     </div>
