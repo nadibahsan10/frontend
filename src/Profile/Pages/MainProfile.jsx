@@ -4,6 +4,8 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Button from "@mui/material/Button";
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import { Avatar, Modal } from '@mui/material';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -11,6 +13,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Accordion from '@mui/material/Accordion';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import MenuIcon from '@mui/icons-material/Menu';
 
 import Card from '../Component/Card';
 import ChangeProfilePicture from '../Component/ChngeProfilePicture';
@@ -39,19 +42,12 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const menuItemStyle = {
-  background: '#780000',
-  color: '#ffffff',
-  marginBottom: '5%',
   borderRadius: '4px',
 
   '&:hover': {
-    backgroundColor: '#EBEBEB', // Change the background color on hover
-    color: '#000000', // Change the text color on hover
+    background: '#780000',
+    color: '#ffffff',
   },
-}
-
-const menuItemStyle1 = {
-  marginBottom: '0',
 }
 
 const modalStyle = {
@@ -116,12 +112,36 @@ function MainProfile() {
                   height: "100px",
                   boxShadow: "none"
                 }}>
-                  <Button variant="contained">Activity Log</Button>
+                  <Button
+                    id="basic-button"
+                    aria-controls={open ? 'basic-menu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
+                    onClick={handleMenuClick}
+                    variant='contained'
+                  >
+                    <MenuIcon />
+                  </Button>
+                  <Menu
+                    id="basic-menu"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    MenuListProps={{
+                      'aria-labelledby': 'basic-button',
+                    }}
+                  >
+                    <MenuItem onClick={() => handleMenuItemClick('modal1')} sx={menuItemStyle}>Update Profile</MenuItem>
+                    <MenuItem onClick={() => handleMenuItemClick('modal2')} sx={menuItemStyle}>Add Links</MenuItem>
+                    <MenuItem onClick={() => handleMenuItemClick('modal3')} sx={menuItemStyle}>Add Degrees</MenuItem>
+                    <MenuItem onClick={() => handleMenuItemClick('modal4')} sx={menuItemStyle}>Add Skills</MenuItem>
+                  </Menu>
                 </Item>
               </Grid>
 
             </Item>
-          </Grid>
+          </Grid> {/*Grid 12*/}
+
 
           <Grid item xs={4}>
             <Item>
@@ -173,7 +193,8 @@ function MainProfile() {
               </Grid>
 
             </Item>
-          </Grid>
+          </Grid> {/*Grid 4*/}
+
 
           <Grid item xs={8}>
             <Item>
@@ -189,30 +210,31 @@ function MainProfile() {
               </Grid>
 
             </Item>
-          </Grid>
-
+          </Grid> {/*Grid 8*/}
 
 
           <Grid item xs={4}>
-          <h3 style={{ margin: 0 }}>Achivement</h3>
-          <hr />
-            <Item sx={{ display: 'flex', marginTop: 1, flexWrap: 'wrap', position: 'relative', justifyContent: 'space-between'}}>
+            <h3 style={{ margin: 0 }}>Achivement</h3>
+            <hr />
+            <Item sx={{ display: 'flex', marginTop: 1, flexWrap: 'wrap', position: 'relative', justifyContent: 'space-between' }}>
               <HobbyCard hobby="Cricket" image={jsImage} />
               <HobbyCard hobby="Cricket" image={githubImage} />
               <HobbyCard hobby="Cricket" image={pic} />
+
             </Item>
-          </Grid>
+          </Grid> {/*Grid 4*/}
+
 
           <Grid item xs={8}>
-          <h3 style={{ margin: 0 }}>Publications & Projects</h3>
-          <hr />
-            <Item sx={{ display: 'flex', marginTop: 1, flexWrap: 'wrap', position: 'relative', justifyContent: 'space-between'}}>
-              
+            <h3 style={{ margin: 0 }}>Publications & Projects</h3>
+            <hr />
+            <Item sx={{ display: 'flex', marginTop: 1, flexWrap: 'wrap', position: 'relative', justifyContent: 'space-between' }}>
+
             </Item>
-          </Grid>
+          </Grid> {/*Grid 8*/}
 
 
-          
+
 
         </Grid>
 
@@ -228,9 +250,15 @@ function MainProfile() {
           <Box sx={modalStyle}>
             <IconButton
               onClick={handleModalClose}
-              sx={{ position: 'absolute', top: 0, right: 0 }}
+              sx={{ 
+                backgroundColor: '#780000',
+                position: 'absolute',
+                top: 5,
+                right: 5,
+                '&:hover': { background: 'black' }
+              }}
             >
-              <CloseIcon />
+              <CloseIcon sx={{fontSize: 'small', color: '#ffffff'}}/>
             </IconButton>
             <ChangeProfilePicture onClose={handleModalClose} />
           </Box>
@@ -248,9 +276,15 @@ function MainProfile() {
           <Box sx={modalStyle}>
             <IconButton
               onClick={handleModalClose}
-              sx={{ position: 'absolute', top: 0, right: 0 }}
+              sx={{
+                backgroundColor: '#780000',
+                position: 'absolute',
+                top: 5,
+                right: 5,
+                '&:hover': { background: 'black' }
+              }}
             >
-              <CloseIcon />
+              <CloseIcon sx={{ fontSize: 'small', color: '#ffffff' }} />
             </IconButton>
             <LinksAdd onClose={handleModalClose} />
           </Box>

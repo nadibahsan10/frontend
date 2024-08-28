@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Avatar from '@mui/material/Avatar'; // Import Avatar
+import IconButton from '@mui/material/IconButton'; // Import IconButton
+import CloseIcon from '@mui/icons-material/Close'; // Import CloseIcon
 
 function LinksAdd({ onClose }) {
     const [form, setForm] = useState({
         medeaName: '',
         mediaLink: '',
         image: null,
-        imageName: '',
-        imageSize: '',
+        imageURL: '', // Store image URL for Avatar preview
     });
 
     const handleChange = (event) => {
@@ -25,10 +27,17 @@ function LinksAdd({ onClose }) {
             setForm(prevForm => ({
                 ...prevForm,
                 image: file,
-                imageName: file.name,
-                imageSize: (file.size / 1024).toFixed(2) + ' KB' // Size in KB
+                imageURL: URL.createObjectURL(file), // Create a URL for the image preview
             }));
         }
+    };
+
+    const handleRemoveImage = () => {
+        setForm(prevForm => ({
+            ...prevForm,
+            image: null,
+            imageURL: '', // Reset the image URL
+        }));
     };
 
     const handleSubmit = () => {
@@ -38,8 +47,7 @@ function LinksAdd({ onClose }) {
 
     return (
         <div>
-
-             <h2 style={{ margin: '2% 0 5% 2%' }}>Update Links</h2>
+            <h2 style={{ margin: '2% 0 5% 2%' }}>Add Links</h2>
 
             <div
                 style={{
@@ -49,23 +57,44 @@ function LinksAdd({ onClose }) {
                     marginLeft: '10%'
                 }}
             >
-                <div style={{ border: '2px dashed', display: 'flex', flexDirection: 'column', marginBottom: '2%' }}>
-                    {/* Display Image Name and Size */}
-                    {form.image ?
-                        (
-                            <div style={{ marginBottom: '20px' }}>
-                                <p style={{ textAlign: 'center', marginTop: '2%' }}><strong>File Name:</strong> {form.imageName}</p>
-                                <p style={{ textAlign: 'center' }}><strong>File Size:</strong> {form.imageSize}</p>
-                            </div>
-                        )
-                        :
-                        (
-                            <div style={{ marginBottom: '20px' }}>
-                                <p style={{ textAlign: 'center', marginTop: '2%' }}><strong>File Name:</strong></p>
-                                <p style={{ textAlign: 'center' }}><strong>File Size:</strong></p>
-                            </div>
-                        )
-                    }
+                <div
+                    style={{
+                        border: '2px dashed',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        marginBottom: '2%',
+                        position: 'relative'
+                    }}
+                >
+                    {/* Display Image in Avatar with Remove Button */}
+                    {form.image ? (
+                        <>
+                            <Avatar
+                                src={form.imageURL}
+                                alt="Uploaded Image"
+                                sx={{ width: 100, height: 100, margin: '5px' }}
+                                variant="square"
+                            />
+                            <IconButton
+                                onClick={handleRemoveImage}
+                                sx={{
+                                    position: 'absolute',
+                                    top: '10px',
+                                    right: '10px',
+                                    backgroundColor: '#780000',
+                                    '&:hover': { background: 'black' }
+                                }}
+                            >
+                                <CloseIcon sx={{ fontSize: 'small', color: '#ffffff' }} />
+                            </IconButton>
+                        </>
+                    ) : (
+                        <Avatar
+                            sx={{ width: 100, height: 100, margin: '5px' }}
+                            variant="square"
+                        />
+                    )}
 
                     {/* Custom File Input */}
                     <input
@@ -76,7 +105,11 @@ function LinksAdd({ onClose }) {
                         onChange={handleImageChange}
                     />
                     <label htmlFor="contained-button-file">
-                        <Button variant="contained" color="primary" component="span" sx={{ margin: '0 0 2% 25%', width: '50%' }}>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            component="span"
+                            sx={{ margin: '10% 0', width: '100%' }}>
                             Upload Image
                         </Button>
                     </label>
