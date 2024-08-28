@@ -34,7 +34,7 @@ function Footer() {
             left: 0,
             width: "100%",
             height: "100%",
-            backgroundImage: "url('./design/UIU.jpg')",
+            backgroundImage: "url('/design/UIU.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
@@ -121,21 +121,23 @@ function Footer() {
           </Grid>
         </Grid>
       </Box>
-      <Grid
-        item
-        xs={12}
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "#343A40",
-          padding: "20px 0px",
-        }}
-      >
-        <Typography variant="body1" sx={{ color: "white !important" }}>
-          Copyright © 2024 Team Mayer Doa.Ak, Natunbazar,Vatara,Dhaka.All rights
-          reserved.
-        </Typography>
+
+      <Grid xs={12}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "#0D7C66 !important",
+            padding: "10px",
+            color: "white !important",
+          }}
+        >
+          <p>
+            Copyright © 2024 Team Mayer Doa.Ak, Natunbazar,Vatara,Dhaka.All
+            rights reserved.{" "}
+          </p>
+        </Box>
       </Grid>
     </Box>
   );

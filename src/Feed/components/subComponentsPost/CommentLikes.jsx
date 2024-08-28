@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Box, Typography, Avatar, Button, IconButton } from "@mui/material";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-
-import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
+import CircularProgress from "@mui/material/CircularProgress";
 import DeleteIcon from "@mui/icons-material/Delete";
 import NorthWestIcon from "@mui/icons-material/NorthWest";
 import SouthEastIcon from "@mui/icons-material/SouthEast";
 import axios from "axios";
+import { AuthContext } from "../../../Auth/AuthContext";
 
-const CommentLikes = ({ element }) => {
+const CommentLikes = ({ element, change }) => {
+  const auth = useContext(AuthContext);
+
   const [likes, setLikes] = useState(null);
   const [disLikes, setDisLikes] = useState(null);
   const [userReaction, setUserReaction] = useState(null);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchLikes = async () => {
       try {
@@ -76,6 +78,25 @@ const CommentLikes = ({ element }) => {
     } catch (error) {}
   };
 
+  const deleteComment = async () => {
+    setLoading(true);
+    const token = JSON.parse(localStorage.getItem("token"));
+    try {
+      const response = await axios.delete(
+        `http://localhost:3000/feed/deletecomment/${element.id}`,
+        {
+          headers: {
+            Authorization: "Baerer " + token,
+          },
+        }
+      );
+      console.log(response.data);
+
+      change((prev) => !prev);
+    } catch (error) {
+      console.log("comment Deleted", error.response.data.message);
+    }
+  };
   const handleCommentDisLike = async () => {
     let value = "dislike";
     if (userReaction === "dislike") {
@@ -164,9 +185,16 @@ const CommentLikes = ({ element }) => {
         >
           {disLikes} Dim
         </Button>
-        <Button size="small" variant="contained" endIcon={<DeleteIcon />}>
-          Delete
-        </Button>
+        {element.userId === auth.id && (
+          <Button
+            size="small"
+            onClick={deleteComment}
+            variant="contained"
+            endIcon={<DeleteIcon />}
+          >
+            {loading ? <CircularProgress size="small" /> : "Delete"}
+          </Button>
+        )}
       </Box>
     </Box>
   );

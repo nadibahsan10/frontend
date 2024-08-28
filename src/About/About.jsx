@@ -19,7 +19,7 @@ function About() {
   return (
     <Container>
       <Box>
-        <Box sx={{ flexGrow: 1 }} fullWidth>
+        <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={0}>
             <Grid item xs={6} className="aboutusF">
               <img src="./design/UIU.jpg" alt="" />

@@ -8,6 +8,8 @@ import {
   TextField,
   Button,
   IconButton,
+  CircularProgress,
+  Alert,
 } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
@@ -25,8 +27,13 @@ const CommentBox = ({ show, handleClose, postId }) => {
   const refVariable = useRef([]);
 
   const [comments, setComments] = useState();
+  const [change, setChange] = useState(true);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchComment = async () => {
+      setLoading(true);
       const token = JSON.parse(localStorage.getItem("token"));
       try {
         const response = await axios.get(
@@ -45,7 +52,8 @@ const CommentBox = ({ show, handleClose, postId }) => {
       }
     };
     fetchComment();
-  }, []);
+    setLoading(false);
+  }, [change]);
 
   const [formData, setFormData] = useState({
     content: "",
@@ -76,8 +84,10 @@ const CommentBox = ({ show, handleClose, postId }) => {
       return { ...prev, imageFile: null };
     });
   };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
 
     const token = "Baerer " + JSON.parse(localStorage.getItem("token"));
     const Data = new FormData();
@@ -97,7 +107,16 @@ const CommentBox = ({ show, handleClose, postId }) => {
         }
       );
       console.log(response.data);
+      setChange((prev) => !prev);
+      setFormData({
+        content: "",
+        imageFile: null,
+      });
+      setSuccess(true);
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
+      setError(error.response.data.message);
       console.log(error.response.data);
     }
   };
@@ -135,9 +154,9 @@ const CommentBox = ({ show, handleClose, postId }) => {
           gap={2}
           encType="multipart/form-data"
           onSubmit={handleSubmit}
+          position="relative"
         >
           <Avatar src={`http://localhost:3000/${auth.profilePicture}`} />
-
           <input
             ref={refVariable}
             type="file"
@@ -145,6 +164,7 @@ const CommentBox = ({ show, handleClose, postId }) => {
             style={{ display: "none" }}
             onChange={handleImage}
           />
+
           <TextField
             value={formData.content}
             onChange={handleInput}
@@ -153,20 +173,24 @@ const CommentBox = ({ show, handleClose, postId }) => {
             label="Give an Answer"
             multiline
             variant="standard"
-          />
-
-          <IconButton
-            variant="contained"
+            sx={{ position: "relative" }}
+          ></TextField>
+          <Button
+            variant="outlined"
             onClick={imageUpload}
-            sx={{ height: "50px" }}
+            sx={{
+              height: "40px",
+              width: "150px",
+            }}
+            size="small"
           >
-            <PhotoIcon />
-          </IconButton>
+            add Photo
+          </Button>
           <Button
             variant="contained"
             type="submit"
             disabled={formData.content !== "" ? false : true}
-            sx={{ height: "50px" }}
+            sx={{ height: "40px", width: "150px" }}
           >
             Answer
           </Button>
@@ -206,9 +230,39 @@ const CommentBox = ({ show, handleClose, postId }) => {
 
         <br />
         <br />
+        {success && (
+          <Alert
+            severity="success"
+            variant="filled"
+            onClose={() => {
+              setSuccess(false);
+            }}
+          >
+            Your Answer has been posted. Thank you
+          </Alert>
+        )}
+        {error && (
+          <Alert
+            severity="error"
+            variant="filled"
+            onClose={() => {
+              setError(null);
+            }}
+          >
+            {error}
+          </Alert>
+        )}
+
+        {loading && (
+          <Box display="flex" justifyContent="center">
+            <CircularProgress />
+          </Box>
+        )}
         {comments &&
           comments.map((item) => {
-            return <CommentLikes element={item} key={item.id} />;
+            return (
+              <CommentLikes change={setChange} element={item} key={item.id} />
+            );
           })}
       </div>
     </Modal>
