@@ -12,8 +12,6 @@ import MainQuestionBank from "./QuestionBank/Pages/MainQuestionBank";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 
-import Z from "./Z";
-import Market from "./Marketplace/Pages/Market";
 import Find from "./Marketplace/Pages/Find";
 import IndividualProduct from "./Marketplace/Pages/IndividualProduct";
 import Addproduct from "./Marketplace/Components/Addproduct";

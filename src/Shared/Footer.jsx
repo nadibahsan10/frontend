@@ -138,7 +138,6 @@ function Footer() {
             rights reserved.{" "}
           </p>
         </Box>
-
       </Grid>
     </Box>
   );
