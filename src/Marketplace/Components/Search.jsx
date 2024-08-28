@@ -19,7 +19,7 @@ import droneCameraIcon from "./SubComponent/Icon/camera.png";
 import { Dialog, DialogActions, DialogContent } from "@mui/material";
 import Addproduct from "./Addproduct";
 import CloseIcon from "@mui/icons-material/Close";
-import UpdateProduct from "./UpdateProduct";
+import MyListings from "./MyListings";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -109,13 +109,7 @@ function Search() {
               </DialogActions>
               <DialogContent>
                 {componentToShow === "update" && (
-                  <UpdateProduct
-                    title="product name"
-                    description="product description"
-                    price="BDT. 2500"
-                    category="electronics"
-                    image="frontend\public\design\UIU.jpg"
-                  />
+                  <MyListings />
                 )}
                 {componentToShow === "add" && <Addproduct />}
               </DialogContent>
