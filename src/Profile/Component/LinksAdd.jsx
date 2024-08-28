@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import Avatar from '@mui/material/Avatar'; // Import Avatar
-import IconButton from '@mui/material/IconButton'; // Import IconButton
-import CloseIcon from '@mui/icons-material/Close'; // Import CloseIcon
+import Avatar from '@mui/material/Avatar'; 
+import IconButton from '@mui/material/IconButton'; 
+import CloseIcon from '@mui/icons-material/Close';
 
 function LinksAdd({ onClose }) {
     const [form, setForm] = useState({
-        medeaName: '',
+        mediaName: '',
         mediaLink: '',
         image: null,
         imageURL: '', // Store image URL for Avatar preview
@@ -119,8 +119,8 @@ function LinksAdd({ onClose }) {
                     id="outlined-position"
                     label="Media Name"
                     variant="outlined"
-                    name="medeaName"
-                    value={form.medeaName}
+                    name="mediaName"
+                    value={form.mediaName}
                     onChange={handleChange}
                     style={{ marginTop: '16px' }}
                 />
