@@ -10,12 +10,15 @@ import About from "./About/About";
 import MainQuestionBank from "./QuestionBank/Pages/MainQuestionBank";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+
 import Z from "./Z";
 import Market from "./Marketplace/Pages/Market"
 import Find from "./Marketplace/Pages/Find"
 import IndividualProduct from "./Marketplace/Pages/IndividualProduct";
 import Addproduct from "./Marketplace/Components/Addproduct";
 import Notification from "./Shared/Notification";
+
+
 
 const App = () => {
   let [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -76,10 +79,13 @@ const App = () => {
           />
 
           <Route path="/feed" element={<Feed />} />
-          <Route path="/inbox" element={<Message />} />
+          <Route path="/inbox" element={<Message />
           <Route path="/market" element={<Market />} />
           <Route path="/alumni" element={<Find />} />
           <Route path="/individual" element={<Addproduct />} />
+
+          <Route path="/market" element={<MainQuestionBank />} />
+
           <Route path="/about" element={<About />} />
           <Route path="/question" element={<MainQuestionBank />} />
         </Routes>

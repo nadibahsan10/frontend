@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grid, Container } from "@mui/material";
 
 import FeedPost from "../components/FeedPost";
@@ -7,6 +7,7 @@ import Top from "../components/Top";
 import PostWall from "../components/PostWall";
 
 const Feed = () => {
+  const [posts, setPosts] = useState([]);
   return (
     <div
       style={{
@@ -24,8 +25,8 @@ const Feed = () => {
             <Top />
           </Grid>
           <Grid item xs={6}>
-            <FeedPost />
-            <PostWall />
+            <FeedPost posts={posts} setPosts={setPosts} />
+            <PostWall posts={posts} setPosts={setPosts} />
           </Grid>
           <Grid item xs={3}>
             <Top />

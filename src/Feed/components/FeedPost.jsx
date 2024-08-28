@@ -15,18 +15,27 @@ import {
   Grid,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import Alert from "@mui/material/Alert";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import axios from "axios";
+import LinearProgress from "@mui/material/LinearProgress";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import { AuthContext } from "../../Auth/AuthContext";
 import ErrorDialog from "../../Shared/ErrorDialog";
 import "./FeedPost.css";
 
-const FeedPost = () => {
+const FeedPost = ({ posts, setPosts }) => {
   const auth = useContext(AuthContext);
-  const [error, setError] = useState({ value: null, isError: false });
+  const [isLoading, setIsLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(null);
+  const closeSuccess = () => {
+    setSuccess(false);
+  };
+
   const closeError = () => {
-    setError({ value: null, isError: false });
+    setError(null);
   };
 
   const imageRef = useRef([]);
@@ -69,9 +78,21 @@ const FeedPost = () => {
           title: state.title.trim() === "",
           description: state.description.trim() === "",
         };
+
         return {
           ...state,
           errors: newErrors,
+        };
+      }
+      case "INITIAL": {
+        return {
+          title: "",
+          description: "",
+          files: null,
+          errors: {
+            title: false,
+            description: false,
+          },
         };
       }
       default:
@@ -91,11 +112,12 @@ const FeedPost = () => {
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     dispatch({ type: "SUBMIT" });
     if (state.errors.title === true || state.errors.description === true) {
       return;
     }
-
+    setIsLoading(true);
     const form = new FormData();
     form.append("title", state.title);
     form.append("description", state.description);
@@ -120,11 +142,13 @@ const FeedPost = () => {
         }
       );
       console.log(response.data);
+      setPosts(null);
+      dispatch({ type: "INITIAL" });
+      setIsLoading(false);
+      setSuccess(true);
     } catch (err) {
-      setError({
-        value: err,
-        isError: true,
-      });
+      setIsLoading(false);
+      setError(err.response.data.message);
       console.log(err.response);
     }
   };
@@ -153,12 +177,22 @@ const FeedPost = () => {
   };
   return (
     <>
-      <ErrorDialog
+      {success && (
+        <Alert severity="success" onClose={closeSuccess}>
+          Your post has been successfully shared with your network!
+        </Alert>
+      )}
+      {error && (
+        <Alert severity="error" onClose={closeError}>
+          {error}
+        </Alert>
+      )}
+      {/* <ErrorDialog
         open={error.isError}
         title="There's an error to post."
         description={error.value?.response.data.message}
         handleClose={closeError}
-      />
+      /> */}
 
       <Box
         padding={1.5}
@@ -256,14 +290,18 @@ const FeedPost = () => {
                 onChange={handleImageUplaod}
               />
 
-              <Button
-                type="submit"
-                sx={{ marginLeft: "auto" }}
-                color="primary"
-                variant="contained"
-              >
-                Post
-              </Button>
+              {isLoading ? (
+                <CircularProgress sx={{ marginLeft: "auto" }} color="primary" />
+              ) : (
+                <Button
+                  type="submit"
+                  sx={{ marginLeft: "auto" }}
+                  color="primary"
+                  variant="contained"
+                >
+                  Post
+                </Button>
+              )}
             </Box>
           </Grid>
         </Grid>

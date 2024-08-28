@@ -121,6 +121,7 @@ function Footer() {
           </Grid>
         </Grid>
       </Box>
+
       <Grid xs={12}>
         <Box
           sx={{
@@ -137,6 +138,7 @@ function Footer() {
             rights reserved.{" "}
           </p>
         </Box>
+
       </Grid>
     </Box>
   );
