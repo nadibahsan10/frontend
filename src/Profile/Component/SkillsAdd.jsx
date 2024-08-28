@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-function LinksAdd({ onClose }) {
+function SkillsAdd({ onClose }) {
+
     const [form, setForm] = useState({
-        medeaName: '',
-        mediaLink: '',
+        skillName: '',
         image: null,
         imageName: '',
         imageSize: '',
@@ -38,8 +38,7 @@ function LinksAdd({ onClose }) {
 
     return (
         <div>
-
-             <h2 style={{ margin: '2% 0 5% 2%' }}>Update Links</h2>
+            <h2 style={{ margin: '2% 0 5% 2%' }}>Update Skills</h2>
 
             <div
                 style={{
@@ -84,20 +83,10 @@ function LinksAdd({ onClose }) {
 
                 <TextField
                     id="outlined-position"
-                    label="Media Name"
+                    label="Skill You Have Achieved"
                     variant="outlined"
-                    name="medeaName"
-                    value={form.medeaName}
-                    onChange={handleChange}
-                    style={{ marginTop: '16px' }}
-                />
-
-                <TextField
-                    id="outlined-email"
-                    label="Link"
-                    variant="outlined"
-                    name="mediaLink"
-                    value={form.mediaLink}
+                    name="skillName"
+                    value={form.skillName}
                     onChange={handleChange}
                     style={{ marginTop: '16px' }}
                 />
@@ -110,8 +99,8 @@ function LinksAdd({ onClose }) {
                     Update
                 </Button>
             </div>
-        </div >
-    );
+        </div>
+    )
 }
 
-export default LinksAdd;
+export default SkillsAdd
