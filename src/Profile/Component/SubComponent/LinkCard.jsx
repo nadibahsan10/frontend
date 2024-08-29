@@ -15,11 +15,19 @@ function LinkCard(props) {
                 <a href={props.mediaLink} target="_blank" rel="noopener noreferrer">{props.mediaName}</a>
 
                 <div className='deleteIcon'>
-                    <IconButton sx={{ padding: 0 }}>
-                        <CloseIcon sx={{ fontSize: '15px' }} />
+                    <IconButton sx={{ padding: 0, background: '#780000' }}>
+                        <CloseIcon
+                            sx={{
+                                fontSize: '15px',
+                                color: '#fff',
+                                '&:hover': { color: '#000' }
+                            }}
+                        />
                     </IconButton>
                 </div>
+
             </div>
+
         </div>
     )
 }

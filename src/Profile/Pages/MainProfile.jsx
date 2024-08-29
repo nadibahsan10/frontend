@@ -19,17 +19,13 @@ import SkillsAdd from '../Component/SkillsAdd';
 import ModalFram from '../Component/ModalFram';
 import './MainProfile.css';
 
-import githubImage from 'E:/Projec/github.png'; // adjust the path accordingly
-import jsImage from 'E:/Projec/js.png';
-import schoolImage from 'E:/Projec/school.png';
-import pic from 'E:/Projec/pic.jpg';
-
-import SemiBiography from '../Component/SemiBiography'
-import Card from '../Component/Card';
+import SemiBiography from '../Component/SubComponent/SemiBiography'
+import Card from '../Component/SubComponent/Card';
 import HobbyCard from '../Component/SubComponent/HobbyCard';
 import LinkCard from '../Component/SubComponent/LinkCard';
 import DegreeCard from '../Component/SubComponent/DegreeCard';
 import SkillCard from '../Component/SubComponent/SkillCard';
+import ProjectCard from '../Component/SubComponent/ProjectCard';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -147,7 +143,7 @@ function MainProfile() {
                     <h3 style={{ margin: 0 }}>Links</h3>
                   </AccordionSummary>
                   <AccordionDetails>
-                    <LinkCard image={githubImage} mediaLink="https://github.com/dksaddy" mediaName="GIthub" />
+                    <LinkCard image="profileImage.webp" mediaLink="https://github.com/dksaddy" mediaName="GIthub" />
                   </AccordionDetails>
                 </Accordion>
 
@@ -160,7 +156,7 @@ function MainProfile() {
                     <h3 style={{ margin: 0 }}>Degrees</h3>
                   </AccordionSummary>
                   <AccordionDetails>
-                    <DegreeCard image={schoolImage} />
+                    <DegreeCard image="profileImage.webp" />
                   </AccordionDetails>
                 </Accordion>
 
@@ -173,7 +169,7 @@ function MainProfile() {
                     <h3 style={{ margin: 0 }}>Skills</h3>
                   </AccordionSummary>
                   <AccordionDetails>
-                    <SkillCard image={jsImage} />
+                    <SkillCard image="profileImage.webp" />
                   </AccordionDetails>
                 </Accordion>
 
@@ -203,10 +199,10 @@ function MainProfile() {
           <Grid item xs={4}>
             <h3 style={{ margin: 0 }}>Achivement</h3>
             <hr />
-            <Item sx={{ display: 'flex', marginTop: 1, flexWrap: 'wrap', position: 'relative', justifyContent: 'space-between' }}>
-              <HobbyCard hobby="Cricket" image={jsImage} />
-              <HobbyCard hobby="Cricket" image={githubImage} />
-              <HobbyCard hobby="Cricket" image={pic} />
+            <Item sx={{ display: 'flex', marginTop: 1, flexWrap: 'wrap', justifyContent: 'space-between' }}>
+              <HobbyCard hobby="Cricket" image="puzzle.png" />
+              <HobbyCard hobby="Cricket" image="profileImage.webp" />
+              <HobbyCard hobby="Cricket" image="puzzle.png" />
 
             </Item>
           </Grid> {/*Grid 4*/}
@@ -215,7 +211,14 @@ function MainProfile() {
           <Grid item xs={8}>
             <h3 style={{ margin: 0 }}>Publications & Projects</h3>
             <hr />
-            <Item sx={{ display: 'flex', marginTop: 1, flexWrap: 'wrap', position: 'relative', justifyContent: 'space-between' }}>
+
+            <Item sx={{ display: 'flex', marginTop: 1, flexWrap: 'wrap', justifyContent: 'space-between', }}>
+              <ProjectCard
+                image="profileImage.webp"
+                project="Protfolio"
+                projectLink="https://dksaddy.github.io/Fun-Portfolio/"
+                description="My Portfolio Project from Udemy Course"
+              />
 
             </Item>
           </Grid> {/*Grid 8*/}

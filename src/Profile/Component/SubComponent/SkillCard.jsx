@@ -16,11 +16,19 @@ function SkillCard(props) {
                 <p>Skill you like share</p>
 
                 <div className='deleteIcon'>
-                    <IconButton sx={{ padding: 0 }}>
-                        <CloseIcon sx={{ fontSize: '15px' }} />
+                    <IconButton sx={{ padding: 0, background: '#780000' }}>
+                        <CloseIcon
+                            sx={{
+                                fontSize: '15px',
+                                color: '#fff',
+                                '&:hover': { color: '#000' }
+                            }}
+                        />
                     </IconButton>
                 </div>
+
             </div>
+
         </div>
     )
 }
