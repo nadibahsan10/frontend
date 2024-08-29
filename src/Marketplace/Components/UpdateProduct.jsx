@@ -12,7 +12,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import CloseIcon from "@mui/icons-material/Close";
 import ImageIcon from "@mui/icons-material/Image";
-
+import Typography from "@mui/material/Typography";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -22,61 +22,59 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-function Addproduct() {
-  const imageFile = useRef(); //useRef hook
-
-  const imageUpload = () => {
-    imageFile.current.click(); //image input with reffernce
-  };
-
-  const submitForm = (event) => {
-    event.preventDefault();
-    console.log(form);
-  };
-
-  const [file, setFile] = useState(); //hook for file store
-
-  const [form, setForm] = useState([
-    { title: "", content: "", price: "", category: "", image: "" },
-  ]); //hook for image store
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setForm((prev) => {
-      return {
+function UpdateProduct({ title, description, price, category, image }) {
+    const imageFile = useRef();
+    const [file, setFile] = useState(null);
+    const [form, setForm] = useState({
+      title: title || "",
+      description: description || "",
+      price: price || "",
+      category: category || "",
+      image: image || "",
+    });
+  
+    const imageUpload = () => {
+      imageFile.current.click();
+    };
+  
+    const submitForm = (event) => {
+      event.preventDefault();
+      console.log(form);
+      // Here you would send the updated form data to your server
+    };
+  
+    const handleChange = (event) => {
+      const { name, value } = event.target;
+      setForm((prev) => ({
         ...prev,
         [name]: value,
-      };
-    });
-  };
-
-  const handleChangeImage = (event) => {
-    setFile(event.target.files[0]);
-    setForm((prev) => {
-      return {
+      }));
+    };
+  
+    const handleChangeImage = (event) => {
+      setFile(event.target.files[0]);
+      setForm((prev) => ({
         ...prev,
         image: event.target.files[0],
-      };
-    });
-  };
-
-  const [category, setCategory] = React.useState(""); //category select
-
-  const handleChangeCategory = (event) => {
-    setCategory(event.target.value);
-    setForm((prev) => {
-      return {
+      }));
+    };
+  
+    const handleChangeCategory = (event) => {
+      setForm((prev) => ({
         ...prev,
         category: event.target.value,
-      };
-    });
-  };
-
-  const discardImage = () => {
-    setForm((prev) => {
-      return { ...prev, image: null };
-    });
-  };
+      }));
+    };
+  
+    const discardImage = () => {
+      setFile(null);
+      setForm((prev) => ({
+        ...prev,
+        image: null,
+      }));
+    };
+  
+const imageUrl = file ? URL.createObjectURL(file) : form.image;
 
   return (
     <Box
@@ -96,31 +94,63 @@ function Addproduct() {
           gap: "2%",
         }}
       >
-        <h2 style={{ textAlign: "center", marginBottom: "10px" }}>Add a product</h2>
-
+        <h2 style={{ textAlign: "center", marginBottom: "10px" }}>
+          Update your product
+        </h2>
+        <Typography
+          variant="caption"
+          gutterBottom
+          sx={{
+            textAlign: "left",
+            margin: "0",
+          }}
+        >
+          Product name :
+        </Typography>
         <TextField
           id="outlined-basic"
           name="title"
-          label="Give your product a short and clear name"
+          value={form.title}
           variant="outlined"
           style={{ margin: "10px", width: "60%" }}
           onChange={handleChange}
         />
 
+        <Typography
+          variant="caption"
+          gutterBottom
+          sx={{
+            textAlign: "left",
+            margin: "0",
+          }}
+        >
+          Product description :
+        </Typography>
         <TextField
           id="outlined-basic"
           name="content"
-          label="Give your product short and clear description"
+          value={form.description}
           variant="outlined"
           style={{ margin: "10px", width: "60%" }}
           multiline
           minRows={2}
           onChange={handleChange}
         />
+
+        <Typography
+          variant="caption"
+          gutterBottom
+          sx={{
+            textAlign: "left",
+            margin: "0",
+          }}
+        >
+          Product price :
+        </Typography>
         <TextField
           id="outlined-basic"
           name="price"
-          label="Give your product price"
+          value={form.price}
           variant="outlined"
           sx={{ margin: "10px", width: "60%" }}
           onChange={handleChange}
@@ -132,7 +162,7 @@ function Addproduct() {
             name="gender"
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={category}
+            value={form.category}
             label="Select category "
             onChange={handleChangeCategory}
           >
@@ -158,7 +188,7 @@ function Addproduct() {
             gap: "30px",
           }}
         >
-          <ImageIcon style={{ height: "50px", width: "50px",margin: '0' }} />
+          <ImageIcon style={{ height: "50px", width: "50px", margin: "0" }} />
           <h5
             style={{
               marginBottom: "10px",
@@ -180,7 +210,7 @@ function Addproduct() {
             >
               <Avatar
                 variant="rounded"
-                src={URL.createObjectURL(file)}
+                src={imageUrl}
                 alt=""
                 sx={{ height: "100%", width: "100%" }}
               />
@@ -222,4 +252,4 @@ function Addproduct() {
   );
 }
 
-export default Addproduct;
+export default UpdateProduct;

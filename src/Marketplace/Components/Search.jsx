@@ -16,14 +16,11 @@ import desktopIcon from "./SubComponent/Icon/desktop.png";
 import laptopIcon from "./SubComponent/Icon/laptop.png";
 import mobileIcon from "./SubComponent/Icon/mobile.png";
 import droneCameraIcon from "./SubComponent/Icon/camera.png";
-import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from "@mui/material";
+import { Dialog, DialogActions, DialogContent } from "@mui/material";
 import Addproduct from "./Addproduct";
 import CloseIcon from "@mui/icons-material/Close";
+import MyListings from "./MyListings";
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -47,14 +44,18 @@ const category = [
 
 function Search() {
   const [open, setOpen] = useState(false);
+  const [componentToShow, setComponentToShow] = useState(null);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (component) => {
+    setComponentToShow(component);
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
+    setComponentToShow(null); // Reset component state when closing the modal
   };
+
   return (
     <div component="form" method="post">
       <Box sx={{ flexGrow: 1 }}>
@@ -70,10 +71,29 @@ function Search() {
           <Grid
             item
             xs={3}
-            sx={{ position: "absolute", top: "30px", right: "100px" }}
+            sx={{
+              position: "absolute",
+              top: "30px",
+              right: "80px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "20px",
+            }}
           >
-            <Button variant="contained" color="green" onClick={handleClickOpen}>
-              Add products
+            <Button
+              variant="contained"
+              color="green"
+              onClick={() => handleClickOpen("update")}
+            >
+              See Your Listings
+            </Button>
+
+            <Button
+              variant="contained"
+              color="green"
+              onClick={() => handleClickOpen("add")}
+            >
+              Add Products
             </Button>
 
             <Dialog
@@ -82,14 +102,16 @@ function Search() {
               maxWidth="lg"
               fullWidth={true}
             >
-              {/* <DialogTitle>Add a product </DialogTitle> */}
               <DialogActions>
-                <Button onClick={handleClose} color="primary">
+                <Button onClick={handleClose}>
                   <CloseIcon />
                 </Button>
               </DialogActions>
               <DialogContent>
-                <Addproduct />
+                {componentToShow === "update" && (
+                  <MyListings />
+                )}
+                {componentToShow === "add" && <Addproduct />}
               </DialogContent>
             </Dialog>
           </Grid>

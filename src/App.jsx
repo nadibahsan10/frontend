@@ -12,7 +12,9 @@ import MainQuestionBank from "./QuestionBank/Pages/MainQuestionBank";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 
+
 import Find from "./Marketplace/Pages/Find";
+
 import IndividualProduct from "./Marketplace/Pages/IndividualProduct";
 import Addproduct from "./Marketplace/Components/Addproduct";
 import Notification from "./Shared/Notification";
@@ -72,8 +74,11 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/notification" element={<Notification />} />
 
+
+
           <Route path="/feed/*" element={<Feed />} />
           <Route path="/inbox" element={<Message />} />
+
           <Route path="/market" element={<Market />} />
           <Route path="/alumni" element={<Find />} />
           <Route path="/individual" element={<Addproduct />} />
