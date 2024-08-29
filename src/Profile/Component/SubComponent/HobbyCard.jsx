@@ -18,7 +18,7 @@ function HobbyCard(props) {
 
                 <div className='deleteIconForHobby'>
                     <IconButton sx={{ padding: 0 }}>
-                        <CloseIcon sx={{ fontSize: '15px' }} />
+                        <CloseIcon sx={{ fontSize: '15px', color: '#fff' }} />
                     </IconButton>
                 </div>
 
