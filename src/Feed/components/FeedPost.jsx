@@ -20,12 +20,12 @@ import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import axios from "axios";
 import LinearProgress from "@mui/material/LinearProgress";
 import CircularProgress from "@mui/material/CircularProgress";
-
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../Auth/AuthContext";
-import ErrorDialog from "../../Shared/ErrorDialog";
+
 import "./FeedPost.css";
 
-const FeedPost = ({ posts, setPosts }) => {
+const FeedPost = ({ change, setChange }) => {
   const auth = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -74,14 +74,14 @@ const FeedPost = ({ posts, setPosts }) => {
         };
       }
       case "SUBMIT": {
-        const newErrors = {
+        let newErrors = {
           title: state.title.trim() === "",
           description: state.description.trim() === "",
         };
 
         return {
           ...state,
-          errors: newErrors,
+          errors: { ...newErrors },
         };
       }
       case "INITIAL": {
@@ -114,8 +114,10 @@ const FeedPost = ({ posts, setPosts }) => {
     event.preventDefault();
 
     dispatch({ type: "SUBMIT" });
+    console.log(state);
     if (state.errors.title === true || state.errors.description === true) {
-      return;
+      console.log("error here");
+      return 0;
     }
     setIsLoading(true);
     const form = new FormData();
@@ -142,10 +144,12 @@ const FeedPost = ({ posts, setPosts }) => {
         }
       );
       console.log(response.data);
-      setPosts(null);
+
       dispatch({ type: "INITIAL" });
       setIsLoading(false);
       setSuccess(true);
+      setImages([]);
+      setChange(change + 1);
     } catch (err) {
       setIsLoading(false);
       setError(err.response.data.message);
@@ -178,21 +182,15 @@ const FeedPost = ({ posts, setPosts }) => {
   return (
     <>
       {success && (
-        <Alert severity="success" onClose={closeSuccess}>
+        <Alert severity="success" variant="filled" onClose={closeSuccess}>
           Your post has been successfully shared with your network!
         </Alert>
       )}
       {error && (
-        <Alert severity="error" onClose={closeError}>
+        <Alert severity="error" variant="filled" onClose={closeError}>
           {error}
         </Alert>
       )}
-      {/* <ErrorDialog
-        open={error.isError}
-        title="There's an error to post."
-        description={error.value?.response.data.message}
-        handleClose={closeError}
-      /> */}
 
       <Box
         padding={1.5}
@@ -211,7 +209,11 @@ const FeedPost = ({ posts, setPosts }) => {
           encType="multipart/form-data"
         >
           <Grid item xs={1}>
-            <Avatar src={`http://localhost:3000/${auth.profilePicture}`} />
+            <Avatar
+              src={`http://localhost:3000/${auth.profilePicture}`}
+              component={Link}
+              to="newWorld/ww"
+            />
           </Grid>
           <Grid item xs={10}>
             <TextField

@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import Avatar from '@mui/material/Avatar'; 
-import IconButton from '@mui/material/IconButton'; 
+import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
-function LinksAdd({ onClose }) {
+function DegreesAdd({ onClose }) {
+
     const [form, setForm] = useState({
-        mediaName: '',
-        mediaLink: '',
+        description: '',
         image: null,
-        imageURL: '', // Store image URL for Avatar preview
+        imageURL: '',
     });
 
     const handleChange = (event) => {
@@ -27,7 +27,7 @@ function LinksAdd({ onClose }) {
             setForm(prevForm => ({
                 ...prevForm,
                 image: file,
-                imageURL: URL.createObjectURL(file), // Create a URL for the image preview
+                imageURL: URL.createObjectURL(file),
             }));
         }
     };
@@ -45,9 +45,10 @@ function LinksAdd({ onClose }) {
         onClose(); // Close the modal after updating
     };
 
+
     return (
         <div>
-            <h2 style={{ margin: '2% 0 5% 2%' }}>Add Links</h2>
+            <h2 style={{ margin: '2% 0 5% 2%' }}>Add Degree</h2>
 
             <div
                 style={{
@@ -67,6 +68,7 @@ function LinksAdd({ onClose }) {
                         position: 'relative'
                     }}
                 >
+
                     {/* Display Image in Avatar with Remove Button */}
                     {form.image ? (
                         <>
@@ -95,7 +97,7 @@ function LinksAdd({ onClose }) {
                             variant="square"
                         />
                     )}
-
+                    
                     {/* Custom File Input */}
                     <input
                         accept="image/*"
@@ -117,20 +119,10 @@ function LinksAdd({ onClose }) {
 
                 <TextField
                     id="outlined-position"
-                    label="Media Name"
+                    label="Degree, Institute, Passing Year"
                     variant="outlined"
-                    name="mediaName"
-                    value={form.mediaName}
-                    onChange={handleChange}
-                    style={{ marginTop: '16px' }}
-                />
-
-                <TextField
-                    id="outlined-email"
-                    label="Link"
-                    variant="outlined"
-                    name="mediaLink"
-                    value={form.mediaLink}
+                    name="description"
+                    value={form.description}
                     onChange={handleChange}
                     style={{ marginTop: '16px' }}
                 />
@@ -143,8 +135,8 @@ function LinksAdd({ onClose }) {
                     Update
                 </Button>
             </div>
-        </div >
-    );
+        </div>
+    )
 }
 
-export default LinksAdd;
+export default DegreesAdd

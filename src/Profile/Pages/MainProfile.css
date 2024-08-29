@@ -1,7 +1,7 @@
 .linkCard {
     display: flex;
     align-items: center;
-    margin: 5% 2%;
+    margin: 5% 0%;
     position: relative;
 }
 
@@ -12,5 +12,34 @@
 }
 
 .linkCard:hover .deleteIcon {
-   opacity: 1;
+    opacity: 1;
+    background-color: rgb(206, 204, 203);
+}
+
+.hobbyCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, 
+                rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;    
+    border-radius: 10px;
+}
+
+.hobbyCard p {
+    text-align: center;
+}
+
+.deleteIconForHobby {
+    position: absolute;
+    right: 0%;
+    top: 0%;
+    opacity: 0;
+    background-color: rgb(206, 204, 203);
+
+}
+
+.hobbyCard:hover .deleteIconForHobby {
+    opacity: 1;
 }

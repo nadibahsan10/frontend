@@ -34,7 +34,7 @@ function Footer() {
             left: 0,
             width: "100%",
             height: "100%",
-            backgroundImage: "url('./design/UIU.jpg')",
+            backgroundImage: "url('/design/UIU.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
@@ -138,7 +138,6 @@ function Footer() {
             rights reserved.{" "}
           </p>
         </Box>
-
       </Grid>
     </Box>
   );

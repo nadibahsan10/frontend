@@ -164,7 +164,7 @@ function Search() {
       </Box>
 
       <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={4} sx={{ padding: "0 20%", marginTop: "1%" }}>
+        <Grid container spacing={4} sx={{padding: "0 20%", marginTop: '1%'}}>
           {category.map((x) => (
             <Grid item xs={3}>
               <Item>
