@@ -4,11 +4,25 @@
 
   color: #780000 !important;
 }
+.link {
+  transition: 0.1s linear;
+}
 .nav-link {
   color: black;
   text-decoration: none;
 
   display: flex;
+}
+.mainDiv .link {
+  color: white !important;
+}
+.mainDiv .active-link .link {
+  color: white !important;
+  border-bottom: #ffffff 3px solid;
+}
+.link:hover {
+  transform: scale(1.1);
+  color: #780000 !important;
 }
 .header-avatar {
   display: flex;

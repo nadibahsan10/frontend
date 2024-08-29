@@ -92,7 +92,7 @@ const CommentLikes = ({ element, change }) => {
       );
       console.log(response.data);
 
-      change((prev) => !prev);
+      change((prev) => prev + 1);
     } catch (error) {
       console.log("comment Deleted", error.response.data.message);
     }
@@ -185,16 +185,14 @@ const CommentLikes = ({ element, change }) => {
         >
           {disLikes} Dim
         </Button>
-        {element.userId === auth.id && (
-          <Button
-            size="small"
-            onClick={deleteComment}
-            variant="contained"
-            endIcon={<DeleteIcon />}
-          >
-            {loading ? <CircularProgress size="small" /> : "Delete"}
-          </Button>
-        )}
+        {element.userId === auth.id &&
+          (loading ? (
+            <CircularProgress size={24} />
+          ) : (
+            <Button size="small" onClick={deleteComment} variant="contained">
+              Delete
+            </Button>
+          ))}
       </Box>
     </Box>
   );

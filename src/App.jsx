@@ -7,11 +7,10 @@ import Footer from "./Shared/Footer";
 import Home from "./Home/Home";
 import About from "./About/About";
 import Market from "./Marketplace/Pages/Market";
-
+import MainProfile from "../src/Profile/Pages/MainProfile";
 import MainQuestionBank from "./QuestionBank/Pages/MainQuestionBank";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-
 
 import Find from "./Marketplace/Pages/Find";
 
@@ -74,8 +73,6 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/notification" element={<Notification />} />
 
-
-
           <Route path="/feed/*" element={<Feed />} />
           <Route path="/inbox" element={<Message />} />
 
@@ -84,7 +81,7 @@ const App = () => {
           <Route path="/individual" element={<Addproduct />} />
 
           <Route path="/market" element={<MainQuestionBank />} />
-
+          <Route path="/myprofile" element={<MainProfile />} />
           <Route path="/about" element={<About />} />
           <Route path="/question" element={<MainQuestionBank />} />
         </Routes>

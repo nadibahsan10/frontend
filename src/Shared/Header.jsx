@@ -17,7 +17,7 @@ import Tooltip from "@mui/material/Tooltip";
 
 import MessageIcon from "@mui/icons-material/Message";
 
-import { NavLink, Link, useNavigate } from "react-router-dom";
+import { NavLink, Link, useNavigate, useLocation } from "react-router-dom";
 
 import { AuthContext } from "../Auth/AuthContext";
 import { GuestMainNav, StudentMainNav, AlumniMainNav } from "./MainNavigation";
@@ -27,6 +27,14 @@ import "./Header.css";
 import Login from "./Login";
 
 function Header() {
+  const location = useLocation();
+  let sx;
+  if (location.pathname !== "/") {
+    sx = { color: "black !important", marginRight: 1 };
+  } else {
+    sx = { marginRight: 1 };
+  }
+
   const [isLoading, setIsloading] = useState(true);
   const loadingOn = () => {
     setIsloading(true);
@@ -101,7 +109,7 @@ function Header() {
           </Tooltip>
         </div>
 
-        <h4 style={{ marginRight: "10px" }}>{auth.name}</h4>
+        <Typography sx={sx}>{auth.name}</Typography>
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
           <Avatar
             alt="Remy Sharp"
@@ -129,7 +137,14 @@ function Header() {
           <Typography textAlign="center">Activity</Typography>
         </MenuItem>
         <MenuItem key="2" onClick={handleCloseUserMenu}>
-          <Typography textAlign="center">My Account</Typography>
+          <Typography
+            textAlign="center"
+            component={Link}
+            sx={{ textDecoration: "none", color: "inherit" }}
+            to="./myprofile"
+          >
+            My Account
+          </Typography>
         </MenuItem>
         <MenuItem key="3" onClick={handleCloseUserMenu}>
           <Typography textAlign="center">Help & Support</Typography>
@@ -167,7 +182,10 @@ function Header() {
           <Login onClose={closeLoginModal} />
         </Box>
       </Modal>
-      <AppBar position="static" sx={{ boxShadow: "none" }} color="white">
+      <AppBar
+        position="static"
+        sx={{ boxShadow: "none", backgroundColor: "transparent" }}
+      >
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Typography
@@ -254,6 +272,7 @@ function Header() {
                 marginLeft: "50px",
                 display: { xs: "none", md: "flex" },
               }}
+              className={location.pathname === "/" ? "mainDiv" : ""}
             >
               {auth.role === "student" && <StudentMainNav />}
               {auth.role === "alumni" && <AlumniMainNav />}

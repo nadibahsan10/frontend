@@ -10,7 +10,7 @@ import DeletePost from "../components/Edit";
 
 const Feed = () => {
   const [posts, setPosts] = useState([]);
-  const [change, setChange] = useState(0);
+  const [change, setChange] = useState(false);
   return (
     <div
       style={{

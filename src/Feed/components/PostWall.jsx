@@ -8,7 +8,7 @@ const PostWall = ({ posts, setPosts, change, setChange }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const reloadPage = () => {
-    setPosts(null);
+    setChange((prev) => !prev);
   };
   const loadingOn = () => {
     setIsLoading(true);

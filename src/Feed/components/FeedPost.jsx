@@ -149,7 +149,7 @@ const FeedPost = ({ change, setChange }) => {
       setIsLoading(false);
       setSuccess(true);
       setImages([]);
-      setChange(change + 1);
+      setChange((prev) => !prev);
     } catch (err) {
       setIsLoading(false);
       setError(err.response.data.message);

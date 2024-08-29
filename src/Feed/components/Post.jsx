@@ -69,6 +69,7 @@ const Post = ({
       );
       console.log(response.data);
       loading();
+      reload();
       setChange((prev) => prev + 1);
     } catch (error) {
       console.log(error.response.data);
@@ -109,13 +110,13 @@ const Post = ({
         >
           <MenuItem onClick={handleClose}>Save</MenuItem>
           {auth.id === uid && (
-            <MenuItem onClick={handleClose}>
-              <Link
-                style={{ textDecoration: "none", color: "inherit" }}
-                to={`edit/${id}`}
-              >
-                Edit
-              </Link>
+            <MenuItem
+              component={Link}
+              style={{ textDecoration: "none", color: "inherit" }}
+              to={`edit/${id}`}
+              onClick={handleClose}
+            >
+              Edit
             </MenuItem>
           )}
 

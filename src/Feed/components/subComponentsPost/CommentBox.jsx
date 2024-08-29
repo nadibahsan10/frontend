@@ -27,14 +27,14 @@ const CommentBox = ({ show, handleClose, postId }) => {
   const refVariable = useRef([]);
 
   const [comments, setComments] = useState();
-  const [change, setChange] = useState(true);
+  const [cm, setCm] = useState(0);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchComment = async () => {
       setLoading(true);
-      const token = JSON.parse(localStorage.getItem("token"));
+      const token = await JSON.parse(localStorage.getItem("token"));
       try {
         const response = await axios.get(
           `http://localhost:3000/feed/getcomments/${postId}`,
@@ -47,13 +47,14 @@ const CommentBox = ({ show, handleClose, postId }) => {
 
         console.log(response.data.comments);
         setComments(response.data.comments);
+        setLoading(false);
       } catch (error) {
         console.log(error.response.data.message);
+        setLoading(false);
       }
     };
     fetchComment();
-    setLoading(false);
-  }, [change]);
+  }, [cm]);
 
   const [formData, setFormData] = useState({
     content: "",
@@ -107,13 +108,16 @@ const CommentBox = ({ show, handleClose, postId }) => {
         }
       );
       console.log(response.data);
-      setChange((prev) => !prev);
+
       setFormData({
         content: "",
         imageFile: null,
       });
-      setSuccess(true);
+
       setLoading(false);
+      setSuccess(true);
+      setCm((prev) => prev + 1);
+      console.log(cm);
     } catch (error) {
       setLoading(false);
       setError(error.response.data.message);
@@ -260,9 +264,7 @@ const CommentBox = ({ show, handleClose, postId }) => {
         )}
         {comments &&
           comments.map((item) => {
-            return (
-              <CommentLikes change={setChange} element={item} key={item.id} />
-            );
+            return <CommentLikes change={setCm} element={item} key={item.id} />;
           })}
       </div>
     </Modal>
