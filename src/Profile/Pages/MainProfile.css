@@ -1,3 +1,4 @@
+/*Above CSS is for Link, Degree, Skills*/
 .linkCard {
     display: flex;
     align-items: center;
@@ -17,15 +18,15 @@
 
 
 
-
+/*Above CSS is for Hobby which we are calling Acievement*/
 .hobbyCard {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
-    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, 
-                rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;    
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,
+        rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
     border-radius: 10px;
 }
 
@@ -47,7 +48,7 @@
 
 
 
-
+/*Above CSS is for Experience Card*/
 .experienceCard {
     position: relative;
 }
@@ -60,5 +61,57 @@
 }
 
 .experienceCard:hover .deleteIconForexperienceCard {
+    opacity: 1;
+}
+
+
+
+/*This CSS is for Publication and Project Card*/
+.projrctCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,
+        rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+    border-radius: 10px;
+}
+
+.projrctCard a {
+    text-decoration: none;
+    color: #780000;
+    font-weight: 600;
+    font-size: large;
+    margin: 3% 0;
+    width: 100%;
+    border-bottom: 2px solid;
+}
+
+.projrctCard:hover a {
+    color: rgb(114, 114, 253);
+}
+
+.projrctCard p {
+    font-weight: 500;
+    margin: 0 3px 3% 3px;
+    text-align: center;
+    color: rgb(75, 73, 73);
+}
+
+.deleteIconForProjrctCard {
+    position: absolute;
+    right: 0%;
+    top: 0%;
+    opacity: 0;
+    background: #780000;
+}
+
+.projrctCard:hover {
+    transform: translateY(-5px);
+    transition: .3s ease-in;
+}
+
+.projrctCard:hover .deleteIconForProjrctCard {
     opacity: 1;
 }

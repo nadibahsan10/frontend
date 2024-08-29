@@ -25,6 +25,7 @@ import HobbyCard from '../Component/SubComponent/HobbyCard';
 import LinkCard from '../Component/SubComponent/LinkCard';
 import DegreeCard from '../Component/SubComponent/DegreeCard';
 import SkillCard from '../Component/SubComponent/SkillCard';
+import ProjectCard from '../Component/SubComponent/ProjectCard';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -198,7 +199,7 @@ function MainProfile() {
           <Grid item xs={4}>
             <h3 style={{ margin: 0 }}>Achivement</h3>
             <hr />
-            <Item sx={{ display: 'flex', marginTop: 1, flexWrap: 'wrap', position: 'relative', justifyContent: 'space-between' }}>
+            <Item sx={{ display: 'flex', marginTop: 1, flexWrap: 'wrap', justifyContent: 'space-between' }}>
               <HobbyCard hobby="Cricket" image="puzzle.png" />
               <HobbyCard hobby="Cricket" image="profileImage.webp" />
               <HobbyCard hobby="Cricket" image="puzzle.png" />
@@ -210,7 +211,14 @@ function MainProfile() {
           <Grid item xs={8}>
             <h3 style={{ margin: 0 }}>Publications & Projects</h3>
             <hr />
-            <Item sx={{ display: 'flex', marginTop: 1, flexWrap: 'wrap', position: 'relative', justifyContent: 'space-between' }}>
+
+            <Item sx={{ display: 'flex', marginTop: 1, flexWrap: 'wrap', justifyContent: 'space-between', }}>
+              <ProjectCard
+                image="profileImage.webp"
+                project="Protfolio"
+                projectLink="https://dksaddy.github.io/Fun-Portfolio/"
+                description="My Portfolio Project from Udemy Course"
+              />
 
             </Item>
           </Grid> {/*Grid 8*/}
