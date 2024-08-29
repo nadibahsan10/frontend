@@ -8,6 +8,7 @@ import Home from "./Home/Home";
 import About from "./About/About";
 import Market from "./Marketplace/Pages/Market";
 
+import MainProfile from "./Profile/Pages/MainProfile"
 import MainQuestionBank from "./QuestionBank/Pages/MainQuestionBank";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
@@ -74,7 +75,7 @@ const App = () => {
 
           <Route path="/feed/*" element={<Feed />} />
           <Route path="/inbox" element={<Message />} />
-          <Route path="/market" element={<Market />} />
+          <Route path="/market" element={<MainProfile />} />
           <Route path="/alumni" element={<Find />} />
           <Route path="/individual" element={<Addproduct />} />
 

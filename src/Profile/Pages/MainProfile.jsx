@@ -19,8 +19,8 @@ import SkillsAdd from '../Component/SkillsAdd';
 import ModalFram from '../Component/ModalFram';
 import './MainProfile.css';
 
-import SemiBiography from '../Component/SemiBiography'
-import Card from '../Component/Card';
+import SemiBiography from '../Component/SubComponent/SemiBiography'
+import Card from '../Component/SubComponent/Card';
 import HobbyCard from '../Component/SubComponent/HobbyCard';
 import LinkCard from '../Component/SubComponent/LinkCard';
 import DegreeCard from '../Component/SubComponent/DegreeCard';
