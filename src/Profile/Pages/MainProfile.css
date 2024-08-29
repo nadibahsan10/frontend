@@ -1,4 +1,4 @@
-/*Above CSS is for Link, Degree, Skills*/
+/*This CSS is for Link, Degree, Skills*/
 .linkCard {
     display: flex;
     align-items: center;
@@ -18,7 +18,7 @@
 
 
 
-/*Above CSS is for Hobby which we are calling Acievement*/
+/*This CSS is for Hobby which we are calling Acievement*/
 .hobbyCard {
     display: flex;
     flex-direction: column;
@@ -48,7 +48,7 @@
 
 
 
-/*Above CSS is for Experience Card*/
+/*This CSS is for Experience Card*/
 .experienceCard {
     position: relative;
 }
