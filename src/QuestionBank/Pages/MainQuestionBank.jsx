@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import Card from "../Component/Card";
 import UploadBar from "../Component/UploadBar";
 import SortBar from "../Component/SortBar";
@@ -16,7 +16,10 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
+import { AuthContext } from "../../Auth/AuthContext";
+
 import Checkbox from "@mui/material/Checkbox";
+import axios from "axios";
 
 import "./MainQuestionBank.css";
 
@@ -34,9 +37,45 @@ const currentYear = new Date().getFullYear();
 const year = [currentYear, currentYear - 1, currentYear - 2, currentYear - 3];
 
 function MainQuestionBank() {
+  const auth = useContext(AuthContext);
+
+  const [search, setSearch] = useState("");
+  const [data, setData] = useState([]);
+  const ref = useRef([]);
+  useEffect(() => {
+    ref.current.click();
+  }, [search]);
+
+  const handleChange = (event) => {
+    const { value } = event.target;
+    setSearch(value);
+  };
+  const handleSubmit = async (event) => {
+   
+    event.preventDefault();
+    
+    try {
+      const token = "Bearer " + JSON.parse(localStorage.getItem("token"));
+      const response = await axios.get(
+        `http://localhost:3000/question/getquestions/${search}`,
+
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+
+      console.log(response.data.data);
+      setData(response.data.data);
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+  };
+
   return (
     <div>
-      <form action="" method="post">
+      <form onSubmit={handleSubmit}>
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={1}>
             <Grid item xs={3}>
@@ -139,36 +178,39 @@ function MainQuestionBank() {
                   <TextField
                     id="outlined-basic"
                     label={<SearchIcon />}
+                    value={search}
+                    onChange={handleChange}
                     variant="outlined"
                     sx={{
                       backgroundColor: "transparent",
                       width: "80%",
                     }}
                   />
-                  <Button variant="contained" sx={{ width: "15%" }}>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    sx={{ width: "15%" }}
+                    ref={ref}
+                  >
                     Search
                   </Button>
                 </div>
 
                 <div className="cardHolder">
-                  <Card
-                    name="Software Engineering"
-                    type="Final Examination"
-                    trimester="Fall 2022"
-                    likes="975"
-                  />
-                  <Card
-                    name="Software Engineering"
-                    type="Final Examination"
-                    trimester="Fall 2022"
-                    likes="975"
-                  />
-                  <Card
-                    name="Software Engineering"
-                    type="Final Examination"
-                    trimester="Fall 2022"
-                    likes="975"
-                  />
+                  {data.length !== 0 ? (
+                    data.map((item) => {
+                      return (
+                        <Card
+                          name={item.course}
+                          type={item.pdf}
+                          trimester={item.trimester}
+                          likes={item.uid}
+                        />
+                      );
+                    })
+                  ) : (
+                    <h1>No question</h1>
+                  )}
                 </div>
               </Item>
             </Grid>
