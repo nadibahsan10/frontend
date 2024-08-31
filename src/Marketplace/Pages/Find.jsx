@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
@@ -21,80 +21,90 @@ import IconButton from "@mui/material/IconButton";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import ShareIcon from "@mui/icons-material/Share";
 import Slider from "@mui/material/Slider";
-import { useState } from "react";
+import axios from "axios";
 import upperFooter from "../Components/SubComponent/upperFooter.jsx";
 
-const products = [
-  {
-    id: 1,
-    name: "Intel Laptop Core i5 9 gen",
-    price: "30,000",
-    pImage:
-      "https://img.freepik.com/premium-vector/vector-drawn-laptop-isolated-white-background_752899-849.jpg",
-  },
-  {
-    id: 2,
-    name: "Intel Laptop Core i5 9 gen",
-    price: "30,000",
-    pImage:
-      "https://img.freepik.com/premium-vector/vector-drawn-laptop-isolated-white-background_752899-849.jpg",
-  },
-  {
-    id: 3,
-    name: "Intel Laptop Core i5 9 gen",
-    price: "30,000",
-    pImage:
-      "https://img.freepik.com/premium-vector/vector-drawn-laptop-isolated-white-background_752899-849.jpg",
-  },
-  {
-    id: 4,
-    name: "Intel Laptop Core i5 9 gen",
-    price: "30,000",
-    pImage:
-      "https://img.freepik.com/premium-vector/vector-drawn-laptop-isolated-white-background_752899-849.jpg",
-  },
-  {
-    id: 5,
-    name: "Intel Laptop Core i5 9 gen",
-    price: "30,000",
-    pImage:
-      "https://img.freepik.com/premium-vector/vector-drawn-laptop-isolated-white-background_752899-849.jpg",
-  },
-  {
-    id: 6,
-    name: "Intel Laptop Core i5 9 gen",
-    price: "30,000",
-    pImage:
-      "https://img.freepik.com/premium-vector/vector-drawn-laptop-isolated-white-background_752899-849.jpg",
-  },
-  {
-    id: 7,
-    name: "Intel Laptop Core i5 9 gen",
-    price: "30,000",
-    pImage:
-      "https://img.freepik.com/premium-vector/vector-drawn-laptop-isolated-white-background_752899-849.jpg",
-  },
-];
 const Item = styled(Box)(({ theme }) => ({
   padding: theme.spacing(0),
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
 
-const SearchCategory = ({ name, icon }) => (
-  <Box sx={{ textAlign: "center" }}>
-    <img src={icon} alt={name} style={{ width: "40px", height: "40px" }} />
-    <p>{name}</p>
-  </Box>
-);
-
-function selectRange() {}
 function Find() {
-  const [value, setValue] = useState([0, 500]);
-  function handleChange(event) {
-    const value = event.target.value;
-    setValue(value);
-  }
+  const [value, setValue] = useState([0, 50000]); // Updated max price
+  const [data, setData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("Any"); // State for selected category
+  const [filteredData, setFilteredData] = useState([]);
+
+  const fetchFilteredData = async ({ searchQuery, selectedCategory, value }) => {
+    try {
+      const token = "Bearer " + JSON.parse(localStorage.getItem("token"));
+      const response = await axios.get("http://localhost:3000/marketplace/getposts", {
+        params: {
+          searchQuery,
+          selectedCategory,
+          minPrice: value[0],
+          maxPrice: value[1],
+        },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      });
+      
+      setFilteredData(response.data.data); // Update the filtered data state
+    } catch (err) {
+      console.log(err.response);
+    }
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+    fetchFilteredData({ 
+      searchQuery: event.target.value, 
+      selectedCategory, 
+      value 
+    });
+  };
+
+  const handleCategoryChange = (event) => {
+    setSelectedCategory(event.target.value);
+    fetchFilteredData({ 
+      searchQuery, 
+      selectedCategory: event.target.value, 
+      value 
+    });
+  };
+
+  const handlePriceChange = (event, newValue) => {
+    setValue(newValue);
+    fetchFilteredData({ 
+      searchQuery, 
+      selectedCategory, 
+      value: newValue 
+    });
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = "Bearer " + JSON.parse(localStorage.getItem("token"));
+        const response = await axios.get("http://localhost:3000/marketplace/getposts", {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: token,
+          },
+        });
+        setData(response.data.data);
+        setFilteredData(response.data.data); // Initialize with all data
+      } catch (err) {
+        console.log(err.response);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <form method="post">
       <Box
@@ -124,6 +134,8 @@ function Find() {
                 label="Search anything in your marketplace... "
                 variant="outlined"
                 sx={{ width: "100%", borderRadius: "none" }}
+                value={searchQuery} // Bind the input value to the state
+                onChange={handleSearchChange} // Handle input change
               />
             </Item>
           </Grid>
@@ -149,7 +161,6 @@ function Find() {
           spacing={2}
           sx={{
             marginTop: "20px",
-            // backgroundColor: "beige",
             padding: "10px 10px",
           }}
         >
@@ -164,9 +175,10 @@ function Find() {
                   Categories
                 </AccordionSummary>
                 <AccordionDetails>
-                  <RadioGroup
+                <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"
-                    defaultValue="All"
+                    value={selectedCategory} // Bind the selected category to the state
+                    onChange={handleCategoryChange} // Handle category change
                     name="categoriesGroup"
                   >
                     <FormControlLabel
@@ -175,37 +187,37 @@ function Find() {
                       label="Any"
                     />
                     <FormControlLabel
-                      value="Electronics"
+                      value="electronics"
                       control={<Radio />}
                       label="Electronics"
                     />
                     <FormControlLabel
-                      value="Mobile"
+                      value="mobile"
                       control={<Radio />}
                       label="Mobile"
                     />
                     <FormControlLabel
-                      value="Desktop"
+                      value="desktop"
                       control={<Radio />}
                       label="Desktop"
                     />
                     <FormControlLabel
-                      value="Laptop"
+                      value="laptop"
                       control={<Radio />}
                       label="Laptop"
                     />
                     <FormControlLabel
-                      value="labEquipement"
+                      value="labequipement"
                       control={<Radio />}
-                      label="Lab Equipement"
+                      label="Lab Equipment"
                     />
                     <FormControlLabel
-                      value="Books"
+                      value="books"
                       control={<Radio />}
-                      label="Books"
+                      label="Book"
                     />
                     <FormControlLabel
-                      value="Furnitures"
+                      value="furniture"
                       control={<Radio />}
                       label="Furnitures"
                     />
@@ -226,10 +238,10 @@ function Find() {
                     <Slider
                       getAriaLabel={() => "Price range"}
                       value={value}
-                      onChange={handleChange}
+                      onChange={handlePriceChange} // Handle price range change
                       valueLabelDisplay="auto"
                       sx={{ display: "flex" }}
-                      max={50000}
+                      max={50000} // Maximum price limit
                     />
                   </Box>
                 </AccordionDetails>
@@ -241,7 +253,7 @@ function Find() {
               variant="body2"
               sx={{ marginBottom: "15px", marginLeft: "10px" }}
             >
-              298 Results found
+              {filteredData.length} Results found{" "}
               <Typography
                 variant="caption"
                 sx={{ marginLeft: "50px", color: "#780000" }}
@@ -256,7 +268,7 @@ function Find() {
                 gap: "30px",
               }}
             >
-              {products.map((product, index) => (
+              {filteredData.map((product, index) => (
                 <Card
                   key={index}
                   sx={{
@@ -270,7 +282,7 @@ function Find() {
                   <CardMedia
                     component="img"
                     sx={{ height: "120px", width: "160px", objectFit: "cover" }}
-                    image={product.pImage}
+                    image={product.image}
                     title={product.name}
                   />
                   <CardContent>

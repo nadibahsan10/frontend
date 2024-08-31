@@ -17,7 +17,7 @@ const Item = styled(Paper)(({ theme }) => ({
 const notification = [
   {
     image: "./design/call.png",
-    title: "Electronics",
+    title: "Computer",
     content:
       "This is a notification.This is the first Notification.New text new text",
     time: "just now",
@@ -78,7 +78,12 @@ function Notification() {
     <Container>
       <Box sx={{ flexGrow: 1 }}>
         <h2
-          style={{ textAlign: "center", color: "#780000", marginTOp: "40px" }}
+          style={{
+            textAlign: "center",
+            color: "#780000",
+            marginTop: "20px",
+            marginBottom: "15px",
+          }}
         >
           Notifications
         </h2>
