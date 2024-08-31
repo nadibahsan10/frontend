@@ -8,10 +8,13 @@ const FeedHome = () => {
     <Container maxWidth="lg">
       <Grid container gap={2}>
         <Grid item xs={2}></Grid>
-        <Grid item xs={8}>
+        <Grid item xs={8} >
+          
           <Wall />
         </Grid>
-        <Grid item xs={2}></Grid>
+        <Grid item xs={2}>
+          <Box></Box>
+        </Grid>
       </Grid>
     </Container>
   );

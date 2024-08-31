@@ -10,16 +10,16 @@ import Market from "./Marketplace/Pages/Market";
 import MainProfile from "../src/Profile/Pages/MainProfile";
 import MainQuestionBank from "./QuestionBank/Pages/MainQuestionBank";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "./App.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
+import "./App.css";
 import Find from "./Marketplace/Pages/Find";
 import IndividualProduct from "./Marketplace/Pages/IndividualProduct";
 import Addproduct from "./Marketplace/Components/Addproduct";
 import Notification from "./Shared/Notification";
 import Feed from "./Feed/Feed";
-
 const queryClient = new QueryClient();
-
 const App = () => {
   let [isLoggedIn, setIsLoggedIn] = useState(false);
   let [email, setEmail] = useState(null);
@@ -91,6 +91,7 @@ const App = () => {
           <Footer />
         </AuthContext.Provider>
       </Router>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 };

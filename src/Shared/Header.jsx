@@ -184,7 +184,10 @@ function Header() {
       </Modal>
       <AppBar
         position="static"
-        sx={{ boxShadow: "none", backgroundColor: "transparent" }}
+        sx={{
+          boxShadow: "none",
+          backgroundColor: "transparent",
+        }}
       >
         <Container maxWidth="xl">
           <Toolbar disableGutters>

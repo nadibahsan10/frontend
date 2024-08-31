@@ -1,40 +1,97 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Box, TextField, Typography, Button, Avatar } from "@mui/material";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+
+import post from "../Functions/post";
 
 import PreviewImage from "./PreviewImage";
+import { useInput } from "../../CustomHooks/useInput";
 
-const a = [];
 const PostField = () => {
+  const { state, handleChange, uploadImage, updateImage, Files, setFiles } =
+    useInput({
+      title: {
+        value: "",
+        isValid: true,
+      },
+      description: {
+        value: "",
+        isValid: true,
+      },
+      image: null,
+    });
+  useEffect(() => {}, [state]);
   const imageRef = useRef([]);
   const clickInput = () => {
     imageRef.current.click();
   };
 
+  // Posting Fucntion
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: () => {
+      post(state.title.value, state.description.value, state.image);
+    },
+
+    onSuccess: () => {
+      queryClient.refetchQueries(["getposts"]);
+    },
+  });
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("submitted");
+    mutation.mutate();
   };
-
+  if (mutation.isPending) {
+    return <h1>Posting</h1>;
+  }
+  if (mutation.isError) {
+    return <h1>Wow..this is nice </h1>;
+  }
   return (
     <Box
       component="form"
       onSubmit={handleSubmit}
-      height="auto"
-      width="100%"
-      sx={{ backgroundColor: "primary.main" }}
+      padding={6}
       marginTop={2}
       marginBottom={2}
-      borderRadius={1}
-      padding={2}
+      borderRadius={2}
+      border="2px solid #EBEBEB"
     >
-      <input type="file" ref={imageRef} multiple style={{ display: "none" }} />
+      <input
+        type="file"
+        onChange={uploadImage}
+        name="image"
+        ref={imageRef}
+        multiple
+        style={{ display: "none" }}
+        accept="image/*"
+      />
 
       <Typography variant="h6" textAlign="center">
         WRITE YOUR QUESTIONS
       </Typography>
-      <TextField variant="outlined" label="Title" fullWidth />
+      <br />
+      <TextField
+        name="title"
+        value={state.title.value}
+        onChange={handleChange}
+        variant="outlined"
+        label="Title"
+        fullWidth
+        error={state.title.isValid ? false : true}
+        helperText={state.title.isValid ? "" : "Title cannot be empty"}
+      />
 
       <TextField
+        name="description"
+        onChange={handleChange}
+        value={state.description.value}
+        error={state.description.isValid ? false : true}
+        helperText={
+          state.description.isValid ? "" : "Description cannot be empty"
+        }
         variant="outlined"
         label="Description"
         multiline
@@ -42,7 +99,7 @@ const PostField = () => {
         minRows={4}
         fullWidth
       />
-      <PreviewImage clickInput={clickInput} images={a} />
+      <PreviewImage images={Files} setFiles={setFiles} update={updateImage} />
       <Box display="flex" alignItems="center">
         <Button
           sx={{ marginLeft: "auto", marginRight: 2 }}
