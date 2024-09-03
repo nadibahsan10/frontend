@@ -1,13 +1,19 @@
-
 h2 {
     color: black;
     margin: 0 0 0 2%;
     text-align: left;
 }
 
+h3 {
+    color: black;
+    margin: 1% 0 1% 2%;
+    text-align: left;
+}
+
 p {
     margin: 0 0 0 2%;
     text-align: left;
+    font-size: .95rem;
 }
 
 .proPic {

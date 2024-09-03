@@ -1,13 +1,17 @@
-.searchBar {
-    display: flex;
-    justify-content: center;
-    width: 85%;
-    margin: 3% 0 3% 7.5%;
-    
+.cardHolder {
+    margin-top: 1%;
+    height:60vh;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
-.cardHolder {
-    height: 40vh;
-    overflow:  auto;
-    scrollbar-color:  #780000 #EBEBEB;
+.cardHolder::-webkit-scrollbar {
+    width: .5em;
+    height: 5px;
+}
+
+.cardHolder::-webkit-scrollbar-thumb {
+    background-color: #780000;
+    outline: 2px solid #333333;
+    border-radius: 10px;
 }

@@ -34,12 +34,26 @@ function Card(props) {
     };
 
     return (
-        <Box sx={{ flexGrow: 1, background: '#EBEBEB', borderRadius: "10px", width: "82%", margin: "1% 9%"}}>
+        <Box
+            sx={{
+                flexGrow: 1,
+                borderRadius: "10px",
+                width: "75%",
+                margin: "2% 12.5%",
+                boxShadow: "rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px",
+                transition: "0.5s linear",
+                '&:hover': {
+                    transform: "scale(1.01)",
+                    border: "1px solid #78000080"
+                },
+            }}
+        >
             <Grid container spacing={1}>
                 <Grid item xs={8}>
                     <Item>
                         <h2>{props.name}</h2>
-                        <p>{props.type} - {props.trimester}</p>
+                        <h3>{props.code}</h3>
+                        <p>{props.type} Examination - {props.trimester} {props.year}</p>
                     </Item>
                 </Grid>
                 <Grid item xs={4}>
@@ -66,7 +80,10 @@ function Card(props) {
                 <Grid item xs={6}>
                     <Item>
                         <div className='downloadBtn'>
-                            <Button variant="contained">
+                            <Button
+                                variant="contained"
+                                onClick={() => window.open(`http://localhost:3000/${props.path}`, "_blank")}
+                            >
                                 <DownloadForOfflineOutlinedIcon sx={{ marginRight: 1 }} /> Download PDF
                             </Button>
                         </div>
@@ -80,7 +97,7 @@ function Card(props) {
                         position: "absolute",
                         top: "50%",
                         left: "50%",
-                        transform: "translate(-50%, -50%)", 
+                        transform: "translate(-50%, -50%)",
                         width: "60vh",
                         backgroundColor: "white",
                         borderRadius: "4px",
