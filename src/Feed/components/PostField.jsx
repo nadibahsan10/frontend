@@ -1,25 +1,31 @@
 import React, { useEffect, useRef } from "react";
-import { Box, TextField, Typography, Button, Avatar } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Typography,
+  Button,
+  Avatar,
+  CircularProgress,
+} from "@mui/material";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import post from "../Functions/post";
-
 import PreviewImage from "./PreviewImage";
 import { useInput } from "../../CustomHooks/useInput";
 
 const PostField = () => {
-  const { state, handleChange, uploadImage, updateImage, Files, setFiles } =
-    useInput({
-      title: {
-        value: "",
-        isValid: true,
-      },
-      description: {
-        value: "",
-        isValid: true,
-      },
-      image: null,
-    });
+  const { state, handleChange, uploadImage, updateImage } = useInput({
+    title: {
+      value: "",
+      isValid: true,
+    },
+    description: {
+      value: "",
+      isValid: true,
+    },
+    image: null,
+  });
+
   useEffect(() => {}, [state]);
   const imageRef = useRef([]);
   const clickInput = () => {
@@ -33,7 +39,7 @@ const PostField = () => {
       post(state.title.value, state.description.value, state.image);
     },
 
-    onSuccess: () => {
+    onSuccess: async () => {
       queryClient.refetchQueries(["getposts"]);
     },
   });
@@ -49,6 +55,7 @@ const PostField = () => {
   if (mutation.isError) {
     return <h1>Wow..this is nice </h1>;
   }
+
   return (
     <Box
       component="form"
@@ -99,7 +106,7 @@ const PostField = () => {
         minRows={4}
         fullWidth
       />
-      <PreviewImage images={Files} setFiles={setFiles} update={updateImage} />
+      <PreviewImage images={state.image} update={updateImage} />
       <Box display="flex" alignItems="center">
         <Button
           sx={{ marginLeft: "auto", marginRight: 2 }}

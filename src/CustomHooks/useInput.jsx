@@ -25,22 +25,15 @@ const useInput = (initialState) => {
     }
   };
 
-  const [Files, setFiles] = useState([]);
-
   const updateImage = (value) => {
-    dispatch({ type: "IMAGE", value: value });
+    const dataTransfer = new DataTransfer();
+    value.forEach((file) => {
+      dataTransfer.items.add(file);
+    });
+    dispatch({ type: "IMAGE", value: dataTransfer.files });
   };
 
   const [state, dispatch] = useReducer(formReducer, initialState);
-  useEffect(() => {
-    if (!state.image) {
-      console.log("No image");
-    } else if (state.image !== null) {
-      setFiles(Array.from(state.image));
-    } else {
-      setFiles([]);
-    }
-  }, [state]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -57,6 +50,6 @@ const useInput = (initialState) => {
     dispatch({ type: "IMAGE", value: files });
   };
 
-  return { state, handleChange, uploadImage, updateImage, Files, setFiles };
+  return { state, handleChange, uploadImage, updateImage };
 };
 export { useInput };

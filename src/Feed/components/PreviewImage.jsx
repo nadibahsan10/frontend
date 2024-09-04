@@ -3,26 +3,21 @@ import { Box, IconButton, Avatar } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import React from "react";
 
-const PreviewImage = ({ images, update, setFiles }) => {
+const PreviewImage = ({ images, update }) => {
   if (images === null) {
     return;
   }
 
-  useEffect(() => {
-    update(images);
-  }, [images]);
-  const handleDelete = (item) => {
-    setFiles((prev) => prev.filter((file) => file !== item));
+  const handleDelete = (index) => {
+    // Convert FileList to array, remove the image, and update the state
+    const updatedImages = Array.from(images).filter((_, i) => i !== index);
+    update(updatedImages);
   };
-
-  if (images === 0) {
-    return;
-  }
 
   return (
     <>
       <Box display="flex" marginBottom={2} gap={2} flexWrap="wrap">
-        {images.map((item, index) => {
+        {Array.from(images).map((item, index) => {
           const srcLink = URL.createObjectURL(item);
           return (
             <Box position="relative" key={index}>
@@ -34,7 +29,7 @@ const PreviewImage = ({ images, update, setFiles }) => {
               />
               <IconButton
                 onClick={() => {
-                  handleDelete(item);
+                  handleDelete(index);
                 }}
                 color="white"
                 sx={{ position: "absolute", top: 0, right: 0 }}

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const fetchData = async () => {
+const getPosts = async () => {
   const token = "Baerer " + JSON.parse(localStorage.getItem("token"));
   const response = await axios.get("http://localhost:3000/feed/getposts", {
     headers: {
@@ -11,4 +11,4 @@ const fetchData = async () => {
   return response;
 };
 
-export default fetchData;
+export default getPosts;

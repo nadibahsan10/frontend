@@ -5,6 +5,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import NameAvatar from "../../Shared/NameAvatar";
 import Reactions from "./Reactions";
 import Image from "./Image";
+import { getPostLikes } from "../Functions/likes";
 
 const Posts = ({
   reactions,
@@ -18,6 +19,17 @@ const Posts = ({
   uid,
   title,
 }) => {
+  const dataToPass = {
+    first_name,
+    last_name,
+    id,
+    content,
+    uid,
+    profile_picture,
+    title,
+    image_url,
+    created_at,
+  };
   return (
     <Box
       padding={4}
@@ -47,11 +59,19 @@ const Posts = ({
       </Box>
       <Box display="flex" flexWrap="wrap" marginTop={2} gap={3}>
         {image_url.length !== 0 &&
-          image_url.map((item) => {
-            return <Image src={`http://localhost:3000/${item}`} />;
+          image_url.map((item, index) => {
+            return <Image key={index} src={`http://localhost:3000/${item}`} />;
           })}
       </Box>
-      {reactions && <Reactions comment />}
+
+      {reactions && (
+        <Reactions
+          id={id}
+          dataToPass={dataToPass}
+          getLikes={getPostLikes}
+          comment
+        />
+      )}
     </Box>
   );
 };
