@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Avatar, Modal, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import DownloadForOfflineOutlinedIcon from '@mui/icons-material/DownloadForOfflineOutlined';
-
+import axios from 'axios';
 import "./Card.css";
 import UpdatePdf from './UpdatePdf';
+import { AuthContext } from "../../Auth/AuthContext";
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#00000000',
@@ -24,6 +24,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function Card(props) {
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+    const auth = useContext(AuthContext);
 
     const handleOpenAddModal = () => {
         setIsAddModalOpen(true);
@@ -32,6 +33,29 @@ function Card(props) {
     const handleCloseAddModal = () => {
         setIsAddModalOpen(false);
     };
+
+    const handleDelete = async () => {
+        try {
+            const token = "Bearer " + JSON.parse(localStorage.getItem("token"));
+
+            const response = await axios.delete(
+                `http://localhost:3000/question/delete/${props.questionID}`,
+                {
+                    headers: {
+                        Authorization: token
+                    }
+                }
+            );
+            console.log(response.data);
+            props.fetch();
+        } catch (error) {
+            console.error('Error fetching questions:', error);
+        }
+
+    };
+
+
+
 
     return (
         <Box
@@ -56,28 +80,27 @@ function Card(props) {
                         <p>{props.type} Examination - {props.trimester} {props.year}</p>
                     </Item>
                 </Grid>
+
                 <Grid item xs={4}>
                     <Item>
                         <div className='proPic'>
-                            <DeleteIcon />
-                            <MoreVertIcon onClick={handleOpenAddModal} style={{ cursor: 'pointer' }} />
+                            {auth.id === props.owner &&
+                                (<>
+                                    <DeleteIcon onClick={handleDelete} style={{ cursor: 'pointer' }} />
+                                    <MoreVertIcon onClick={handleOpenAddModal} style={{ cursor: 'pointer' }} />
+                                </>
+                                )}
                             <Avatar
-                                sx={{ height: 25, width: 25, marginRight: 2 }}
+                                sx={{ height: 25, width: 25, marginRight: 2, cursor: 'pointer' }}
                                 alt="Profile Image"
-                                src="/profileImage.webp"
-                            />
+                                src={`http://localhost:3000/${props.userImg}`}
+                                onClick={() => { window.location.href = 'http://localhost:5173/myprofile'; }}
+                                />
                         </div>
                     </Item>
                 </Grid>
-                <Grid item xs={6}>
-                    <Item>
-                        <div className='likeBtn'>
-                            <FavoriteIcon sx={{ color: "red" }} />
-                            <span>{props.likes}</span>
-                        </div>
-                    </Item>
-                </Grid>
-                <Grid item xs={6}>
+
+                <Grid item xs={12}>
                     <Item>
                         <div className='downloadBtn'>
                             <Button

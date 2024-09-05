@@ -35,5 +35,4 @@ p {
 .downloadBtn {
     display: flex;
     justify-content: end;
-    margin-right: 3%;
 }

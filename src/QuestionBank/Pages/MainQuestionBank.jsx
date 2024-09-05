@@ -55,26 +55,11 @@ function MainQuestionBank() {
   const [checkedItemsYear, setCheckedItemsYear] = useState([]);
   const [departmentRadio, setDepartmentRadio] = useState('');
   const [examTypeRadio, setExamTypeRadio] = useState('');
+  const [searchTerm, setSearchTerm] = useState(''); // Search term state
 
-  const handleSearch = async (event) => {
-    const {value} = event.target;
-
-    try {
-      const token = "Bearer " + JSON.parse(localStorage.getItem("token"));
-      const response = await axios.post('http://localhost:3000/question/search', 
-        { search: value },
-        {
-          headers: {
-            Authorization: token
-          }
-        }
-      );
-      setQuestion(response.data);
-    } catch (error) {
-      console.error('Error fetching search results:', error);
-    }
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
   };
-  
 
   const handleCheckboxChangeTrimester = (item) => {
     const updatedCheckedItems = checkedItemsTrimester.includes(item)
@@ -109,11 +94,6 @@ function MainQuestionBank() {
 
   const fetchQuestions = async () => {
     try {
-      // Early exit if no filters are selected
-      if (!departmentRadio && !examTypeRadio && checkedItemsTrimester.length === 0 && checkedItemsYear.length === 0) {
-        return;
-      }
-
       const token = "Bearer " + JSON.parse(localStorage.getItem("token"));
 
       // Make the API call with all selected filters
@@ -123,7 +103,8 @@ function MainQuestionBank() {
           department: departmentRadio,
           examType: examTypeRadio,
           trimester: checkedItemsTrimester,
-          year: checkedItemsYear
+          year: checkedItemsYear,
+          search: searchTerm,
         },
         {
           headers: {
@@ -134,6 +115,8 @@ function MainQuestionBank() {
 
       // Update state with the fetched data
       setQuestion(response.data);
+      console.log(response.data);
+      
     } catch (error) {
       console.error('Error fetching questions:', error);
     }
@@ -142,7 +125,7 @@ function MainQuestionBank() {
   // useEffect that triggers on any filter change
   useEffect(() => {
     fetchQuestions();
-  }, [departmentRadio, examTypeRadio, checkedItemsTrimester, checkedItemsYear]);
+  }, [departmentRadio, examTypeRadio, checkedItemsTrimester, checkedItemsYear, searchTerm]);
 
 
   const fetchQuestion = async () => {
@@ -160,11 +143,6 @@ function MainQuestionBank() {
       console.error("Error fetching question: ", error);
     }
   };
-
-  // useEffect for initial data fetch
-  useEffect(() => {
-    fetchQuestion();
-  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -351,7 +329,10 @@ function MainQuestionBank() {
                       trimester={item.trimester}
                       year={item.year}
                       path={item.path}
-                      likes="975"
+                      questionID ={item.id}
+                      owner ={item.uid}
+                      userImg ={item.profile_picture}
+                      fetch ={fetchQuestion}
                     />
                   ))}
                 </div>
