@@ -40,7 +40,7 @@ const Comment = () => {
       return getComments(postId);
     },
   });
-  console.log(commentData);
+
   const { state, handleChange, uploadImage, updateImage } = useInput({
     comment: {
       value: "",
@@ -63,7 +63,8 @@ const Comment = () => {
     mutationFn: () => {
       postComment(state.comment.value, state.image, postId);
     },
-    onSuccess: () => {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries("comment", postId);
       queryClient.refetchQueries("comment", postId);
     },
   });
@@ -104,7 +105,7 @@ const Comment = () => {
         >
           <Avatar
             sx={{ height: 50, width: 50 }}
-            src="Frontend\public\profileImage.webp"
+            src={`http://localhost:3000/${auth.profilePicture}`}
           />
           <Box display="flex" flexDirection="column" sx={{ width: "100%" }}>
             <TextField

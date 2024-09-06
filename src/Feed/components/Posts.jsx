@@ -1,11 +1,13 @@
 import { Box, Avatar, Button, Typography, IconButton } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import SettingsIcon from "@mui/icons-material/Settings";
 
 import NameAvatar from "../../Shared/NameAvatar";
 import Reactions from "./Reactions";
 import Image from "./Image";
-import { getPostLikes } from "../Functions/likes";
+import { getPostLikes, postLike } from "../Functions/likes";
+import GearMenu from "./GearMenu";
+import PostMenu from "./PostMenu";
 
 const Posts = ({
   reactions,
@@ -30,6 +32,15 @@ const Posts = ({
     image_url,
     created_at,
   };
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <Box
       padding={4}
@@ -39,14 +50,26 @@ const Posts = ({
       position="relative"
     >
       <Box display="flex" alignItems="center">
-        <NameAvatar name={first_name + " " + last_name} subtitle={created_at} />
-        <IconButton sx={{ marginLeft: "auto" }}>
+        <NameAvatar
+          src={`http://localhost:3000/${profile_picture}`}
+          name={first_name + " " + last_name}
+          subtitle={created_at}
+        />
+        <IconButton sx={{ marginLeft: "auto" }} onClick={handleClick}>
           <SettingsIcon fontSize="large" />
         </IconButton>
+        <GearMenu handleClose={handleClose} open={open} anchorEl={anchorEl}>
+          <PostMenu
+            handleClose={handleClose}
+            title={title}
+            content={content}
+            postId={id}
+          />
+        </GearMenu>
       </Box>
 
       <Box marginTop={4} marginBottom={2}>
-        <Typography variant="h4" textAlign="center" marginBottom={5}>
+        <Typography variant="h4" textTransform="uppercase" marginBottom={5}>
           {title}
         </Typography>
         <Typography
@@ -69,6 +92,7 @@ const Posts = ({
           id={id}
           dataToPass={dataToPass}
           getLikes={getPostLikes}
+          giveLike={postLike}
           comment
         />
       )}

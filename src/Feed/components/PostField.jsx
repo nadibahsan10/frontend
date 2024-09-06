@@ -1,12 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import {
-  Box,
-  TextField,
-  Typography,
-  Button,
-  Avatar,
-  CircularProgress,
-} from "@mui/material";
+import { Box, TextField, Typography, Button } from "@mui/material";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import post from "../Functions/post";
@@ -40,6 +33,7 @@ const PostField = () => {
     },
 
     onSuccess: async () => {
+      await queryClient.invalidateQueries(["getposts"]);
       queryClient.refetchQueries(["getposts"]);
     },
   });
@@ -62,7 +56,6 @@ const PostField = () => {
       onSubmit={handleSubmit}
       padding={6}
       marginTop={2}
-      marginBottom={2}
       borderRadius={2}
       border="2px solid #EBEBEB"
     >
@@ -76,9 +69,7 @@ const PostField = () => {
         accept="image/*"
       />
 
-      <Typography variant="h6" textAlign="center">
-        WRITE YOUR QUESTIONS
-      </Typography>
+      <Typography variant="h5">WRITE YOUR QUESTIONS</Typography>
       <br />
       <TextField
         name="title"

@@ -1,5 +1,6 @@
 import axios from "axios";
 const postLike = async (postId, isLiked) => {
+  console.log("likes ar on the way");
   const token = JSON.parse(localStorage.getItem("token"));
   const response = await axios.post(
     `http://localhost:3000/feed/like`,
@@ -15,18 +16,23 @@ const postLike = async (postId, isLiked) => {
 };
 
 const commentLike = async (commentId, isLiked) => {
+  console.log("comment Liking");
   const token = JSON.parse(localStorage.getItem("token"));
-  const response = await axios.post(
-    `http://localhost:3000/feed/commentlikes/${commentId}`,
-    { isLiked },
-    {
-      headers: {
-        Authorization: "Baerer " + token,
-      },
-    }
-  );
+  try {
+    const response = await axios.post(
+      `http://localhost:3000/feed/commentlikes/${commentId}`,
+      { isLiked },
+      {
+        headers: {
+          Authorization: "Baerer " + token,
+        },
+      }
+    );
 
-  return response.data;
+    return response.data;
+  } catch (error) {
+    console.log(error.response.data.message);
+  }
 };
 const getCommentLikes = async (commentId) => {
   const token = JSON.parse(localStorage.getItem("token"));

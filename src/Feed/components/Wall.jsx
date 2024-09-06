@@ -8,6 +8,7 @@ const Wall = () => {
   const { data, error, isLoading } = useQuery({
     queryKey: ["getposts"],
     queryFn: getPosts,
+    staleTime: 100000,
   });
 
   if (isLoading) {

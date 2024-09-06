@@ -149,10 +149,14 @@ function Header() {
         <MenuItem key="3" onClick={handleCloseUserMenu}>
           <Typography textAlign="center">Help & Support</Typography>
         </MenuItem>
-        <MenuItem key="4" onClick={handleCloseUserMenu}>
-          <Typography textAlign="center" onClick={handleLogOut}>
-            Logout
-          </Typography>
+        <MenuItem
+          key="4"
+          onClick={() => {
+            handleCloseUserMenu();
+            handleLogOut();
+          }}
+        >
+          <Typography textAlign="center">Logout</Typography>
         </MenuItem>
       </Menu>
     </>
