@@ -1,6 +1,3 @@
-
-import { AuthContext } from "../../Auth/AuthContext";
-
 import React, { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -16,7 +13,6 @@ import DownloadForOfflineOutlinedIcon from "@mui/icons-material/DownloadForOffli
 import "./Card.css";
 import UpdatePdf from "./UpdatePdf";
 
-
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#00000000",
   ...theme.typography.body2,
@@ -27,12 +23,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function Card(props) {
-
-  
-    const auth = useContext(AuthContext);
-
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-
 
   const handleOpenAddModal = () => {
     setIsAddModalOpen(true);
@@ -41,7 +32,6 @@ function Card(props) {
   const handleCloseAddModal = () => {
     setIsAddModalOpen(false);
   };
-
 
   return (
     <Box
@@ -116,7 +106,6 @@ function Card(props) {
       </Modal>
     </Box>
   );
-
 }
 
 export default Card;

@@ -1,36 +1,23 @@
 import React, { useState } from "react";
 import InsertDriveFileSharpIcon from "@mui/icons-material/InsertDriveFileSharp";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
+
 import { Modal, Box } from "@mui/material";
 import Button from "@mui/material/Button";
 import AddPdf from "./AddPdf";
 import "./UploadBar.css";
 
-export default function UploadBar(props) {
+export default function UploadBar() {
   const [Add, setAdd] = useState(false);
-
   const AddOff = () => {
     setAdd(false);
   };
-
   const AddOn = () => {
     setAdd(true);
   };
 
-  const handleModalClose = (event, reason) => {
-    // Prevent closing on backdrop click
-    if (reason !== 'backdropClick') {
-      AddOff();
-    }
-  };
-
   return (
     <>
-      <Modal
-        open={Add}
-        onClose={handleModalClose}
-      >
+      <Modal open={Add} onClose={AddOff}>
         <div
           style={{
             position: "absolute",
@@ -42,21 +29,7 @@ export default function UploadBar(props) {
             borderRadius: "4px",
           }}
         >
-          <AddPdf onClose={AddOff} fetch={props.fetch}/>
-
-          <IconButton
-            onClick={AddOff}
-            sx={{
-              position: 'absolute',
-              top: '10px',
-              right: '10px',
-              backgroundColor: '#780000',
-              '&:hover': { background: 'black' }
-            }}
-          >
-            <CloseIcon sx={{ fontSize: 'small', color: '#ffffff' }} />
-          </IconButton>
-
+          <AddPdf />
         </div>
       </Modal>
       <div className="barElement">
@@ -64,7 +37,6 @@ export default function UploadBar(props) {
         <Button variant="contained" onClick={AddOn} sx={{ width: "15%" }}>
           ADD PDF
         </Button>
-
       </div>
     </>
   );
