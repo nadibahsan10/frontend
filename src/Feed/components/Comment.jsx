@@ -39,6 +39,7 @@ const Comment = () => {
     queryFn: async () => {
       return getComments(postId);
     },
+    staleTime: 1000 * 60 * 5,
   });
 
   const { state, handleChange, uploadImage, updateImage } = useInput({

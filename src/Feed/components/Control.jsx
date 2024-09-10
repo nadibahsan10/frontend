@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Typography, Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const Control = () => {
   return (
@@ -14,42 +15,18 @@ const Control = () => {
         Control panel
       </Typography>
       <hr />
-      <Box
-        sx={{ height: 60, width: "100%" }}
-        borderRadius={2}
-        component={Button}
-        variant="contained"
-        marginBottom={2}
-      >
-        <Typography variant="h6">My Timeline</Typography>
-      </Box>
-      <Box
-        sx={{ height: 60, width: "100%" }}
-        borderRadius={2}
-        component={Button}
-        variant="contained"
-        marginBottom={2}
-      >
-        <Typography variant="h6">recent posts</Typography>
-      </Box>
-      <Box
-        sx={{ height: 60, width: "100%" }}
-        borderRadius={2}
-        component={Button}
-        variant="contained"
-        marginBottom={2}
-      >
-        <Typography variant="h6">My profile</Typography>
-      </Box>
-      <Box
-        sx={{ height: 60, width: "100%" }}
-        borderRadius={2}
-        component={Button}
-        variant="contained"
-        marginBottom={2}
-      >
-        <Typography variant="h6">Vote</Typography>
-      </Box>
+      <Button fullWidth variant="outlined" component={Link} to="">
+        Home
+      </Button>
+      <Button fullWidth variant="outlined" component={Link} to="chatGpt">
+        Gemini Ai
+      </Button>
+      <Button fullWidth variant="outlined" component={Link} to="myfeed">
+        My Post
+      </Button>
+      <Button fullWidth variant="outlined" component={Link} to="users">
+        Users
+      </Button>
     </Box>
   );
 };

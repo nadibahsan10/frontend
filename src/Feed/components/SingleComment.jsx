@@ -30,8 +30,8 @@ const SingleComment = ({
         {content}
       </Typography>
       <Box display="flex" flexWrap="wrap" gap={2}>
-        {JSON.parse(image_url).map((item) => {
-          return <Image src={`http://localhost:3000/${item}`} />;
+        {JSON.parse(image_url).map((item, index) => {
+          return <Image src={`http://localhost:3000/${item}`} key={index} />;
         })}
       </Box>
       <Box marginLeft={7}>

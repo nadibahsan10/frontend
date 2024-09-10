@@ -1,9 +1,18 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
+import { getTopContributers } from "../Functions/user";
 import NameAvatar from "../../Shared/NameAvatar";
 
 const Top = () => {
+  const queryClient = useQueryClient();
+
+  const { data, isError, isLoading } = useQuery({
+    queryKey: ["topusers"],
+    queryFn: getTopContributers,
+  });
+  console.log(data.users);
   return (
     <Box
       padding={6}
@@ -16,11 +25,15 @@ const Top = () => {
         Top Contributers
       </Typography>
       <hr />
-      <NameAvatar subtitle="320 Votes" />
-
-      <NameAvatar subtitle="320 Votes " />
-      <NameAvatar subtitle="320 Votes " />
-      <NameAvatar subtitle="320 Votes" />
+      {data?.users.map((item) => {
+        return (
+          <NameAvatar
+            src={`http://localhost:3000/${item.profile_picture}`}
+            name={item.first_name + " " + item.last_name}
+            subtitle={`Total Votes ${item.totalVotes}`}
+          />
+        );
+      })}
     </Box>
   );
 };

@@ -10,6 +10,7 @@ const Update = () => {
   const queryClient = useQueryClient();
   const location = useLocation();
   const data = location.state;
+  const navigate = useNavigate();
 
   const { state, handleChange } = useInput({
     title: { value: data.title, isValid: true },
@@ -27,10 +28,14 @@ const Update = () => {
   const handleSubmit = (e) => {
     mutation.mutate();
     e.preventDefault();
+    navigate(-1);
   };
 
   if (mutation.isError) {
     return <h1>{mutation.error.message}</h1>;
+  }
+  if (mutation.isPending) {
+    return <h1>Loading...</h1>;
   }
   return (
     <Container maxWidth="md">
