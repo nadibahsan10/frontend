@@ -17,7 +17,6 @@ const Wall = () => {
   if (error) {
     return <h1>Error..</h1>;
   }
-  console.log(data);
 
   return (
     <Box display="flex" flexDirection="column" gap={2}>

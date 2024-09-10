@@ -12,7 +12,7 @@ const Search = () => {
   const handleReset = () => {
     navigate(-1);
   };
-  console.log(location.pathname);
+
   return (
     <Box
       padding={6}

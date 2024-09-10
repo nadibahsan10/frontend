@@ -12,7 +12,7 @@ const Top = () => {
     queryKey: ["topusers"],
     queryFn: getTopContributers,
   });
-  console.log(data.users);
+
   return (
     <Box
       padding={6}
@@ -25,15 +25,16 @@ const Top = () => {
         Top Contributers
       </Typography>
       <hr />
-      {data?.users.map((item) => {
-        return (
-          <NameAvatar
-            src={`http://localhost:3000/${item.profile_picture}`}
-            name={item.first_name + " " + item.last_name}
-            subtitle={`Total Votes ${item.totalVotes}`}
-          />
-        );
-      })}
+      {data &&
+        data.users?.map((item) => {
+          return (
+            <NameAvatar
+              src={`http://localhost:3000/${item.profile_picture}`}
+              name={item.first_name + " " + item.last_name}
+              subtitle={`Total Votes ${item.totalVotes}`}
+            />
+          );
+        })}
     </Box>
   );
 };
