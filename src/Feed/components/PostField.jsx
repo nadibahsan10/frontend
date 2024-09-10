@@ -1,5 +1,11 @@
 import React, { useEffect, useRef } from "react";
-import { Box, TextField, Typography, Button } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Typography,
+  Button,
+  LinearProgress,
+} from "@mui/material";
 //1
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
@@ -47,10 +53,19 @@ const PostField = () => {
   };
 
   if (mutation.isPending) {
-    return <h1>Posting</h1>;
+    return (
+      <Box
+        padding={6}
+        marginTop={2}
+        borderRadius={2}
+        border="2px solid #EBEBEB"
+      >
+        <LinearProgress />
+      </Box>
+    );
   }
   if (mutation.isError) {
-    return <h1>Wow..this is nice </h1>;
+    return <h1>An error</h1>;
   }
 
   return (

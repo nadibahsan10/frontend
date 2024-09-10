@@ -7,6 +7,7 @@ import {
   Typography,
   Avatar,
   TextField,
+  LinearProgress,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CropOriginalIcon from "@mui/icons-material/CropOriginal";
@@ -77,6 +78,32 @@ const Comment = () => {
   };
   if (mutation.isError) {
     return <h1>{mutation.error.message}</h1>;
+  }
+  if (mutation.isPending) {
+    return (
+      <Box
+        padding={6}
+        marginTop={2}
+        borderRadius={2}
+        border="2px solid #EBEBEB"
+      >
+        <LinearProgress />
+      </Box>
+    );
+  }
+  if (isLoading) {
+    return (
+      <Container>
+        <Box
+          padding={6}
+          marginTop={2}
+          borderRadius={2}
+          border="2px solid #EBEBEB"
+        >
+          <LinearProgress />
+        </Box>
+      </Container>
+    );
   }
 
   return (

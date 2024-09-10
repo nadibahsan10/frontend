@@ -12,6 +12,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  CircularProgress,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
@@ -64,7 +65,11 @@ const Reactions = (props) => {
     console.log(mutation.error);
   }
   if (mutation.isPending) {
-    return <h1>Loading</h1>;
+    return (
+      <Box marginLeft="auto">
+        <CircularProgress />
+      </Box>
+    );
   }
   const handleCommentDelete = () => {
     mutationComment.mutate();

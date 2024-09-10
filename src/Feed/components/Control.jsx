@@ -1,8 +1,10 @@
 import React from "react";
 import { Box, Typography, Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Control = () => {
+  const location = useLocation();
+
   return (
     <Box
       padding={6}
@@ -10,21 +12,48 @@ const Control = () => {
       marginBottom={2}
       borderRadius={2}
       border="2px solid #EBEBEB"
+      display="flex"
+      flexDirection="column"
+      gap={2}
     >
       <Typography variant="h5" textTransform="uppercase">
         Control panel
       </Typography>
       <hr />
-      <Button fullWidth variant="outlined" component={Link} to="">
+      <Button
+        fullWidth
+        variant={location.pathname === "/feed" ? "contained" : "outlined"}
+        component={Link}
+        to=""
+      >
         Home
       </Button>
-      <Button fullWidth variant="outlined" component={Link} to="chatGpt">
+      <Button
+        fullWidth
+        variant={
+          location.pathname === "/feed/chatGpt" ? "contained" : "outlined"
+        }
+        component={Link}
+        to="chatGpt"
+      >
         Gemini Ai
       </Button>
-      <Button fullWidth variant="outlined" component={Link} to="myfeed">
+      <Button
+        fullWidth
+        variant={
+          location.pathname === "/feed/myfeed" ? "contained" : "outlined"
+        }
+        component={Link}
+        to="myfeed"
+      >
         My Post
       </Button>
-      <Button fullWidth variant="outlined" component={Link} to="users">
+      <Button
+        fullWidth
+        variant={location.pathname === "/feed/users" ? "contained" : "outlined"}
+        component={Link}
+        to="users"
+      >
         Users
       </Button>
     </Box>
