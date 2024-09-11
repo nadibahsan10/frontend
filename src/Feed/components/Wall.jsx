@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, LinearProgress } from "@mui/material";
 import React from "react";
 import PostField from "./PostField";
 import Posts from "./Posts";
@@ -12,7 +12,16 @@ const Wall = () => {
   });
 
   if (isLoading) {
-    return <h1>Loading</h1>;
+    return (
+      <Box
+        padding={6}
+        marginTop={2}
+        borderRadius={2}
+        border="2px solid #EBEBEB"
+      >
+        <LinearProgress />
+      </Box>
+    );
   }
   if (error) {
     return <h1>Error..</h1>;

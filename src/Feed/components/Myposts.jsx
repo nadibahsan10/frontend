@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Box } from "@mui/material";
+import { Box, LinearProgress } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 
 import Posts from "./Posts";
@@ -13,7 +13,19 @@ const Myposts = () => {
     queryFn: getPostsByUser,
     staleTime: 1000 * 60 * 5,
   });
-  console.log(data);
+
+  if (isLoading) {
+    return (
+      <Box
+        padding={6}
+        marginTop={2}
+        borderRadius={2}
+        border="2px solid #EBEBEB"
+      >
+        <LinearProgress />
+      </Box>
+    );
+  }
 
   return (
     <Box padding={6} marginTop={2} borderRadius={2} border="2px solid #EBEBEB">

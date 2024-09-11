@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button } from "@mui/material";
+import { Box, Button, CircularProgress } from "@mui/material";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { getVotedOrNot, voteUser } from "../Functions/user";
@@ -11,7 +11,7 @@ const Voting = ({ to, from }) => {
       return await getVotedOrNot(to);
     },
   });
-  console.log(data);
+
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: async (data) => {
@@ -26,6 +26,16 @@ const Voting = ({ to, from }) => {
   const handleClick = (to, vote) => {
     mutation.mutate({ to, vote });
   };
+  if (isLoading) {
+    return <CircularProgress />;
+  }
+  if (mutation.isPending) {
+    return (
+      <Box marginLeft="auto">
+        <CircularProgress />
+      </Box>
+    );
+  }
   return (
     <>
       <Button
