@@ -76,7 +76,7 @@ const App = () => {
             <Route path="/feed/*" element={<Feed />} />
             <Route path="/inbox" element={<Message />} />
 
-            <Route path="/market" element={<MainQuestionBank />} />
+            <Route path="/market" element={<h1>Hello</h1>} />
 
             <Route path="/about" element={<About />} />
             <Route path="/question/*" element={<MainQuestionBank />} />
