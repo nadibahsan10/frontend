@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -20,6 +20,7 @@ import { Dialog, DialogActions, DialogContent } from "@mui/material";
 import Addproduct from "./Addproduct";
 import CloseIcon from "@mui/icons-material/Close";
 import MyListings from "./MyListings";
+import axios from "axios";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -43,6 +44,30 @@ const category = [
 ];
 
 function Search() {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = "Bearer " + JSON.parse(localStorage.getItem("token"));
+        
+        const response = await axios.get(
+          "http://localhost:3000/marketplace/getposts",
+          
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: token,
+            },
+          }
+        );
+        const data = response.data.data;
+        console.log(data);
+      } catch (err) {
+        console.log(err.response);
+      }
+    };
+    fetchData();
+  }, []);
+
   const [open, setOpen] = useState(false);
   const [componentToShow, setComponentToShow] = useState(null);
 
@@ -56,7 +81,18 @@ function Search() {
     setComponentToShow(null); // Reset component state when closing the modal
   };
 
+
+
+  const posts = async (event) => {
+   
+  };
+
+
+
   return (
+
+
+
     <div component="form" method="post">
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2} sx={{ position: "relative" }}>
