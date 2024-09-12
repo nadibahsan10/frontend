@@ -16,6 +16,7 @@ const Question = ({
   profile_picture,
   trimester,
   year,
+  department,
 }) => {
   return (
     <Box
@@ -40,7 +41,18 @@ const Question = ({
         </IconButton>
       </Box>
       <Box marginLeft="auto">
-        <Options id={id} pdfPath={pdf} userId={uid} profile={profile_picture} />
+        <Options
+          id={id}
+          trimester={trimester}
+          year={year}
+          examType={exam_type}
+          course={course}
+          code={code}
+          pdfPath={pdf}
+          userId={uid}
+          department={department}
+          profile={profile_picture}
+        />
         <Button
           component={Link}
           to={`http://localhost:3000/${pdf}`}

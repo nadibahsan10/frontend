@@ -32,4 +32,30 @@ const postQuestions = async (
   return response;
 };
 
+const updateQuestions = async (
+  id,
+  courseName,
+  courseCode,
+  department,
+  year,
+  trimester,
+  examType
+) => {
+  const form = new FormData();
+
+  const token = JSON.parse(localStorage.getItem("token"));
+  const response = await axios.put(
+    `http://localhost:3000/questions/updatequestion/`,
+    { id, courseName, courseCode, department, year, trimester, examType },
+    {
+      headers: {
+        Authorization: "Baerer " + token,
+      },
+    }
+  );
+
+  return response;
+};
+
 export default postQuestions;
+export { updateQuestions };
