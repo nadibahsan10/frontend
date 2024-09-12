@@ -14,7 +14,7 @@ import PreviewImage from "./PreviewImage";
 import { useInput } from "../../CustomHooks/useInput";
 
 const PostField = () => {
-  const { state, handleChange, uploadImage, updateImage } = useInput({
+  const { state, handleChange, uploadImage, updateImage, reset } = useInput({
     title: {
       value: "",
       isValid: true,
@@ -43,6 +43,7 @@ const PostField = () => {
     onSuccess: async () => {
       await queryClient.invalidateQueries(["getposts"]);
       queryClient.refetchQueries(["getposts"]);
+      reset();
     },
   });
 

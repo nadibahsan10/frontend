@@ -8,7 +8,7 @@ const AddQuestion = () => {
   return (
     <Box>
       <AddPdf />
-      <QuestionWall />
+     
     </Box>
   );
 };

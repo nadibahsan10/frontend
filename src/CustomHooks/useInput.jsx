@@ -18,6 +18,19 @@ const useInput = (initialState) => {
           image: action.value,
         };
       }
+      case "CHECKBOX": {
+        return {
+          ...state,
+          [action.category]: action.checked
+            ? [...state[action.category], action.value] // Add value if checked
+            : state[action.category].filter((item) => item !== action.value), // Remove value if unchecked
+        };
+      }
+      case "RESET": {
+        return {
+          ...initialState,
+        };
+      }
 
       default: {
         return state;
@@ -45,11 +58,28 @@ const useInput = (initialState) => {
     });
   };
 
+  const reset = () => {
+    dispatch({ type: "RESET" });
+  };
+  const handleCheckBox = (e) => {
+    const { name, checked } = e.target;
+    console.log(name, checked);
+    const [category, value] = name.split("-");
+    dispatch({ type: "CHECKBOX", checked, category, value });
+  };
+
   const uploadImage = (event) => {
     const { files } = event.target;
     dispatch({ type: "IMAGE", value: files });
   };
 
-  return { state, handleChange, uploadImage, updateImage };
+  return {
+    state,
+    handleChange,
+    uploadImage,
+    updateImage,
+    handleCheckBox,
+    reset,
+  };
 };
 export { useInput };

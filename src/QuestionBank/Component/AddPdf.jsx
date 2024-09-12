@@ -11,10 +11,18 @@ import {
   Select,
 } from "@mui/material";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import {
+  QueryClient,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 
 import { useInput } from "../../CustomHooks/useInput";
+import postQuestions from "../Functions/postQuestions";
 
 const AddPdf = () => {
+  const QueryClient = useQueryClient();
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -23,18 +31,39 @@ const AddPdf = () => {
     setOpen(false);
   };
   const pdfRef = useRef();
-  const { state, handleChange, uploadImage, updateImage } = useInput({
+  const { state, handleChange, uploadImage, reset } = useInput({
     courseName: { value: "", isValid: true },
     courseCode: { value: "", isValid: true },
     department: { value: "CSE", isValid: true },
     year: { value: "2023", isValid: true },
     trimester: { value: "fall", isValid: true },
+    examType: { value: "final", isValid: true },
     image: null,
+  });
+
+  const mutation = useMutation({
+    mutationFn: async () => {
+      await postQuestions(
+        state.courseName.value,
+        state.courseCode.value,
+        state.department.value,
+        state.year.value,
+        state.trimester.value,
+        state.examType.value,
+        state.image
+      );
+    },
+    onSuccess: async () => {
+      await QueryClient.invalidateQueries(["getquestions"]);
+      QueryClient.refetchQueries(["getquestions"]);
+    },
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(state);
+    mutation.mutate();
+    handleClose();
   };
 
   return (
@@ -150,6 +179,20 @@ const AddPdf = () => {
               <MenuItem value="fall">Fall</MenuItem>
               <MenuItem value="summer">Summer</MenuItem>
               <MenuItem value="spring">Spring</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl sx={{ marginTop: 2 }} fullWidth>
+            <InputLabel id="demo-simple-select-label">Exam Type</InputLabel>
+            <Select
+              name="examType"
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              label="Exam Type"
+              value={state.examType.value}
+              onChange={handleChange}
+            >
+              <MenuItem value="mid">Mid</MenuItem>
+              <MenuItem value="final">Final</MenuItem>
             </Select>
           </FormControl>
 
