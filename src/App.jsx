@@ -6,6 +6,7 @@ import { AuthContext } from "./Auth/AuthContext";
 import Footer from "./Shared/Footer";
 import Home from "./Home/Home";
 import About from "./About/About";
+import Market from "./Market/Market";
 
 import MainQuestionBank from "./QuestionBank/MainQuestionBank";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -76,7 +77,7 @@ const App = () => {
             <Route path="/feed/*" element={<Feed />} />
             <Route path="/inbox" element={<Message />} />
 
-            <Route path="/market" element={<h1>Hello</h1>} />
+            <Route path="/market/*" element={<Market />} />
 
             <Route path="/about" element={<About />} />
             <Route path="/question/*" element={<MainQuestionBank />} />
