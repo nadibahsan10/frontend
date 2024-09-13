@@ -27,7 +27,6 @@ const Links = ({ icon, title, id }) => {
           height: 200,
         }}
         variant="outlined"
-        backgroundColor="#e0e0e0"
         component={Link}
         state={id}
         to="product"
