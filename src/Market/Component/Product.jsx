@@ -35,10 +35,14 @@ const Product = () => {
               textOverflow: "ellipsis",
               WebkitLineClamp: 2,
             }}
+            gutterBottom
           >
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae,
             temporibus! Lorem ipsum dolor sit amet consectetur adipisicing elit.
             Similique, molestiae?
+          </Typography>
+          <Typography variant="body1" fontWeight={700} color="initial">
+            Fashion & life Style
           </Typography>
         </Box>
         <Box display="flex" padding={2}>
@@ -48,7 +52,7 @@ const Product = () => {
           <Button
             sx={{ marginLeft: "auto" }}
             component={Link}
-            to="individualproduct/1234"
+            to="/market/individualproduct/1234"
             variant="contained"
           >
             View

@@ -57,19 +57,34 @@ const MarketHome = () => {
         <Typography variant="h3">UIU Market Place</Typography>
         <Box sx={{ width: "700px" }} display="flex" alignItems="center" gap={2}>
           <TextField fullWidth label="What are you looking for ?" />
-          <Button variant="contained" sx={{ height: "100%" }}>
+          <Button
+            variant="contained"
+            component={Link}
+            to="product"
+            sx={{ height: "100%" }}
+          >
             Search
           </Button>
         </Box>
-        <Button
-          component={Link}
-          to="ad"
-          variant="contained"
-          color="success"
-          sx={{ color: "white" }}
-        >
-          Advertisement
-        </Button>
+        <Box display="flex" gap={2}>
+          <Button
+            component={Link}
+            to="addproduct"
+            variant="contained"
+            color="success"
+            sx={{ color: "white" }}
+          >
+            Advertisement
+          </Button>
+          <Button
+            component={Link}
+            to="myproduct"
+            variant="outlined"
+            sx={{ color: "white" }}
+          >
+            My Products
+          </Button>
+        </Box>
       </Box>
 
       <Grid
