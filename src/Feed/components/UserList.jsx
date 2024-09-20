@@ -7,6 +7,7 @@ import { AuthContext } from "../../Auth/AuthContext";
 import NameAvatar from "../../Shared/NameAvatar";
 import { getUsers, voteUser } from "../Functions/user";
 import Voting from "./Voting";
+import MessageButton from "../../Shared/MessageButton";
 
 const UserList = () => {
   const auth = useContext(AuthContext);
@@ -27,16 +28,8 @@ const UserList = () => {
                   src={`http://localhost:3000/${item.profile_picture}`}
                   name={item.first_name + " " + item.last_name}
                 />
-                <Button
-                  variant="outlined"
-                  to={`/inbox/${item.id}`}
-                  onClick={() => {
-                    console.log("Clicked to Another User");
-                  }}
-                  component={Link}
-                >
-                  Message
-                </Button>
+                <MessageButton id={item.id} />
+
                 <Voting to={item.id} from={auth.id} />
               </Box>
             </>
