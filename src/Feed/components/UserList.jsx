@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Box, Button, Typography, TextField } from "@mui/material";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 
 import { AuthContext } from "../../Auth/AuthContext";
 import NameAvatar from "../../Shared/NameAvatar";
@@ -26,6 +27,16 @@ const UserList = () => {
                   src={`http://localhost:3000/${item.profile_picture}`}
                   name={item.first_name + " " + item.last_name}
                 />
+                <Button
+                  variant="outlined"
+                  to={`/inbox/${item.id}`}
+                  onClick={() => {
+                    console.log("Clicked to Another User");
+                  }}
+                  component={Link}
+                >
+                  Message
+                </Button>
                 <Voting to={item.id} from={auth.id} />
               </Box>
             </>

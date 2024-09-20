@@ -1,12 +1,13 @@
 import React, { useState, useCallback, useEffect, useContext } from "react";
 import Header from "./Shared/Header";
-import Message from "./Message/pages/Message";
+
 import { AuthContext } from "./Auth/AuthContext";
 
 import Footer from "./Shared/Footer";
 import Home from "./Home/Home";
 import About from "./About/About";
 import Market from "./Market/Market";
+import Inbox from "./Inbox/Inbox";
 
 import MainQuestionBank from "./QuestionBank/MainQuestionBank";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -75,7 +76,7 @@ const App = () => {
             <Route path="/notification" element={<Notification />} />
 
             <Route path="/feed/*" element={<Feed />} />
-            <Route path="/inbox" element={<Message />} />
+            <Route path="/inbox/*" element={<Inbox />} />
 
             <Route path="/market/*" element={<Market />} />
 
