@@ -8,7 +8,7 @@ import {
   TextField,
 } from "@mui/material";
 
-const Message = ({ sent }) => {
+const Message = ({ sent, message }) => {
   if (sent) {
     return (
       <Box
@@ -19,10 +19,7 @@ const Message = ({ sent }) => {
         borderRadius={1}
       >
         <Typography variant="body1" color="white.main">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur ipsum
-          numquam architecto. Lorem ipsum dolor sit amet consectetur,
-          adipisicing elit. At nulla sequi officia in quisquam iusto nemo harum
-          aliquid ut impedit.
+          {message}
         </Typography>
       </Box>
     );
@@ -35,7 +32,7 @@ const Message = ({ sent }) => {
       marginTop={2}
       borderRadius={1}
     >
-      <Typography variant="body1">Lorem ipsum dolor sit amet c</Typography>
+      <Typography variant="body1">{message}</Typography>
     </Box>
   );
 };

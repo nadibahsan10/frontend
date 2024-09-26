@@ -1,19 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Box, Button } from "@mui/material";
 
 import NameAvatar from "../../Shared/NameAvatar";
-const Indiviudal = () => {
+
+const Indiviudal = ({ name, profile, id }) => {
   return (
     <Button
       sx={{ marginTop: 2 }}
       component={Link}
-      to="reciverId"
+      to={id}
+      state={{ name, profile }}
       variant="outlined"
       fullWidth
     >
-      <Box padding={1}>
-        <NameAvatar />
+      <Box marginRight={10} padding={1}>
+        <NameAvatar name={name} src={profile} />
       </Box>
     </Button>
   );

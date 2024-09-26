@@ -8,6 +8,7 @@ import Home from "./Home/Home";
 import About from "./About/About";
 import Market from "./Market/Market";
 import Inbox from "./Inbox/Inbox";
+import MyProfile from "../myprofile/MyProfile";
 
 import MainQuestionBank from "./QuestionBank/MainQuestionBank";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -79,11 +80,11 @@ const App = () => {
             <Route path="/inbox/*" element={<Inbox />} />
 
             <Route path="/market/*" element={<Market />} />
-
+            <Route path="/myprofile/*" element={<MyProfile />} />
             <Route path="/about" element={<About />} />
             <Route path="/question/*" element={<MainQuestionBank />} />
           </Routes>
-          <Footer />
+          {/* <Footer /> */}
         </AuthContext.Provider>
       </Router>
       <ReactQueryDevtools initialIsOpen={false} />
