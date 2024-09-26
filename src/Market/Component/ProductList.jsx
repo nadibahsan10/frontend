@@ -9,10 +9,17 @@ import {
   Select,
   Grid,
 } from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
 
 import Product from "./Product";
+import getPosts from "../Functions/getPost";
 
 const ProductList = () => {
+  const { data, isLoading, error, isError } = useQuery({
+    queryKey: ["getPosts"],
+    queryFn: getPosts,
+  });
+
   return (
     <Box marginTop={2} borderRadius={1} padding={3} border="1px solid #D3D3D3">
       <Box display="flex" alignItems="center">
@@ -38,12 +45,9 @@ const ProductList = () => {
         </FormControl>
       </Box>
       <Grid container marginTop={2} spacing={2}>
-        <Product />
-
-        <Product />
-        <Product />
-        <Product />
-        <Product />
+        {data?.map((item) => {
+          return <Product />;
+        })}
       </Grid>
     </Box>
   );
