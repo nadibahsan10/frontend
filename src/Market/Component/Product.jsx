@@ -10,21 +10,22 @@ import {
 import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
 import { Link } from "react-router-dom";
 
-const Product = () => {
+const Product = ({item}) => {
+ const image_url= JSON.parse(item.image_url);
   return (
     <Grid item xs={4}>
       <Box backgroundColor="#F0F0F0" borderRadius={1}>
         <Avatar
           variant="rounded"
-          src="../profileImage.webp"
+          src={item.image_url}
           sx={{ height: 200, width: "100%" }}
         />
         <Box padding={2}>
           <Typography variant="h6" color="secondary">
-            Title
+            {item.title}
           </Typography>
           <Typography variant="h5" fontWeight={700}>
-            Tk 5000
+            Tk {item.price}
           </Typography>
           <Typography
             variant="body1"
@@ -37,12 +38,10 @@ const Product = () => {
             }}
             gutterBottom
           >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae,
-            temporibus! Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Similique, molestiae?
+            {item.description}
           </Typography>
           <Typography variant="body1" fontWeight={700} color="initial">
-            Fashion & life Style
+            Status : {item.status}
           </Typography>
         </Box>
         <Box display="flex" padding={2}>
@@ -52,7 +51,8 @@ const Product = () => {
           <Button
             sx={{ marginLeft: "auto" }}
             component={Link}
-            to="/market/individualproduct/1234"
+            to={`/market/individualproduct/${item.id}`}
+            state= { {item} }  
             variant="contained"
           >
             View

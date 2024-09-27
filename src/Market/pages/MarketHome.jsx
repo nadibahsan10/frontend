@@ -83,6 +83,14 @@ const MarketHome = () => {
           >
             My Products
           </Button>
+          <Button
+            component={Link}
+            to="jobmarket"
+            variant="outlined"
+            sx={{ color: "white" }}
+          >
+            Job Market
+          </Button>
         </Box>
       </Box>
 

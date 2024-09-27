@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Container, Grid, TextField, Button } from "@mui/material";
 import FilterMarket from "../Component/FilterMarket";
-import ProductList from "../Component/ProductList";
+import MyListings from "../Component/MyListings";
 
 const MyProduct = () => {
   return (
@@ -15,23 +15,16 @@ const MyProduct = () => {
             alignItems="center"
             justifyContent="start"
           >
-            <TextField
-              sx={{ width: "60%" }}
-              label="Search Product"
-              variant="outlined"
-            />
-            <Button sx={{ height: 55 }} variant="outlined">
-              Search
-            </Button>
+            <h4>My Listings</h4>
           </Box>
         </Grid>
         <Grid item xs={3}>
-          <FilterMarket />
+          <h1>SideNav</h1>
         </Grid>
         <Grid item xs={0.2}></Grid>
 
         <Grid item xs={8.8}>
-          <ProductList />
+          <MyListings />
         </Grid>
       </Grid>
     </Container>
