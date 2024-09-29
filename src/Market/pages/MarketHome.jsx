@@ -46,7 +46,7 @@ const MarketHome = () => {
           height: "300px",
           borderRadius: 1,
         }}
-        marginTop={2}
+        marginTop={1}
         display="flex"
         alignItems="center"
         justifyContent="center"

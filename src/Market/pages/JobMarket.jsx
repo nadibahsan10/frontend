@@ -22,8 +22,8 @@ function JobMarket() {
 
   return (
     <>
-      <Box component="section" sx={{ p: 2, border: "1px dashed grey" }}>
-        <Grid container spacing={2} alignItems="center">
+      <Box component="section" sx={{ p: 0 }}>
+        <Grid container spacing={1} alignItems="center">
           <Grid item xs={12}>
             <Typography variant="h5" gutterBottom sx={{ textAlign: "center" }}>
               JOB MARKET
@@ -51,34 +51,38 @@ function JobMarket() {
               Search
             </Button>
           </Grid>
-          <Grid item xs={12}>
+        </Grid>
+      </Box>
+
+      <Box  sx={{
+        width: '90%',       
+        margin: '0 auto',     
+      }}>
+        <Grid container spacing={3}>
+          <Grid item xs={5}>
+            
+          </Grid>
+          <Grid item xs={7}>
             <JobSortCategory />
           </Grid>
         </Grid>
       </Box>
 
-      <Grid container spacing={2} sx={{ height: "70vh", overflow: "hidden" }}>
-        <Grid item xs={1}></Grid>
+      <Box component="section" sx={{ p: 2 }}>
+        <Grid container spacing={2} sx={{ height: "70vh", overflow: "hidden" }}>
+          <Grid item xs={1}></Grid>
 
-      
-        <Grid
-          item
-          xs={4}
-          sx={{ overflow: "auto", maxHeight: "100%" }}  
-        >
-          <JobList onSelectJob={handleJobSelect} />
+          <Grid item xs={4} sx={{ overflow: "auto", maxHeight: "100%" }}>
+            <JobList onSelectJob={handleJobSelect} />
+          </Grid>
+
+          <Grid item xs={6} sx={{ overflow: "auto", maxHeight: "100%" }}>
+            <IndividualJobDescription job={selectedJob} />
+          </Grid>
+
+          <Grid item xs={1}></Grid>
         </Grid>
-
-        <Grid
-          item
-          xs={6}
-          sx={{ overflow: "auto", maxHeight: "100%" }}
-        >
-          <IndividualJobDescription job={selectedJob} />
-        </Grid>
-
-        <Grid item xs={1}></Grid>
-      </Grid>
+      </Box>
     </>
   );
 }

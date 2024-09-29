@@ -8,6 +8,8 @@ import ShareIcon from "@mui/icons-material/Share";
 import WorkIcon from "@mui/icons-material/Work";
 import ListIcon from "@mui/icons-material/List";
 import Button from "@mui/material/Button";
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import DownloadIcon from '@mui/icons-material/Download';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "#fff",
@@ -33,7 +35,7 @@ function IndividualJobDescription({ job }) {
     <Box sx={{ padding: 2 }}>
       <Grid container spacing={2}>
         <Grid item xs={10}>
-          <Typography variant="h4" color="text.secondary" gutterBottom>
+          <Typography variant="h6" color="text.secondary" gutterBottom>
             {job.company}
           </Typography>
         </Grid>
@@ -57,7 +59,7 @@ function IndividualJobDescription({ job }) {
         </Grid>
       </Grid>
 
-      <Typography variant="h3" gutterBottom>
+      <Typography variant="h5" gutterBottom>
         {job.title}
       </Typography>
 
@@ -136,8 +138,18 @@ function IndividualJobDescription({ job }) {
         About The Job :
       </Typography>
 
+      <Typography variant="body1" sx={{ marginTop: 2 }}>
+        <Typography component="span" sx={{ fontWeight: "bold" }}>
+          {job.company}
+        </Typography>{" "}
+        {/* Regular space */}
+        is looking for{" "}
+        <Typography component="span" sx={{ fontWeight: "bold" }}>
+          {job.title}
+        </Typography>
+        <br />
+      </Typography>
       <Typography variant="body2" sx={{ marginTop: 1 }}>
-        {job.company} is looking for {job.title} <br />
         <br />
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod autem
         odio distinctio, esse, saepe culpa quos eos repudiandae suscipit
@@ -219,13 +231,20 @@ function IndividualJobDescription({ job }) {
         consectetur adipisicing elit. Sequi nobis possimus repellat consequatur
         eveniet deleniti nulla magni, earum dolorum accusamus voluptate nihil
         exercitationem optio nam delectus laudantium, similique maiores cum.
+        <br />
+        <br />
+        Uploaded By @Sheikh Hasina 
       </Typography>
       <br />
+
       <br />
       <Button variant="contained" sx={{ marginRight: 2 }}>
-        Drop CV
+        <ShareIcon />
       </Button>
-      <Button variant="contained">Download PDF</Button>
+      <Button variant="contained" color="secondary" sx={{ marginRight: 2 }}>
+      <BookmarkIcon />
+      </Button>
+      <Button variant="contained"><DownloadIcon /></Button>
     </Box>
   );
 }
