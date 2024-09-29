@@ -141,7 +141,7 @@ function Header() {
             textAlign="center"
             component={Link}
             sx={{ textDecoration: "none", color: "inherit" }}
-            to="./myprofile"
+            to={`./myprofile/${auth.id}`}
           >
             My Account
           </Typography>
