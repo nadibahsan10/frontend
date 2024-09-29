@@ -8,7 +8,7 @@ import Home from "./Home/Home";
 import About from "./About/About";
 import Market from "./Market/Market";
 import Inbox from "./Inbox/Inbox";
-import MyProfile from "../myprofile/MyProfile";
+import MyProfile from "../src/myprofile/MyProfile";
 
 import MainQuestionBank from "./QuestionBank/MainQuestionBank";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
