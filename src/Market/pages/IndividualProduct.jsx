@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "../../Auth/AuthContext";
+
 import {
   Container,
   Box,
@@ -11,8 +14,22 @@ import SmartphoneIcon from "@mui/icons-material/Smartphone";
 
 import NameAvatar from "../../Shared/NameAvatar";
 import UpdateProduct from "../Component/UpdateProduct";
+import { useLocation } from "react-router-dom";
+import MessageButton from "../../Shared/MessageButton";
 
 const IndividualProduct = () => {
+  const auth = useContext(AuthContext);
+  const location = useLocation();
+  const { item } = location.state || {};  
+
+  console.log(location.state);  
+  console.log(item);            
+
+  if (!location.state) {
+    return <div>Product not found.</div>;  
+  }
+
+
   const [open, setOpen] = useState(false);
   const handleClose = () => {
     setOpen(false);
@@ -37,9 +54,9 @@ const IndividualProduct = () => {
                   2 Days Ago
                 </Typography>
                 <Typography variant="h6" gutterBottom>
-                  Iphone 15 Pro Max
+                {item.title}
                 </Typography>
-                <Typography variant="h4">Tk 100000</Typography>
+                <Typography variant="h4">Tk  {item.price}</Typography>
               </Box>
             </Box>
             <Box
@@ -52,18 +69,7 @@ const IndividualProduct = () => {
                 Description
               </Typography>
               <Typography variant="body1" color="initial">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
-                repellat et dolorum iste temporibus impedit, ratione sint ipsa
-                deleniti corrupti culpa harum quidem animi magni saepe autem
-                nemo facere quisquam beatae, doloribus debitis, blanditiis
-                voluptas? Blanditiis incidunt voluptas nemo quidem, est unde
-                temporibus maxime, magni earum, odio dolores reiciendis quasi
-                facere soluta hic debitis. Autem cumque error tenetur iste modi
-                temporibus ratione. Et unde non fugit explicabo est quos autem
-                deserunt dolorem praesentium exercitationem, eaque placeat
-                quidem iste at voluptas commodi dolor perferendis quia
-                consequatur possimus. Ex maxime vero corrupti omnis voluptatem
-                molestiae, magni pariatur quisquam nostrum temporibus ipsa quos?
+              {item.description}
               </Typography>
             </Box>
           </Grid>
@@ -102,13 +108,12 @@ const IndividualProduct = () => {
                 variant="body1"
                 sx={{ marginRight: 1 }}
               >
-                Lorem, ipsum dolor sit amet consectetur Lorem ipsum dolor sit
-                amet consectetur adipisicing elit. Ea aliquid esse assumenda eum
-                placeat voluptates tenetur a sint cumque incidunt?
+                {item.address}
               </Typography>
-              <Button variant="contained" sx={{ marginTop: 2 }}>
-                Message
-              </Button>
+              {
+                auth.id !== item.uid && <MessageButton id={item.uid} />
+              }
+              
 
               <Button
                 onClick={handleOpen}

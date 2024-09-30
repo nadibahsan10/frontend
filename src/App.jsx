@@ -8,6 +8,8 @@ import Home from "./Home/Home";
 import About from "./About/About";
 import Market from "./Market/Market";
 import Inbox from "./Inbox/Inbox";
+import MyProfile from "../myprofile/MyProfile";
+import Alumni from "./Alumni/Alumni";
 import MyProfile from "../src/myprofile/MyProfile";
 
 import MainQuestionBank from "./QuestionBank/MainQuestionBank";
@@ -81,8 +83,10 @@ const App = () => {
 
             <Route path="/market/*" element={<Market />} />
             <Route path="/myprofile/*" element={<MyProfile />} />
-            <Route path="/about" element={<About />} />
+            
             <Route path="/question/*" element={<MainQuestionBank />} />
+            <Route path="/alumni/*" element={<Alumni />} />
+            <Route path="/about" element={<About />} />
           </Routes>
           {/* <Footer /> */}
         </AuthContext.Provider>

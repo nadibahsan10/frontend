@@ -46,7 +46,7 @@ const ProductList = () => {
       </Box>
       <Grid container marginTop={2} spacing={2}>
         {data?.map((item) => {
-          return <Product />;
+          return <Product item={item}/>;
         })}
       </Grid>
     </Box>

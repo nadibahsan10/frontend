@@ -46,7 +46,7 @@ const MarketHome = () => {
           height: "300px",
           borderRadius: 1,
         }}
-        marginTop={2}
+        marginTop={1}
         display="flex"
         alignItems="center"
         justifyContent="center"
@@ -82,6 +82,14 @@ const MarketHome = () => {
             sx={{ color: "white" }}
           >
             My Products
+          </Button>
+          <Button
+            component={Link}
+            to="jobmarket"
+            variant="outlined"
+            sx={{ color: "white" }}
+          >
+            Job Market
           </Button>
         </Box>
       </Box>
