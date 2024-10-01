@@ -7,9 +7,9 @@ import CircularProgress from "@mui/material/CircularProgress";
 import "./LoginMode.css";
 import axios from "axios";
 
-import ErrorModal from "./ErrorModal";
+import ErrorModal from "../Shared/ErrorModal";
 import { AuthContext } from "../Auth/AuthContext";
-const LoginMode = (props) => {
+const Login = (props) => {
   const auth = useContext(AuthContext);
 
   const [isLoading, setIsloading] = useState(false);
@@ -154,4 +154,4 @@ const LoginMode = (props) => {
   );
 };
 
-export default LoginMode;
+export default Login;

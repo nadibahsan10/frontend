@@ -4,6 +4,7 @@ import HubIcon from "@mui/icons-material/Hub";
 import ContentPasteSearchIcon from "@mui/icons-material/ContentPasteSearch";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 import "./Home.css";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -16,7 +17,7 @@ const Home = () => {
             width: "100%",
             position: "absolute",
             top: "0px",
-            zIndex: "-1",
+            zIndex: "0",
           }}
           alt=""
         />
@@ -25,6 +26,7 @@ const Home = () => {
             height: "102vh",
             width: "100%",
             backgroundColor: "rgba(0, 0, 0, 0.692)",
+            zIndex: 1,
           }}
           display="flex"
           alignItems="center"
@@ -43,8 +45,13 @@ const Home = () => {
           <br />
           <br />
 
-          <Button variant="contained" sx={{ height: "60px", width: "200px" }}>
-            LEARN MORE
+          <Button
+            component={Link}
+            to="./signup"
+            variant="contained"
+            sx={{ height: "60px", width: "200px", zIndex: 2 }}
+          >
+            Get Started
           </Button>
         </Box>
         <Box>

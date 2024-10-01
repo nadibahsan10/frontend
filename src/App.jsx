@@ -8,9 +8,11 @@ import Home from "./Home/Home";
 import About from "./About/About";
 import Market from "./Market/Market";
 import Inbox from "./Inbox/Inbox";
-import MyProfile from "../myprofile/MyProfile";
+import Admin from "./Admin/Admin";
 import Alumni from "./Alumni/Alumni";
 import MyProfile from "../src/myprofile/MyProfile";
+import Login from "./Login/Login";
+import Signup from "./Signup/Signup";
 
 import MainQuestionBank from "./QuestionBank/MainQuestionBank";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -76,14 +78,17 @@ const App = () => {
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
             <Route path="/notification" element={<Notification />} />
 
             <Route path="/feed/*" element={<Feed />} />
+            <Route path="/admin/*" element={<Admin />} />
             <Route path="/inbox/*" element={<Inbox />} />
 
             <Route path="/market/*" element={<Market />} />
             <Route path="/myprofile/*" element={<MyProfile />} />
-            
+
             <Route path="/question/*" element={<MainQuestionBank />} />
             <Route path="/alumni/*" element={<Alumni />} />
             <Route path="/about" element={<About />} />

@@ -109,10 +109,6 @@ const BasicInformation = ({ user }) => {
             </Typography>
             <Grid container spacing={2}>
               <Grid item xs={6}>
-                <Typography variant="subtitle1">University/College:</Typography>
-                <Typography color="textSecondary">{user.university}</Typography>
-              </Grid>
-              <Grid item xs={6}>
                 <Typography variant="subtitle1">Degree/Program:</Typography>
                 <Typography color="textSecondary">{user.degree}</Typography>
               </Grid>

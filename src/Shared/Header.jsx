@@ -24,7 +24,7 @@ import { GuestMainNav, StudentMainNav, AlumniMainNav } from "./MainNavigation";
 import { Student, Guest, Alumni } from "./Navigation";
 
 import "./Header.css";
-import Login from "./Login";
+// import Login from "./Login";
 
 function Header() {
   const location = useLocation();
@@ -166,26 +166,6 @@ function Header() {
 
   return (
     <>
-      <Modal open={isLoading}>
-        <Box
-          display="flex"
-          alignItems="center"
-          height="100vh"
-          justifyContent="center"
-        >
-          <CircularProgress size={100} />
-        </Box>
-      </Modal>
-
-      <Modal
-        open={loginModal}
-        aria-labelledby="login-modal-title"
-        aria-describedby="login-modal-description"
-      >
-        <Box>
-          <Login onClose={closeLoginModal} />
-        </Box>
-      </Modal>
       <AppBar
         position="static"
         sx={{
@@ -283,20 +263,34 @@ function Header() {
             >
               {auth.role === "student" && <StudentMainNav />}
               {auth.role === "alumni" && <AlumniMainNav />}
-              {auth.role === null && <GuestMainNav />}
+              {auth.role === "guest" && <GuestMainNav />}
+              {!auth.isLoggedIn && <GuestMainNav />}
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
               {auth.isLoggedIn ? (
                 loginContent
               ) : (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={openLoginModal}
-                >
-                  JOIN
-                </Button>
+                <>
+                  <Button
+                    variant="contained"
+                    color="white"
+                    to="./login"
+                    component={Link}
+                    sx={{ color: "black.main" }}
+                  >
+                    Login
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    to="./signup"
+                    component={Link}
+                    sx={{ ml: 2 }}
+                  >
+                    Get Started
+                  </Button>
+                </>
               )}
             </Box>
           </Toolbar>

@@ -99,14 +99,14 @@ function AlumniHome() {
         <Typography variant="h4" sx={{ textAlign: "center", padding: "30px" }}>
           Welcome to UIU Alumni Portal
         </Typography>
-        <Grid container spacing={2} sx={{ }}>
+        <Grid container spacing={2} sx={{}}>
           <Grid item xs={3} sx={{ padding: 4 }}>
             <MyList />
           </Grid>
 
           {/*main body*/}
 
-          <Grid item xs={7} sx={{  padding: 2 }}>
+          <Grid item xs={7} sx={{ padding: 2 }}>
             <TextField
               id="outlined-basic"
               label="Search Alumni here ..."
@@ -125,9 +125,9 @@ function AlumniHome() {
             >
               Profiles
             </Typography>
-            <Container sx={{ padding: 2 ,maxHeight: '700px', 
-            overflowY: 'auto',
-            }}>
+            <Container
+              sx={{ padding: 2, maxHeight: "700px", overflowY: "auto" }}
+            >
               <Grid container spacing={2}>
                 {alumniData.map((alumni) => (
                   <Grid item key={alumni.id} xs={12} sm={6} md={4}>
@@ -188,6 +188,9 @@ function AlumniHome() {
               </Grid>
             </Container>
           </Grid>
+          {/* <Routes>
+            <Route path="/profiles" element= />
+          </Routes> */}
           <Grid item xs={2} sx={{ backgroundColor: "white", padding: 2 }}>
             <Typography variant="h6">Additional Content</Typography>
             <Typography>

@@ -8,8 +8,8 @@ import ShareIcon from "@mui/icons-material/Share";
 import WorkIcon from "@mui/icons-material/Work";
 import ListIcon from "@mui/icons-material/List";
 import Button from "@mui/material/Button";
-import BookmarkIcon from '@mui/icons-material/Bookmark';
-import DownloadIcon from '@mui/icons-material/Download';
+import BookmarkIcon from "@mui/icons-material/Bookmark";
+import DownloadIcon from "@mui/icons-material/Download";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "#fff",
@@ -158,82 +158,10 @@ function IndividualJobDescription({ job }) {
         Voluptatibus earum reiciendis eaque dignissimos, distinctio atque iste
         sed dolore placeat assumenda deleniti aliquam explicabo? Ut repudiandae
         veniam accusantium a, repellendus assumenda. Lorem ipsum dolor sit amet,
-        consectetur adipisicing elit. Sequi nobis possimus repellat consequatur
-        eveniet deleniti nulla magni, earum dolorum accusamus voluptate nihil
-        exercitationem optio nam delectus laudantium, similique maiores cum.
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod autem
-        odio distinctio, esse, saepe culpa quos eos repudiandae suscipit
-        reiciendis corporis ab dolores exercitationem sunt nam vel delectus
-        voluptate non! Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-        Voluptatibus earum reiciendis eaque dignissimos, distinctio atque iste
-        sed dolore placeat assumenda deleniti aliquam explicabo? Ut repudiandae
-        veniam accusantium a, repellendus assumenda. Lorem ipsum dolor sit amet,
-        consectetur adipisicing elit. Sequi nobis possimus repellat consequatur
-        eveniet deleniti nulla magni, earum dolorum accusamus voluptate nihil
-        exercitationem optio nam delectus laudantium, similique maiores cum.
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod autem
-        odio distinctio, esse, saepe culpa quos eos repudiandae suscipit
-        reiciendis corporis ab dolores exercitationem sunt nam vel delectus
-        voluptate non! Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-        Voluptatibus earum reiciendis eaque dignissimos, distinctio atque iste
-        sed dolore placeat assumenda deleniti aliquam explicabo? Ut repudiandae
-        veniam accusantium a, repellendus assumenda. Lorem ipsum dolor sit amet,
-        consectetur adipisicing elit. Sequi nobis possimus repellat consequatur
-        eveniet deleniti nulla magni, earum dolorum accusamus voluptate nihil
-        exercitationem optio nam delectus laudantium, similique maiores cum.
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod autem
-        odio distinctio, esse, saepe culpa quos eos repudiandae suscipit
-        reiciendis corporis ab dolores exercitationem sunt nam vel delectus
-        voluptate non! Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-        Voluptatibus earum reiciendis eaque dignissimos, distinctio atque iste
-        sed dolore placeat assumenda deleniti aliquam explicabo? Ut repudiandae
-        veniam accusantium a, repellendus assumenda. Lorem ipsum dolor sit amet,
-        consectetur adipisicing elit. Sequi nobis possimus repellat consequatur
-        eveniet deleniti nulla magni, earum dolorum accusamus voluptate nihil
-        exercitationem optio nam delectus laudantium, similique maiores cum.
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod autem
-        odio distinctio, esse, saepe culpa quos eos repudiandae suscipit
-        reiciendis corporis ab dolores exercitationem sunt nam vel delectus
-        voluptate non! Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-        Voluptatibus earum reiciendis eaque dignissimos, distinctio atque iste
-        sed dolore placeat assumenda deleniti aliquam explicabo? Ut repudiandae
-        veniam accusantium a, repellendus assumenda. Lorem ipsum dolor sit amet,
-        consectetur adipisicing elit. Sequi nobis possimus repellat consequatur
-        eveniet deleniti nulla magni, earum dolorum accusamus voluptate nihil
-        exercitationem optio nam delectus laudantium, similique maiores cum.
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod autem
-        odio distinctio, esse, saepe culpa quos eos repudiandae suscipit
-        reiciendis corporis ab dolores exercitationem sunt nam vel delectus
-        voluptate non! Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-        Voluptatibus earum reiciendis eaque dignissimos, distinctio atque iste
-        sed dolore placeat assumenda deleniti aliquam explicabo? Ut repudiandae
-        veniam accusantium a, repellendus assumenda. Lorem ipsum dolor sit amet,
-        consectetur adipisicing elit. Sequi nobis possimus repellat consequatur
-        eveniet deleniti nulla magni, earum dolorum accusamus voluptate nihil
-        exercitationem optio nam delectus laudantium, similique maiores cum.
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod autem
-        odio distinctio, esse, saepe culpa quos eos repudiandae suscipit
-        reiciendis corporis ab dolores exercitationem sunt nam vel delectus
-        voluptate non! Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-        Voluptatibus earum reiciendis eaque dignissimos, distinctio atque iste
-        sed dolore placeat assumenda deleniti aliquam explicabo? Ut repudiandae
-        veniam accusantium a, repellendus assumenda. Lorem ipsum dolor sit amet,
-        consectetur adipisicing elit. Sequi nobis possimus repellat consequatur
-        eveniet deleniti nulla magni, earum dolorum accusamus voluptate nihil
-        exercitationem optio nam delectus laudantium, similique maiores cum.
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod autem
-        odio distinctio, esse, saepe culpa quos eos repudiandae suscipit
-        reiciendis corporis ab dolores exercitationem sunt nam vel delectus
-        voluptate non! Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-        Voluptatibus earum reiciendis eaque dignissimos, distinctio atque iste
-        sed dolore placeat assumenda deleniti aliquam explicabo? Ut repudiandae
-        veniam accusantium a, repellendus assumenda. Lorem ipsum dolor sit amet,
-        consectetur adipisicing elit. Sequi nobis possimus repellat consequatur
-        eveniet deleniti nulla magni, earum dolorum accusamus voluptate nihil
-        exercitationem optio nam delectus laudantium, similique maiores cum.
+        
         <br />
         <br />
-        Uploaded By @Sheikh Hasina 
+        Uploaded By @Sheikh Hasina
       </Typography>
       <br />
 
@@ -242,9 +170,11 @@ function IndividualJobDescription({ job }) {
         <ShareIcon />
       </Button>
       <Button variant="contained" color="secondary" sx={{ marginRight: 2 }}>
-      <BookmarkIcon />
+        <BookmarkIcon />
       </Button>
-      <Button variant="contained"><DownloadIcon /></Button>
+      <Button variant="contained">
+        <DownloadIcon />
+      </Button>
     </Box>
   );
 }
