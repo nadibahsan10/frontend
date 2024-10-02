@@ -118,6 +118,7 @@ const Login = () => {
                   variant="contained"
                   color="white"
                   size="large"
+                  to="/signup"
                   sx={{ width: "100%" }}
                 >
                   Get Started

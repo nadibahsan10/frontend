@@ -12,6 +12,9 @@ const useInput = (initialState) => {
           },
         };
       }
+      case "AUTO": {
+        return { ...state, city: action.value };
+      }
       case "IMAGE": {
         return {
           ...state,
@@ -38,6 +41,13 @@ const useInput = (initialState) => {
     }
   };
 
+  const handleCityChange = (event, value) => {
+    if (value) {
+      dispatch({ type: "AUTO", value: value });
+    } else {
+      dispatch({ type: "AUTO", value: null });
+    }
+  };
   const updateImage = (value) => {
     const dataTransfer = new DataTransfer();
     value.forEach((file) => {
@@ -79,6 +89,7 @@ const useInput = (initialState) => {
     uploadImage,
     updateImage,
     handleCheckBox,
+    handleCityChange,
     reset,
   };
 };

@@ -5,7 +5,7 @@ import { CircularProgress } from "@mui/material";
 
 import useFetch from "../CustomHooks/useFetch";
 
-export default function Location() {
+export default function Location({ value, change }) {
   const { data, isLoading, isError, error } = useFetch({
     queryKey: ["getlocation"],
     url: "http://localhost:3000/auth/getlocation",
@@ -16,9 +16,10 @@ export default function Location() {
   }
   return (
     <Autocomplete
-      value="Dhaka"
+      value={value}
+      onChange={change}
       disablePortal
-      options={data?.map((item) => item.city_name)}
+      options={data}
       renderInput={(params) => <TextField {...params} label="City" />}
     />
   );

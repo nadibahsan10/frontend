@@ -7,6 +7,15 @@ const PreviewImage = ({ images, update }) => {
   if (images === null) {
     return;
   }
+  if (Array.from(images).length === 1) {
+    return (
+      <Avatar
+        sx={{ height: 200, width: 200 }}
+        src={URL.createObjectURL(Array.from(images)[0])}
+        variant="rounded"
+      />
+    );
+  }
 
   const handleDelete = (index) => {
     // Convert FileList to array, remove the image, and update the state
