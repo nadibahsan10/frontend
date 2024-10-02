@@ -96,19 +96,20 @@ function Header() {
   const loginContent = (
     <>
       <div className="header-avatar">
-        <div style={{ marginRight: "20px" }}>
-          <Tooltip title="Messages">
-            <IconButton component={Link} to="/inbox">
-              <MessageIcon color="primary" />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Notifications">
-            <IconButton component={Link} to="/notification">
-              <NotificationsIcon color="primary" />
-            </IconButton>
-          </Tooltip>
-        </div>
-
+        {auth.role !== "admin" && (
+          <div style={{ marginRight: "20px" }}>
+            <Tooltip title="Messages">
+              <IconButton component={Link} to="/inbox">
+                <MessageIcon color="primary" />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Notifications">
+              <IconButton component={Link} to="/notification">
+                <NotificationsIcon color="primary" />
+              </IconButton>
+            </Tooltip>
+          </div>
+        )}
         <Typography sx={sx}>{auth.name}</Typography>
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
           <Avatar
@@ -133,22 +134,23 @@ function Header() {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        <MenuItem key="1" onClick={handleCloseUserMenu}>
-          <Typography textAlign="center">Activity</Typography>
-        </MenuItem>
-        <MenuItem key="2" onClick={handleCloseUserMenu}>
-          <Typography
-            textAlign="center"
-            component={Link}
-            sx={{ textDecoration: "none", color: "inherit" }}
-            to={`./myprofile/${auth.id}`}
-          >
-            My Account
-          </Typography>
-        </MenuItem>
-        <MenuItem key="3" onClick={handleCloseUserMenu}>
-          <Typography textAlign="center">Help & Support</Typography>
-        </MenuItem>
+        {auth.role !== "admin" && (
+          <>
+            <MenuItem key="2" onClick={handleCloseUserMenu}>
+              <Typography
+                textAlign="center"
+                component={Link}
+                sx={{ textDecoration: "none", color: "inherit" }}
+                to={`./myprofile/${auth.id}`}
+              >
+                My Account
+              </Typography>
+            </MenuItem>
+            <MenuItem key="3" onClick={handleCloseUserMenu}>
+              <Typography textAlign="center">Help & Support</Typography>
+            </MenuItem>
+          </>
+        )}
         <MenuItem
           key="4"
           onClick={() => {

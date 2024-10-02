@@ -37,7 +37,11 @@ const Login = () => {
         localStorage.setItem("token", JSON.stringify(data));
         const user = JSON.parse(atob(data.split(".")[1]));
         auth.login(user);
-        navigate("/");
+        if (user.role === "admin") {
+          navigate("/admin");
+        } else {
+          navigate("/");
+        }
       },
     });
   };

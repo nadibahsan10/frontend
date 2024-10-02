@@ -57,7 +57,7 @@ const useFetch = ({
   });
 
   // Use `useMutation` for non-GET requests (POST, PUT, DELETE)
-  const mutation = useMutation(fetcher);
+  const mutation = useMutation({ mutationFn: fetcher });
 
   // Return the appropriate result
   return method === "GET" ? query : mutation;
