@@ -38,7 +38,7 @@ const Login = () => {
         const user = JSON.parse(atob(data.split(".")[1]));
         auth.login(user);
         if (user.role === "admin") {
-          navigate("/admin/dashbord");
+          navigate("/admin");
         } else {
           navigate("/");
         }

@@ -10,8 +10,6 @@ import {
 import { NavLink, Routes, Route } from "react-router-dom";
 
 import AdminUsers from "./AdminUsers";
-import AdminQuesions from "./AdminQuestions";
-import Dashboard from "./Dashboard";
 
 const AdminHome = () => {
   return (
@@ -29,34 +27,6 @@ const AdminHome = () => {
           }}
         >
           {/* Navigation List */}
-          <ListItem disablePadding>
-            <NavLink
-              to="./dashbord"
-              style={({ isActive }) => ({
-                textDecoration: "none",
-                width: "100%",
-              })}
-            >
-              {({ isActive }) => (
-                <ListItemButton
-                  sx={{
-                    width: "100%",
-                    backgroundColor: isActive
-                      ? "secondary.main"
-                      : "transparent",
-                    borderRadius: 1,
-                    "&:hover": {
-                      backgroundColor: isActive
-                        ? "secondary.main"
-                        : "primary.dark",
-                    },
-                  }}
-                >
-                  <ListItemText primary="Dashbord" sx={{ color: "#fff" }} />
-                </ListItemButton>
-              )}
-            </NavLink>
-          </ListItem>
           <List>
             <ListItem disablePadding>
               <NavLink
@@ -89,7 +59,7 @@ const AdminHome = () => {
 
             <ListItem disablePadding>
               <NavLink
-                to="./questions"
+                to="./settings"
                 style={({ isActive }) => ({
                   textDecoration: "none",
                   width: "100%",
@@ -110,7 +80,36 @@ const AdminHome = () => {
                       },
                     }}
                   >
-                    <ListItemText primary="Questions" sx={{ color: "#fff" }} />
+                    <ListItemText primary="Settings" sx={{ color: "#fff" }} />
+                  </ListItemButton>
+                )}
+              </NavLink>
+            </ListItem>
+
+            <ListItem disablePadding>
+              <NavLink
+                to="./reports"
+                style={({ isActive }) => ({
+                  textDecoration: "none",
+                  width: "100%",
+                })}
+              >
+                {({ isActive }) => (
+                  <ListItemButton
+                    sx={{
+                      width: "100%",
+                      backgroundColor: isActive
+                        ? "secondary.main"
+                        : "transparent",
+                      borderRadius: 1,
+                      "&:hover": {
+                        backgroundColor: isActive
+                          ? "secondary.main"
+                          : "primary.dark",
+                      },
+                    }}
+                  >
+                    <ListItemText primary="Reports" sx={{ color: "#fff" }} />
                   </ListItemButton>
                 )}
               </NavLink>
@@ -124,10 +123,7 @@ const AdminHome = () => {
       {/* Main Content */}
       <Grid item xs={9}>
         <Routes>
-          <Route path="dashbord" element={<Dashboard />} />
-
           <Route path="users" element={<AdminUsers />} />
-          <Route path="questions" element={<AdminQuesions />} />
         </Routes>
       </Grid>
     </Grid>

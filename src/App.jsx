@@ -70,7 +70,6 @@ const App = () => {
             id: id,
             name: name,
             profilePicture: profilePicture,
-            setProfilePicture: setProfilePicture,
             role: role,
             login: login,
             logout: logout,
