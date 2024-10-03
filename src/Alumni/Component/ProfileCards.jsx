@@ -1,166 +1,181 @@
-import React, { useEffect } from "react";
-
+import React from 'react'
 import {
-  Box,
-  Container,
-  Typography,
-  Grid,
-  Card,
-  CardContent,
-  Avatar,
-  Button,
-  LinearProgress,
-} from "@mui/material";
-import useFetch from "../../CustomHooks/useFetch";
-import { Link } from "react-router-dom"; // Import Link from React Router
-
-function ProfileCards({ searchQuery, batch, department }) {
-  const { data, isLoading, isError, error } = useFetch({
-    url: "http://localhost:3000/alumni/getposts",
-    queryKey: ["alumniinfo",searchQuery, batch, department],
-    params: {
-      searchQuery, batch, department
-    }
-  });
-
-  // Handle loading state
-  if (isLoading) {
-    return (
-      <Box
-        sx={{
-          width: "60%",
-          margin: "4rem auto",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          textAlign: "center",
-        }}
-      >
-        <LinearProgress sx={{ width: "100%" }} />
-        <Typography variant="h6" sx={{ marginTop: 2 }}>
-          Loading Alumni Profiles...
-        </Typography>
-      </Box>
-    );
-  }
-
-  if (isError) {
-    return <Typography>Error: {error.message}</Typography>;
-  }
-
- 
-
-  // Handle no results found
-  if (data.length === 0) {
-    return (
-      <Typography variant="h6" sx={{ textAlign: "center", padding: 2 }}>
-        No alumni found matching your criteria.
-      </Typography>
-    );
-  }
-
-  return (
-    <Box sx={{ width: "100%" }}>
-      <Typography
-        variant="h6"
-        sx={{
-          padding: "2px 15px",
-          borderRadius: "5px",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          textAlign: "center",
-          backgroundColor: "#780000",
-          color: "White",
-          marginBottom: 2,
-        }}
-      >
-        Alumni Profiles
-      </Typography>
-      <Container
-        sx={{
-          padding: 2,
-          minHeight: "90vh",
-          overflowY: "auto",
-          border: "2px solid #00000030",
-          borderRadius: "8px",
-        }}
-      >
-        <Grid container spacing={2}>
-          {data.map((alumni) => (
-            <Grid item key={alumni.id} xs={12} sm={6} md={4}>
-              <Card
-                sx={{
-                  height: "100%",
-                  transition: "transform 0.3s",
-                  borderRadius: "15px",
-                  boxShadow: 3,
-                  "&:hover": {
-                    transform: "scale(1.02)",
-                  },
-                }}
+    Container,
+    Box,
+    Typography,
+    TextField,
+    Button,
+    Grid,
+    Card,
+    CardContent,
+    CardMedia,
+  } from "@mui/material";
+const alumniData = [
+    {
+      id: 1,
+      name: "MD Nadib Ahsan",
+      company: "Google LLC",
+      image: "https://via.placeholder.com/100",
+    },
+    {
+      id: 2,
+      name: "S.M. Shahriar Rahman Maruph",
+      company: "Microsoft",
+      image: "https://via.placeholder.com/100",
+    },
+    {
+      id: 3,
+      name: "Mohiuddin Sadik",
+      company: "Adobe",
+      image: "https://via.placeholder.com/100",
+    },
+    {
+      id: 4,
+      name: "MD Nadib Ahsan",
+      company: "Google LLC",
+      image: "https://via.placeholder.com/100",
+    },
+    {
+      id: 5,
+      name: "S.M. Shahriar Rahman Maruph",
+      company: "Microsoft",
+      image: "https://via.placeholder.com/100",
+    },
+    {
+      id: 6,
+      name: "Mohiuddin Sadik",
+      company: "Adobe",
+      image: "https://via.placeholder.com/100",
+    },
+    {
+      id: 1,
+      name: "MD Nadib Ahsan",
+      company: "Google LLC",
+      image: "https://via.placeholder.com/100",
+    },
+    {
+      id: 2,
+      name: "S.M. Shahriar Rahman Maruph",
+      company: "Microsoft",
+      image: "https://via.placeholder.com/100",
+    },
+    {
+      id: 3,
+      name: "Mohiuddin Sadik",
+      company: "Adobe",
+      image: "https://via.placeholder.com/100",
+    },
+    {
+      id: 4,
+      name: "MD Nadib Ahsan",
+      company: "Google LLC",
+      image: "https://via.placeholder.com/100",
+    },
+    {
+      id: 5,
+      name: "S.M. Shahriar Rahman Maruph",
+      company: "Microsoft",
+      image: "https://via.placeholder.com/100",
+    },
+    {
+      id: 6,
+      name: "Mohiuddin Sadik",
+      company: "Adobe",
+      image: "https://via.placeholder.com/100",
+    },
+  ];
+  import CustomImage from "../Image/250929134_4408229885970439_9204173520367789220_n.jpg"
+  
+function ProfileCards() {
+  return (<>
+    <TextField
+    id="outlined-basic"
+    label="Search Alumni here ..."
+    variant="outlined"
+    fullWidth
+  />
+  <Typography
+    variant="h6"
+    sx={{
+      marginTop: "1%", 
+      padding: "2px 15px", 
+      borderRadius: "5px",
+      display: "flex", //
+      justifyContent: "center",
+      alignItems: "center",
+      textAlign: "center", 
+      backgroundColor: "#780000",
+      color: "White", // Text color
+      
+      marginBottom: '1%'
+    }}
+  >
+    Alumni Profiles 
+  </Typography>
+  <Container
+    sx={{ padding: 2, maxHeight: "700px", overflowY: "auto" ,border: "2px solid #00000030",borderRadius: "8px",}}
+  >
+    <Grid container spacing={2}>
+      {alumniData.map((alumni) => (
+        <Grid item key={alumni.id} xs={12} sm={6} md={4}>
+          <Card
+            sx={{
+              height: "100%",
+              transition: "transform 0.3s",
+              borderRadius: "15px",
+              boxShadow: 3,
+              "&:hover": {
+                transform: "scale(1.02)",
+              },
+            }}
+          >
+            <CardMedia
+              component="img"
+              image={CustomImage}
+              alt={alumni.name}
+              sx={{
+                borderRadius: "50%",
+                margin: "16px auto",
+                width: "100px",
+                height: "100px",
+                objectFit: "cover",
+              }}
+            />
+            <CardContent
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                height: "120px",
+                textAlign: "center",
+              }}
+            >
+              <div>
+                <Typography
+                  variant="body2"
+                  sx={{ fontWeight: "bold", marginBottom: 1 }}
+                >
+                  {alumni.name}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {alumni.company}
+                </Typography>
+              </div>
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ marginTop: "auto" }}
               >
-                <Link
-                  to={`/myprofile/${alumni.id}`}
-                  style={{ textDecoration: "none" }}
-                >
-                  <Avatar
-                    src={`http://localhost:3000/${alumni.profile_picture}`}
-                    alt={alumni.first_name}
-                    sx={{
-                      margin: "16px auto",
-                      width: "100px",
-                      height: "100px",
-                    }}
-                  />
-                </Link>
-                <CardContent
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    height: "150px",
-                    textAlign: "center",
-                  }}
-                >
-                  <Link
-                    to={`/myprofile/${alumni.id}`}
-                    style={{ textDecoration: "none" }}
-                  >
-                    <div>
-                      <Typography
-                        variant="body2"
-                        sx={{ fontWeight: "bold", marginBottom: 1, color: 'primary.main' }}
-                      >
-                        {alumni.first_name} {alumni.last_name}
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        {alumni.batch}
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        {alumni.name}
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        {alumni.company}
-                      </Typography>
-                    </div>
-                  </Link>
-
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    sx={{ marginTop: "auto" }}
-                  >
-                    Connect
-                  </Button>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
+                Connect
+              </Button>
+            </CardContent>
+          </Card>
         </Grid>
-      </Container>
-    </Box>
-  );
+      ))}
+    </Grid>
+  </Container>
+  </>
+  )
 }
 
-export default ProfileCards;
+export default ProfileCards

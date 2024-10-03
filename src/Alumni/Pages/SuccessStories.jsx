@@ -1,38 +1,98 @@
 // SuccessStories.js
 import React, { useState } from "react";
-import { Box, Typography, IconButton, Grid ,LinearProgress}  from "@mui/material";
+import { Box, Typography, IconButton, Grid } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add"; // Import the MUI icon
 import StoryCard from "../Component/Storycards";
-import useFetch from "../../CustomHooks/useFetch"; 
-
 const SuccessStories = () => {
-  const { data, isLoading, isError, error } = useFetch({
-    url: "http://localhost:3000/alumni/getstories",
-    queryKey: ["alumnistories"],
-  });
+  const [stories, setStories] = useState([
+    {
+      id: 1,
+      title: "From Student to CEO",
+      content: "Learn how I started my own company after graduation.",
+      author: "John Doe",
+      image:
+        "https://th.bing.com/th/id/OIP.Jnd2U7TsL1rpODJSLuxjtwHaE8?w=999&h=667&rs=1&pid=ImgDetMain", // Replace with actual image URL
+      favorites: 12,
+    },
+    {
+      id: 2,
+      title: "Breaking Barriers in Tech",
+      content: "My journey as a woman in tech and how I overcame challenges.",
+      author: "Jane Smith",
+      image: "https://latviv.com/wp-content/uploads/2020/04/SuccessStory.jpg", // Replace with actual image URL
+      favorites: 8,
+    },
+    {
+      id: 1,
+      title: "From Student to CEO",
+      content: "Learn how I started my own company after graduation.",
+      author: "John Doe",
+      image:
+        "https://th.bing.com/th/id/OIP.Jnd2U7TsL1rpODJSLuxjtwHaE8?w=999&h=667&rs=1&pid=ImgDetMain", // Replace with actual image URL
+      favorites: 12,
+    },
+    {
+      id: 2,
+      title: "Breaking Barriers in Tech",
+      content: "My journey as a woman in tech and how I overcame challenges.",
+      author: "Jane Smith",
+      image: "https://latviv.com/wp-content/uploads/2020/04/SuccessStory.jpg", // Replace with actual image URL
+      favorites: 8,
+    },
+    {
+      id: 1,
+      title: "From Student to CEO",
+      content: "Learn how I started my own company after graduation.",
+      author: "John Doe",
+      image:
+        "https://th.bing.com/th/id/OIP.Jnd2U7TsL1rpODJSLuxjtwHaE8?w=999&h=667&rs=1&pid=ImgDetMain", // Replace with actual image URL
+      favorites: 12,
+    },
+    {
+      id: 2,
+      title: "Breaking Barriers in Tech",
+      content: "My journey as a woman in tech and how I overcame challenges.",
+      author: "Jane Smith",
+      image: "https://latviv.com/wp-content/uploads/2020/04/SuccessStory.jpg", // Replace with actual image URL
+      favorites: 8,
+    },
+    {
+      id: 1,
+      title: "From Student to CEO",
+      content: "Learn how I started my own company after graduation.",
+      author: "John Doe",
+      image:
+        "https://th.bing.com/th/id/OIP.Jnd2U7TsL1rpODJSLuxjtwHaE8?w=999&h=667&rs=1&pid=ImgDetMain", // Replace with actual image URL
+      favorites: 12,
+    },
+    {
+      id: 2,
+      title: "Breaking Barriers in Tech",
+      content: "My journey as a woman in tech and how I overcame challenges.",
+      author: "Jane Smith",
+      image: "https://latviv.com/wp-content/uploads/2020/04/SuccessStory.jpg", // Replace with actual image URL
+      favorites: 8,
+    },
+    {
+      id: 1,
+      title: "From Student to CEO",
+      content: "Learn how I started my own company after graduation.",
+      author: "John Doe",
+      image:
+        "https://th.bing.com/th/id/OIP.Jnd2U7TsL1rpODJSLuxjtwHaE8?w=999&h=667&rs=1&pid=ImgDetMain", // Replace with actual image URL
+      favorites: 12,
+    },
+    {
+      id: 2,
+      title: "Breaking Barriers in Tech",
+      content: "My journey as a woman in tech and how I overcame challenges.",
+      author: "Jane Smith",
+      image: "https://latviv.com/wp-content/uploads/2020/04/SuccessStory.jpg", // Replace with actual image URL
+      favorites: 8,
+    },
 
-  // Handle loading state
-  if (isLoading) {
-    return (
-      <Box sx={{ 
-        width: '60%', 
-        margin: '4rem auto',  // Centers the Box and adds margin at the top 
-        display: 'flex', 
-        flexDirection: 'column', 
-        alignItems: 'center', 
-        textAlign: 'center'  // Center the text inside the Box
-    }}>
-        <LinearProgress sx={{ width: '100%' }} />  
-        <Typography variant="h6" sx={{ marginTop: 2 }}>
-            Loading stories...
-        </Typography>
-    </Box>
-    
-    );
-  }
-  if (isError) {
-    return <Typography>Error: {error.message}</Typography>;
-  }
+    // Add more stories as needed
+  ]);
 
   const handleCreateStory = () => {
     // Logic to create a new story (e.g., opening a modal)
@@ -76,7 +136,7 @@ const SuccessStories = () => {
       </IconButton>
 
       <Grid container spacing={2} sx={{ mt: 0 }}>
-        {data.map((story) => (
+        {stories.map((story) => (
           <Grid item xs={12} sm={6} md={4} key={story.id}>
             <StoryCard story={story} />
           </Grid>

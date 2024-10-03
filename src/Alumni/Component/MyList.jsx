@@ -1,42 +1,129 @@
 import React, { useState } from "react";
 import {
   Container,
+  List,
+  ListItem,
+  ListItemText,
   Typography,
   Box,
-  Card,
-  CardContent,
-  Avatar,
   IconButton,
-  Grid,
+  Avatar,
 } from "@mui/material";
 import ConnectWithoutContactIcon from "@mui/icons-material/ConnectWithoutContact";
+import RemoveIcon from "@mui/icons-material/Remove";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import MessageIcon from "@mui/icons-material/Message";
-import customImage from "../Image/250929134_4408229885970439_9204173520367789220_n.jpg";
+import customImage from "../Image/250929134_4408229885970439_9204173520367789220_n.jpg"
 
 const alumniData = [
   {
     id: 1,
     name: "MD Nadib Ahsan",
     company: "Google LLC",
-    batch: "2021",
-    profile_picture: customImage,
+    image: "https://via.placeholder.com/100",
   },
   {
     id: 2,
     name: "S.M. Shahriar Rahman Maruph",
     company: "Microsoft",
-    batch: "2020",
-    profile_picture: customImage,
+    image: "https://via.placeholder.com/100",
   },
   {
     id: 3,
     name: "Mohiuddin Sadik",
     company: "Adobe",
-    batch: "2019",
-    profile_picture: customImage,
+    image: "https://via.placeholder.com/100",
   },
-  // Add more demo data as needed
+  {
+    id: 4,
+    name: "MD Nadib Ahsan",
+    company: "Google LLC",
+    image: "https://via.placeholder.com/100",
+  },
+  {
+    id: 5,
+    name: "S.M. Shahriar Rahman Maruph",
+    company: "Microsoft",
+    image: "https://via.placeholder.com/100",
+  },
+  {
+    id: 6,
+    name: "Mohiuddin Sadik",
+    company: "Adobe",
+    image: "https://via.placeholder.com/100",
+  },
+  {
+    id: 1,
+    name: "MD Nadib Ahsan",
+    company: "Google LLC",
+    image: "https://via.placeholder.com/100",
+  },
+  {
+    id: 2,
+    name: "S.M. Shahriar Rahman Maruph",
+    company: "Microsoft",
+    image: "https://via.placeholder.com/100",
+  },
+  {
+    id: 3,
+    name: "Mohiuddin Sadik",
+    company: "Adobe",
+    image: "https://via.placeholder.com/100",
+  },
+  {
+    id: 4,
+    name: "MD Nadib Ahsan",
+    company: "Google LLC",
+    image: "https://via.placeholder.com/100",
+  },
+  {
+    id: 5,
+    name: "S.M. Shahriar Rahman Maruph",
+    company: "Microsoft",
+    image: "https://via.placeholder.com/100",
+  },
+  {
+    id: 6,
+    name: "Mohiuddin Sadik",
+    company: "Adobe",
+    image: "https://via.placeholder.com/100",
+  },
+  {
+    id: 1,
+    name: "MD Nadib Ahsan",
+    company: "Google LLC",
+    image: "https://via.placeholder.com/100",
+  },
+  {
+    id: 2,
+    name: "S.M. Shahriar Rahman Maruph",
+    company: "Microsoft",
+    image: "https://via.placeholder.com/100",
+  },
+  {
+    id: 3,
+    name: "Mohiuddin Sadik",
+    company: "Adobe",
+    image: "https://via.placeholder.com/100",
+  },
+  {
+    id: 4,
+    name: "MD Nadib Ahsan",
+    company: "Google LLC",
+    image: "https://via.placeholder.com/100",
+  },
+  {
+    id: 5,
+    name: "S.M. Shahriar Rahman Maruph",
+    company: "Microsoft",
+    image: "https://via.placeholder.com/100",
+  },
+  {
+    id: 6,
+    name: "Mohiuddin Sadik",
+    company: "Adobe",
+    image: "https://via.placeholder.com/100",
+  },
 ];
 
 const MyList = () => {
@@ -46,115 +133,129 @@ const MyList = () => {
     setSelectedAlumni(id === selectedAlumni ? null : id); // Toggle selection
   };
 
+  const handleRemove = (id) => {
+    console.log(`Removing alumni with ID: ${id}`);
+    setSelectedAlumni(null);
+    // Add your logic here to remove the alumni from the list
+  };
+
   const handleViewProfile = (id) => {
     console.log(`Viewing profile for alumni with ID: ${id}`);
     // Add your logic to view the profile
   };
-
-  const handleMessage = (id) => {
-    console.log(`Sending message to alumni with ID: ${id}`);
-    // Add your logic to send a message
+  const listStyle = {
+    backgroundColor: "white",
+    borderRadius: "8px",
+    transition: "transform 0.3s",
+    "&:hover": {
+      transform: "scale(1.02)",
+    },
   };
 
   return (
     <Box
       sx={{
-        width: "100%",
+        padding: 2,
+        width: "fit-content",
+        backgroundColor: "#f5f5f5",
+        borderRadius: 2, 
+        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)", 
+        height: "100vh",
+        display: "flex", // Flexbox for centering content inside if needed
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        margin:0,
       }}
     >
+      {/* Sidebar Title */}
       <Typography
         variant="h6"
         sx={{
+          padding: "2px px",
+          display: "flex", //
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
+        }}
+      >
+        Connected Alumni
+      </Typography>
+
+      {/* Connected Alumni Count */}
+      <Typography
+        variant="body2"
+        sx={{
           padding: "2px 15px",
           borderRadius: "5px",
-          display: "flex",
+          display: "flex", //
           justifyContent: "center",
           alignItems: "center",
           textAlign: "center",
           backgroundColor: "#780000",
-          color: "White",
+          color: "White", // Text color
+
           marginBottom: 2,
         }}
       >
         <ConnectWithoutContactIcon sx={{ marginRight: 1 }} />
-        {alumniData.length} Connected
+        109 Connected
       </Typography>
 
+      {/* Alumni List */}
       <Container
-      sx={{
-        padding: 2,
-        minHeight: "90vh",
-        overflowY: "auto",
-        border: "2px solid #00000030",
-        borderRadius: "8px",
-      }}>
-        <Grid container spacing={2}>
+        sx={{
+          maxHeight: "80%",
+          overflowY: "auto",
+          border: "2px solid #00000030",
+          borderRadius: "8px",
+          width: "100%",
+        }}
+      >
+        <List sx={{ width: "100%" }}>
           {alumniData.map((alumni) => (
-            <Grid item key={alumni.id} xs={12} sm={6} md={4}>
-              <Card
-                sx={{
-                  height: "100%",
-                  transition: "transform 0.3s",
-                  borderRadius: "15px",
-                  boxShadow: 3,
-                  "&:hover": {
-                    transform: "scale(1.02)",
-                  },
+            <ListItem
+              button
+              key={alumni.id}
+              onClick={() => handleClick(alumni.id)}
+              sx={listStyle}
+            >
+              <Avatar
+                alt={alumni.name}
+                src={customImage}
+                sx={{ marginRight: 2 }}
+              />
+
+              <ListItemText
+                primary={alumni.name}
+                secondary={alumni.company}
+                sx={{ flexGrow: 1 }}
+              />
+
+              {/* View Profile Button */}
+              <IconButton
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevents the list item click event from triggering
+                  handleViewProfile(alumni.id);
                 }}
+                aria-label="view profile"
               >
-                <Avatar
-                  src={alumni.profile_picture}
-                  alt={alumni.name}
-                  sx={{
-                    margin: "16px auto",
-                    width: "100px",
-                    height: "100px",
-                  }}
-                />
+                <VisibilityIcon />
+              </IconButton>
 
-                <CardContent
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    height: "150px",
-                    textAlign: "center",
-                  }}
-                >
-                  <div>
-                    <Typography
-                      variant="body2"
-                      sx={{ fontWeight: "bold", marginBottom: 1 }}
-                    >
-                      {alumni.name}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {alumni.batch}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {alumni.company}
-                    </Typography>
-                  </div>
-                  <div style={{ display: "flex", justifyContent: "space-around" }}>
-                    <IconButton
-                      onClick={() => handleViewProfile(alumni.id)}
-                      aria-label="view profile"
-                    >
-                      <VisibilityIcon />
-                    </IconButton>
-
-                    <IconButton
-                      onClick={() => handleMessage(alumni.id)}
-                      aria-label="message"
-                    >
-                      <MessageIcon />
-                    </IconButton>
-                  </div>
-                </CardContent>
-              </Card>
-            </Grid>
+              {/* Remove Button */}
+              <IconButton
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevents the list item click event from triggering
+                  handleRemove(alumni.id);
+                }}
+                aria-label="message"
+              >
+                <MessageIcon />
+              </IconButton>
+            </ListItem>
           ))}
-        </Grid>
+        </List>
       </Container>
     </Box>
   );
