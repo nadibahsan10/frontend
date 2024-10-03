@@ -78,7 +78,6 @@ const alumniData = [
     company: "Adobe",
     image: "https://via.placeholder.com/100",
   },
-  
 ];
 
 const MyList = () => {
@@ -97,9 +96,8 @@ const MyList = () => {
     <Box
       sx={{
         padding: 2,
-        width: 300, 
-        backgroundColor: '#f5f5f5',
-
+        width: 300,
+        backgroundColor: "#f5f5f5",
       }}
     >
       <Typography
@@ -125,23 +123,23 @@ const MyList = () => {
           borderRadius: "8px",
           textAlign: "center",
           color: "white",
-          display: "flex", 
+          display: "flex",
           alignItems: "center",
           justifyContent: "center",
           marginBottom: 2,
         }}
       >
-        <ConnectWithoutContactIcon sx={{ marginRight: 1 }} /> 
+        <ConnectWithoutContactIcon sx={{ marginRight: 1 }} />
         109 Connected
       </Typography>
 
-     {/* Alumni List */}
-     <Container
+      {/* Alumni List */}
+      <Container
         sx={{
-          maxHeight: '700px', 
-          overflowY: 'auto', 
-          border: '1px solid #ccc',
-          borderRadius: '8px',
+          maxHeight: "700px",
+          overflowY: "auto",
+          border: "1px solid #ccc",
+          borderRadius: "8px",
         }}
       >
         <List>
@@ -150,18 +148,28 @@ const MyList = () => {
               button
               key={alumni.id}
               onClick={() => handleClick(alumni.id)}
-              sx={{ display: 'flex', alignItems: 'center' }}
+              sx={{ display: "flex", alignItems: "center" }}
             >
-              <ListItemText primary={alumni.name} secondary={alumni.company} sx={{ flexGrow: 1 }} />
-              <IconButton onClick={() => handleViewProfile(alumni.id)} aria-label="view profile">
+              <ListItemText
+                primary={alumni.name}
+                secondary={alumni.company}
+                sx={{ flexGrow: 1 }}
+              />
+              <IconButton
+                onClick={() => handleViewProfile(alumni.id)}
+                aria-label="view profile"
+              >
                 <VisibilityIcon />
               </IconButton>
-              <IconButton onClick={() => handleRemove(alumni.id)} aria-label="remove">
+              <IconButton
+                onClick={() => handleRemove(alumni.id)}
+                aria-label="remove"
+              >
                 <MessageIcon />
               </IconButton>
             </ListItem>
           ))}
-        </Grid>
+        </List>
       </Container>
     </Box>
   );
