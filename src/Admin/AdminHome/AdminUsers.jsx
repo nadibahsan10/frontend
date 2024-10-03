@@ -13,25 +13,26 @@ import {
   Button,
   Avatar,
   TextField,
+  CircularProgress,
 } from "@mui/material";
 import ArrowUpward from "@mui/icons-material/ArrowUpward";
 import ArrowDownward from "@mui/icons-material/ArrowDownward";
 import useFetch from "../../CustomHooks/useFetch";
 import Approve from "../components/Approve";
 import Reject from "../components/Reject";
+import Popup from "../../Shared/Popup";
 
 const AdminUserList = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortDirection, setSortDirection] = useState("asc");
   const [sortBy, setSortBy] = useState("name");
-  const { data, isLoading, isError } = useFetch({
+  const { data, isLoading, isError, error, refetch } = useFetch({
     url: "http://localhost:3000/admin/getuiuusers",
     queryKey: ["getuiuusers"],
   });
 
   // Check for loading or error state
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error fetching users</div>;
+  if (isLoading) return <CircularProgress />;
 
   // Assuming data is an array of users with the required fields
   const users = data || [];
@@ -63,84 +64,99 @@ const AdminUserList = () => {
   };
 
   return (
-    <Box sx={{ padding: "20px" }}>
-      <Typography variant="h4" sx={{ marginBottom: "20px" }}>
-        Users Approval List
-      </Typography>
-
-      {/* Search Bar */}
-      <Box sx={{ marginBottom: "20px" }}>
-        <TextField
-          fullWidth
-          label="Search Users"
-          variant="outlined"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+    <>
+      {isError && (
+        <Popup
+          open={isError}
+          onClose={() => {
+            refetch();
+            if (error.response.status === 403) {
+              navigate("/");
+            }
+          }} // Reset mutation state on close
+          errorMessage={error.response.data.message}
+          status={error.response.status}
         />
-      </Box>
+      )}
+      <Box sx={{ padding: "20px" }}>
+        <Typography variant="h4" sx={{ marginBottom: "20px" }}>
+          Users Approval List
+        </Typography>
 
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell onClick={() => handleSort("profile_picture")}>
-                Profile Picture
-              </TableCell>
-              <TableCell onClick={() => handleSort("uiu")}>
-                University ID
-                {sortBy === "uiu" &&
-                  (sortDirection === "asc" ? (
-                    <ArrowUpward fontSize="small" />
-                  ) : (
-                    <ArrowDownward fontSize="small" />
-                  ))}
-              </TableCell>
-              <TableCell onClick={() => handleSort("first_name")}>
-                Name
-                {sortBy === "first_name" &&
-                  (sortDirection === "asc" ? (
-                    <ArrowUpward fontSize="small" />
-                  ) : (
-                    <ArrowDownward fontSize="small" />
-                  ))}
-              </TableCell>
-              <TableCell onClick={() => handleSort("email")}>
-                Email
-                {sortBy === "email" &&
-                  (sortDirection === "asc" ? (
-                    <ArrowUpward fontSize="small" />
-                  ) : (
-                    <ArrowDownward fontSize="small" />
-                  ))}
-              </TableCell>
-              <TableCell>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {sortedUsers.map((user) => (
-              <TableRow key={user.id}>
-                <TableCell>
-                  <Avatar
-                    sx={{ height: 100, width: 100 }}
-                    src={
-                      "http://localhost:3000/" + user.profile_picture ||
-                      "https://via.placeholder.com/150"
-                    }
-                  />
+        {/* Search Bar */}
+        <Box sx={{ marginBottom: "20px" }}>
+          <TextField
+            fullWidth
+            label="Search Users"
+            variant="outlined"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </Box>
+
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell onClick={() => handleSort("profile_picture")}>
+                  Profile Picture
                 </TableCell>
-                <TableCell>{user.uiu}</TableCell>
-                <TableCell>{`${user.first_name} ${user.last_name}`}</TableCell>
-                <TableCell>{user.email}</TableCell>
-                <TableCell>
-                  <Approve userId={user.id} />
-                  <Reject userId={user.id} />
+                <TableCell onClick={() => handleSort("uiu")}>
+                  University ID
+                  {sortBy === "uiu" &&
+                    (sortDirection === "asc" ? (
+                      <ArrowUpward fontSize="small" />
+                    ) : (
+                      <ArrowDownward fontSize="small" />
+                    ))}
                 </TableCell>
+                <TableCell onClick={() => handleSort("first_name")}>
+                  Name
+                  {sortBy === "first_name" &&
+                    (sortDirection === "asc" ? (
+                      <ArrowUpward fontSize="small" />
+                    ) : (
+                      <ArrowDownward fontSize="small" />
+                    ))}
+                </TableCell>
+                <TableCell onClick={() => handleSort("email")}>
+                  Email
+                  {sortBy === "email" &&
+                    (sortDirection === "asc" ? (
+                      <ArrowUpward fontSize="small" />
+                    ) : (
+                      <ArrowDownward fontSize="small" />
+                    ))}
+                </TableCell>
+                <TableCell>Actions</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Box>
+            </TableHead>
+            <TableBody>
+              {sortedUsers.map((user) => (
+                <TableRow key={user.id}>
+                  <TableCell>
+                    <Avatar
+                      sx={{ height: 100, width: 100 }}
+                      src={
+                        "http://localhost:3000/" + user.profile_picture ||
+                        "https://via.placeholder.com/150"
+                      }
+                    />
+                  </TableCell>
+                  <TableCell>{user.uiu}</TableCell>
+                  <TableCell>{`${user.first_name} ${user.last_name}`}</TableCell>
+                  <TableCell>{user.email}</TableCell>
+                  <TableCell>
+                    <Approve question={false} userId={user.id} />
+                    <Reject question={false} userId={user.id} />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Box>
+    </>
   );
 };
 

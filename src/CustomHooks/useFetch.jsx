@@ -10,15 +10,17 @@ const useFetch = ({
   data = null,
   params = {},
 }) => {
-  const queryClient = useQueryClient(); // Access the query client instance
-
   // Fetcher function
-  const fetcher = async () => {
-    console.log("Fetcher Active");
+  const fetcher = async (paramsByMutate) => {
+    let finalParams = params;
+    if (paramsByMutate) {
+      finalParams = paramsByMutate.params || finalParams;
+    }
     const token = JSON.parse(localStorage.getItem("token"));
 
     // Create FormData if data is provided and method is POST or PUT
     let requestData = data instanceof FormData ? data : null;
+    console.log(data);
 
     if (!requestData) {
       requestData = new FormData();
@@ -26,6 +28,7 @@ const useFetch = ({
       // Append data fields to FormData
       if (data) {
         Object.keys(data).forEach((key) => {
+          console.log(key, data[key]);
           requestData.append(key, data[key]);
         });
       }
@@ -35,7 +38,7 @@ const useFetch = ({
       method,
       url,
       data: requestData,
-      params,
+      params: finalParams,
       headers: {
         Authorization: `Bearer ${token}`,
         ...(requestData instanceof FormData
@@ -44,7 +47,7 @@ const useFetch = ({
       },
     });
 
-    console.log(response.data);
+    // console.log(response.data);
     return response.data;
   };
 

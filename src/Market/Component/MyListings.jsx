@@ -48,10 +48,9 @@ function MyListings() {
             </FormControl>*/}
       </Box>
       <Grid container marginTop={2} spacing={2}>
-        {typeof data === Array &&
-          data?.map((item) => {
-            return <Product item={item} />;
-          })}
+        {/* {data?.map((item) => {
+          return <Product item={item} />;
+        })} */}
       </Grid>
     </Box>
   );
