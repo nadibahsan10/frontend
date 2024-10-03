@@ -1,35 +1,98 @@
-import React, { useState } from "react";
-import {
-  Grid,
-  List,
-  ListItem,
-  ListItemText,
-  TextField,
-  Typography,
-  Button,
-  Radio,
-  RadioGroup,
-} from "@mui/material";
+import React from "react";
+import { Grid, List, ListItem, ListItemText, TextField } from "@mui/material";
 import Accordion from "@mui/material/Accordion";
+import AccordionActions from "@mui/material/AccordionActions";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Button from "@mui/material/Button";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 import { Link } from "react-router-dom";
 
-const LeftNav = ({searchQuery,batch,department,handleSearchChange,handleBatchChange,handleDepartmentChange}) => {
+const LeftNav = ({ state, handleChange, handleCheckBox }) => {
 
+  const listStyle = {
+    padding: 1,
+    backgroundColor: "white",
+    marginBottom: 1,
+    borderRadius: "8px",
+    transition: "transform 0.3s",
+    "&:hover": {
+      transform: "scale(1.02)",
+    },
+  };
   return (
-    <>
-      <TextField
-        id="outlined-basic"
-        label="Search Alumni here ..."
-        variant="outlined"
-        fullWidth
-        value={searchQuery}
-        onChange={handleSearchChange}
-      />
+    <Grid item xs={2}>
+      <Grid container direction="column" justifyContent="space-between">
+        {/* Top Menu List */}
+        <Grid item sx={{ padding: 2, boxShadow: 2, borderRadius: "15px" }}>
+          <List>
+            <ListItem button sx={listStyle} component={Link} to="events">
+              <ListItemText primary="Events & Seminer" />
+            </ListItem>
+            <ListItem button sx={listStyle} component={Link} to="mentorship">
+              <ListItemText primary="Mentorship Program" />
+            </ListItem>
+            <ListItem button sx={listStyle} component={Link} to="successstories">
+              <ListItemText primary="Success Stories" />
+            </ListItem>
+          </List>
+        </Grid>
+
+        {/* Bottom Menu List */}
+        {/* <Grid item sx={{ padding: 2, boxShadow: 3, borderRadius: "15px" }}>
+          <List>
+            <ListItem button sx={listStyle}>
+              <ListItemText primary="Menu 4" />
+            </ListItem>
+            <ListItem button sx={listStyle}>
+              <ListItemText primary="Menu 5" />
+            </ListItem>
+          </List>
+        </Grid> */}
+      </Grid>
+      <Accordion sx={{ marginTop: 2 }}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1-content"
+          id="panel1-header"
+        >
+          Department
+        </AccordionSummary>
+        <AccordionDetails>
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <Checkbox name="department-cse" onChange={handleCheckBox} />
+              }
+              label="CSE"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox name="department-eee" onChange={handleCheckBox} />
+              }
+              label="EEE"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox name="department-bba" onChange={handleCheckBox} />
+              }
+              label="BBA"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  name="department-economics"
+                  onChange={handleCheckBox}
+                />
+              }
+              label="ECONOMICS"
+            />
+          </FormGroup>
+        </AccordionDetails>
+      </Accordion>
       <Accordion sx={{ marginTop: 2 }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -44,122 +107,10 @@ const LeftNav = ({searchQuery,batch,department,handleSearchChange,handleBatchCha
             label="Enter Batch ..."
             variant="outlined"
             fullWidth
-            value={batch}
-            onChange={handleBatchChange}
           />
         </AccordionDetails>
       </Accordion>
-      <Accordion sx={{ marginTop: 2, maxHeight: 400 }}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1-content"
-          id="panel1-header"
-        >
-          Department
-        </AccordionSummary>
-        <AccordionDetails sx={{ maxHeight: 300, overflow: "auto" }}>
-          <FormGroup>
-            <RadioGroup
-              aria-labelledby="department-radio-group"
-              name="department"
-              value={department}
-              onChange={handleDepartmentChange}
-            >
-              <FormControlLabel
-                control={<Radio value="" />}
-                label="ALL"
-              />
-              <FormControlLabel
-                control={<Radio value="1" />}
-                label="BBA"
-              />
-              <FormControlLabel
-                control={<Radio value="2" />}
-                label="BBA in Accounting"
-              />
-              <FormControlLabel
-                control={<Radio value="3" />}
-                label="BS in Economics"
-              />
-              <FormControlLabel
-                control={<Radio value="4" />}
-                label="B.Sc in Civil"
-              />
-              <FormControlLabel
-                control={<Radio value="5" />}
-                label="B.Sc in CSE"
-              />
-              <FormControlLabel
-                control={<Radio value="6" />}
-                label="B.Sc in Data Science"
-              />
-              <FormControlLabel
-                control={<Radio value="7" />}
-                label="BSS in EEE"
-              />
-              <FormControlLabel
-                control={<Radio value="8" />}
-                label="BSS in EDS"
-              />
-              <FormControlLabel
-                control={<Radio value="9" />}
-                label="BSS in Media Studies and Journalism"
-              />
-              <FormControlLabel
-                control={<Radio value="10" />}
-                label="BA in English"
-              />
-              <FormControlLabel
-                control={<Radio value="11" />}
-                label="B. Pharm"
-              />
-              <FormControlLabel
-                control={<Radio value="12" />}
-                label="MBA"
-              />
-              <FormControlLabel
-                control={<Radio value="13" />}
-                label="EMBA"
-              />
-              <FormControlLabel
-                control={<Radio value="14" />}
-                label="MS in Economics"
-              />
-              <FormControlLabel
-                control={<Radio value="15" />}
-                label="MDS"
-              />
-              <FormControlLabel
-                control={<Radio value="16" />}
-                label="M.Sc. in CSE"
-              />
-            </RadioGroup>
-          </FormGroup>
-        </AccordionDetails>
-      </Accordion>
-
-      <Grid container direction="column" justifyContent="space-between" sx={{ marginTop: 4 }}>
-        {/* Top Menu List */}
-        <Grid item sx={{ padding: 2, boxShadow: 2, borderRadius: "3px" }}>
-          <Typography variant="h6" gutterBottom>
-            You May Like
-          </Typography>
-
-          <List>
-            <ListItem button sx={{ padding: 1, backgroundColor: "white", marginBottom: 1, borderRadius: "8px" }} component={Link} to="events">
-              <ListItemText primary="Events & Seminar" />
-            </ListItem>
-            <ListItem button sx={{ padding: 1, backgroundColor: "white", marginBottom: 1, borderRadius: "8px" }} component={Link} to="mentorship">
-              <ListItemText primary="Mentorship Program" />
-            </ListItem>
-            <ListItem button sx={{ padding: 1, backgroundColor: "white", marginBottom: 1, borderRadius: "8px" }} component={Link} to="successstories">
-              <ListItemText primary="Success Stories" />
-            </ListItem>
-          </List>
-        </Grid>
-      </Grid>
-
-    </>
+    </Grid>
   );
 };
 
