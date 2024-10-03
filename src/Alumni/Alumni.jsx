@@ -1,10 +1,10 @@
-import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
-import { Box } from "@mui/material";
-import AlumniHome from "./Pages/AlumniHome";
-import EventHome from "./Pages/EventHome";
-import MentorShip from "./Component/MentorShip";
-import SuccessStories from "./Pages/SuccessStories";
+import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { Box } from '@mui/material';
+import AlumniHome from './Pages/AlumniHome';
+import EventHome from "./Pages/EventHome"
+import MentorShip from './Component/MentorShip';
+import SuccessStories from './Pages/SuccessStories';
 
 const Alumni = () => {
   return (
@@ -17,6 +17,6 @@ const Alumni = () => {
       </Routes>
     </Box>
   );
-};
+}
 
 export default Alumni;

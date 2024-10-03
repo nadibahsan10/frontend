@@ -36,48 +36,7 @@ const alumniData = [
     batch: "2019",
     profile_picture: customImage,
   },
-  {
-    id: 6,
-    name: "Mohiuddin Sadik",
-    company: "Adobe",
-    image: "https://via.placeholder.com/100",
-  },
-  {
-    id: 1,
-    name: "MD Nadib Ahsan",
-    company: "Google LLC",
-    image: "https://via.placeholder.com/100",
-  },
-  {
-    id: 2,
-    name: "S.M. Shahriar Rahman Maruph",
-    company: "Microsoft",
-    image: "https://via.placeholder.com/100",
-  },
-  {
-    id: 3,
-    name: "Mohiuddin Sadik",
-    company: "Adobe",
-    image: "https://via.placeholder.com/100",
-  },
-  {
-    id: 4,
-    name: "MD Nadib Ahsan",
-    company: "Google LLC",
-    image: "https://via.placeholder.com/100",
-  },
-  {
-    id: 5,
-    name: "S.M. Shahriar Rahman Maruph",
-    company: "Microsoft",
-    image: "https://via.placeholder.com/100",
-  },
-  {
-    id: 6,
-    name: "Mohiuddin Sadik",
-    company: "Adobe",
-    image: "https://via.placeholder.com/100",
-  },
+  // Add more demo data as needed
 ];
 
 const MyList = () => {
@@ -92,84 +51,110 @@ const MyList = () => {
     // Add your logic to view the profile
   };
 
+  const handleMessage = (id) => {
+    console.log(`Sending message to alumni with ID: ${id}`);
+    // Add your logic to send a message
+  };
+
   return (
     <Box
       sx={{
-        padding: 2,
-        width: 300,
-        backgroundColor: "#f5f5f5",
+        width: "100%",
       }}
     >
       <Typography
         variant="h6"
         sx={{
-          padding: "10px 20px",
-          backgroundColor: "lightblue",
-          borderRadius: "8px",
-          textAlign: "center",
-          color: "black",
-          marginBottom: 1,
-        }}
-      >
-        Connected Alumni
-      </Typography>
-
-      {/* Connected Alumni Count */}
-      <Typography
-        variant="body2"
-        sx={{
-          padding: "2px 0",
-          backgroundColor: "red",
-          borderRadius: "8px",
-          textAlign: "center",
-          color: "white",
+          padding: "2px 15px",
+          borderRadius: "5px",
           display: "flex",
-          alignItems: "center",
           justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
+          backgroundColor: "#780000",
+          color: "White",
           marginBottom: 2,
         }}
       >
         <ConnectWithoutContactIcon sx={{ marginRight: 1 }} />
-        109 Connected
+        {alumniData.length} Connected
       </Typography>
 
-      {/* Alumni List */}
       <Container
-        sx={{
-          maxHeight: "700px",
-          overflowY: "auto",
-          border: "1px solid #ccc",
-          borderRadius: "8px",
-        }}
-      >
-        <List>
+      sx={{
+        padding: 2,
+        minHeight: "90vh",
+        overflowY: "auto",
+        border: "2px solid #00000030",
+        borderRadius: "8px",
+      }}>
+        <Grid container spacing={2}>
           {alumniData.map((alumni) => (
-            <ListItem
-              button
-              key={alumni.id}
-              onClick={() => handleClick(alumni.id)}
-              sx={{ display: "flex", alignItems: "center" }}
-            >
-              <ListItemText
-                primary={alumni.name}
-                secondary={alumni.company}
-                sx={{ flexGrow: 1 }}
-              />
-              <IconButton
-                onClick={() => handleViewProfile(alumni.id)}
-                aria-label="view profile"
+            <Grid item key={alumni.id} xs={12} sm={6} md={4}>
+              <Card
+                sx={{
+                  height: "100%",
+                  transition: "transform 0.3s",
+                  borderRadius: "15px",
+                  boxShadow: 3,
+                  "&:hover": {
+                    transform: "scale(1.02)",
+                  },
+                }}
               >
-                <VisibilityIcon />
-              </IconButton>
-              <IconButton
-                onClick={() => handleRemove(alumni.id)}
-                aria-label="remove"
-              >
-                <MessageIcon />
-              </IconButton>
-            </ListItem>
+                <Avatar
+                  src={alumni.profile_picture}
+                  alt={alumni.name}
+                  sx={{
+                    margin: "16px auto",
+                    width: "100px",
+                    height: "100px",
+                  }}
+                />
+
+                <CardContent
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    height: "150px",
+                    textAlign: "center",
+                  }}
+                >
+                  <div>
+                    <Typography
+                      variant="body2"
+                      sx={{ fontWeight: "bold", marginBottom: 1 }}
+                    >
+                      {alumni.name}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {alumni.batch}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {alumni.company}
+                    </Typography>
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "space-around" }}>
+                    <IconButton
+                      onClick={() => handleViewProfile(alumni.id)}
+                      aria-label="view profile"
+                    >
+                      <VisibilityIcon />
+                    </IconButton>
+
+                    <IconButton
+                      onClick={() => handleMessage(alumni.id)}
+                      aria-label="message"
+                    >
+                      <MessageIcon />
+                    </IconButton>
+                  </div>
+                </CardContent>
+              </Card>
+            </Grid>
           ))}
-        </List>
+        </Grid>
       </Container>
     </Box>
   );

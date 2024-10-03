@@ -16,13 +16,14 @@ import Product from "./Product";
 import getMyListings from "../Functions/getMyListings";
 
 function MyListings() {
-  const auth = useContext(AuthContext);
-  console.log(auth);
+    const auth = useContext(AuthContext);
+    console.log(auth);
   const { data, isLoading, error, isError } = useQuery({
-    queryKey: ["getList", auth.id],
+    queryKey: ["getList",auth.id],
     queryFn: getMyListings,
   });
-
+  console.log(data);
+  
   return (
     <Box marginTop={2} borderRadius={1} padding={3} border="1px solid #D3D3D3">
       <Box display="flex" alignItems="center">
@@ -48,9 +49,9 @@ function MyListings() {
             </FormControl>*/}
       </Box>
       <Grid container marginTop={2} spacing={2}>
-        {/* {data?.map((item) => {
-          return <Product item={item} />;
-        })} */}
+        {data?.map((item) => {
+              return <Product item={item}/>;
+            })}
       </Grid>
     </Box>
   );
