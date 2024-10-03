@@ -1,30 +1,60 @@
 import React from "react";
 import { Button } from "@mui/material";
 import useFetch from "../../CustomHooks/useFetch";
+import { CircularProgress } from "@mui/material";
+import Popup from "../../Shared/Popup";
+import { useQueryClient } from "@tanstack/react-query";
 
-const Approve = (userId) => {
+const Approve = ({ userId, question }) => {
+  const queryClient = useQueryClient();
 
   const mutation = useFetch({
-    url: "http://localhost:3000/admin/approveuser",
+    url: question
+      ? "http://localhost:3000/admin/approvequestion"
+      : "http://localhost:3000/admin/approveuser",
     method: "POST",
-    params: { id: userId.userId },
+    params: { id: userId },
   });
+
   const approved = () => {
-    mutation.mutate();
+    mutation.mutate(undefined, {
+      onSuccess: async () => {
+        const queryKey = question ? ["getQuestions"] : ["getuiuusers"];
+        await queryClient.invalidateQueries(queryKey);
+        queryClient.refetchQueries(queryKey);
+      },
+    });
   };
 
-  if (mutation.isError) {
-    <h1>{mutation.error.response.data.message}</h1>;
+  if (mutation.isPending) {
+    return <CircularProgress sx={{ marginRight: 2 }} />;
   }
+
   return (
-    <Button
-      variant="contained"
-      color="primary"
-      sx={{ marginRight: 2 }}
-      onClick={approved}
-    >
-      Approve
-    </Button>
+    <>
+      {mutation.isError && (
+        <Popup
+          open={mutation.isError}
+          onClose={() => {
+            mutation.reset();
+            if (mutation.error.response.status === 403) {
+              navigate("/");
+            }
+          }}
+          errorMessage={mutation.error.response.data.message}
+          status={mutation.error.response.status}
+        />
+      )}
+
+      <Button
+        variant="contained"
+        color="primary"
+        sx={{ marginRight: 2 }}
+        onClick={approved}
+      >
+        Approve
+      </Button>
+    </>
   );
 };
 

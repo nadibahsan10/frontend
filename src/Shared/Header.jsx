@@ -181,7 +181,7 @@ function Header() {
               component={Link}
               variant="h3"
               noWrap
-              to="/"
+              to={auth.role === "admin" ? "/admin/dashbord" : "/"}
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
