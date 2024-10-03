@@ -7,8 +7,6 @@ import {
   TextField,
   Typography,
   Button,
-  Radio,
-  RadioGroup,
 } from "@mui/material";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -16,9 +14,39 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 import { Link } from "react-router-dom";
 
-const LeftNav = ({searchQuery,batch,department,handleSearchChange,handleBatchChange,handleDepartmentChange}) => {
+const LeftNav = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [batch, setBatch] = useState("");
+  const [selectedDepartments, setSelectedDepartments] = useState([]);
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+    console.log("Search Query:", e.target.value);
+  };
+
+  const handleBatchChange = (e) => {
+    setBatch(e.target.value);
+    console.log("Batch:", e.target.value);
+  };
+
+  const handleCheckBox = (e) => {
+    const { name } = e.target;
+    setSelectedDepartments((prev) =>
+      prev.includes(name)
+        ? prev.filter((dept) => dept !== name) // Remove if already selected
+        : [...prev, name] // Add if not selected
+    );
+    console.log("Selected Departments:", selectedDepartments);
+  };
+
+  const handleSubmit = () => {
+    console.log("Final Search Query:", searchQuery);
+    console.log("Final Batch:", batch);
+    console.log("Final Selected Departments:", selectedDepartments);
+  };
 
   return (
     <>
@@ -62,13 +90,9 @@ const LeftNav = ({searchQuery,batch,department,handleSearchChange,handleBatchCha
             <RadioGroup
               aria-labelledby="department-radio-group"
               name="department"
-              value={department}
-              onChange={handleDepartmentChange}
+              value={state.selectedDepartment} // Ensure you have this state
+              onChange={handleRadioChange} // handle radio change function
             >
-              <FormControlLabel
-                control={<Radio value="" />}
-                label="ALL"
-              />
               <FormControlLabel
                 control={<Radio value="1" />}
                 label="BBA"
@@ -158,7 +182,11 @@ const LeftNav = ({searchQuery,batch,department,handleSearchChange,handleBatchCha
           </List>
         </Grid>
       </Grid>
-
+      
+      {/* Submit button to log final values */}
+      <Button variant="contained" onClick={handleSubmit} sx={{ marginTop: 2 }}>
+        Log Input Values
+      </Button>
     </>
   );
 };

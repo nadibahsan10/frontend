@@ -1,47 +1,54 @@
-import React from "react";
-import {
-  Container,
-  Box,
-  Typography,
-  TextField,
-  Button,
-  Grid,
-  Card,
-  CardContent,
-  CardMedia,
-} from "@mui/material";
-import MyList from "../Component/MyList";
+import React, { useState } from "react";
+import { Box, Typography, Grid } from "@mui/material";
 import LeftNav from "../Component/LeftNav";
-import ProfileCards from "../Component/ProfileCards";
+import TabbedComponent from "../Component/TabbedComponent";
 
 function AlumniHome() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [batch, setBatch] = useState("");
+  const [selectedDepartment, setSelectedDepartment] = useState("");
+
+  // Handler to update search query
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  // Handler to update batch
+  const handleBatchChange = (event) => {
+    setBatch(event.target.value);
+  };
+
+  // Handler to update department
+  const handleDepartmentChange = (event) => {
+    setSelectedDepartment(event.target.value);
+  };
+
+
   return (
-    <>
-      <Box
-        sx={{
-          width: "100%",
-          margin: "0 auto",
-        }}
-      >
-        <Typography variant="h4" sx={{ textAlign: "center", padding: "10px" }}>
-          Welcome to UIU Alumni Portal
-        </Typography>
-        <Grid container spacing={2} sx={{padding: 2}}>
-          {/* Left Side */}
-          <LeftNav />
-
-          {/*main body*/}
-
-          <Grid item xs={7} sx={{ padding: 2 }}>
-          <ProfileCards />
-          </Grid>
-          {/* Right Side */}
-          <Grid item xs={3} sx={{ backgroundColor: "white", padding: 2 ,margin: 0}}>
-            <MyList />
-          </Grid>
+    <Box sx={{ width: "100%", margin: "0 auto" }}>
+      <Typography variant="h4" sx={{ textAlign: "center", padding: "10px" }}>
+        Welcome to UIU Alumni Portal
+      </Typography>
+      <Grid container spacing={2} sx={{ padding: 2 }}>
+        <Grid item xs={3} sx={{ padding: 2 }}>
+          <LeftNav
+            searchQuery={searchQuery}
+            batch={batch}
+            department={selectedDepartment}
+            handleSearchChange={handleSearchChange}
+            handleBatchChange={handleBatchChange}
+            handleDepartmentChange={handleDepartmentChange}
+          />
         </Grid>
-      </Box>
-    </>
+        <Grid item xs={9} sx={{ padding: 0 }}>
+          <TabbedComponent
+            searchQuery={searchQuery}
+            batch={batch}
+            department={selectedDepartment} // Pass the department data
+          />
+        </Grid>
+      </Grid>
+    </Box>
   );
 }
 

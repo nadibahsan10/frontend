@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Container,
   Typography,
@@ -8,13 +8,15 @@ import {
   Avatar,
   IconButton,
   Grid,
+  Button,
 } from "@mui/material";
-import ConnectWithoutContactIcon from "@mui/icons-material/ConnectWithoutContact";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import MessageIcon from "@mui/icons-material/Message";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle"; // Importing Accept icon
+import CancelIcon from "@mui/icons-material/Cancel"; // Importing Decline icon
+import EmailIcon from "@mui/icons-material/Email";
 import customImage from "../Image/250929134_4408229885970439_9204173520367789220_n.jpg";
+import PendingActionsIcon from "@mui/icons-material/PendingActions"; // Importing PendingActions icon
 
-const alumniData = [
+const requestedAlumniData = [
   {
     id: 1,
     name: "MD Nadib Ahsan",
@@ -39,21 +41,20 @@ const alumniData = [
   // Add more demo data as needed
 ];
 
-const MyList = () => {
-  const [selectedAlumni, setSelectedAlumni] = useState(null);
-
-  const handleClick = (id) => {
-    setSelectedAlumni(id === selectedAlumni ? null : id); // Toggle selection
+const RequestedAlumni = () => {
+  const handleAcceptRequest = (id) => {
+    console.log(`Accepted request for alumni with ID: ${id}`);
+    // Add your logic to accept the request
   };
 
-  const handleViewProfile = (id) => {
-    console.log(`Viewing profile for alumni with ID: ${id}`);
-    // Add your logic to view the profile
+  const handleDeclineRequest = (id) => {
+    console.log(`Declined request for alumni with ID: ${id}`);
+    // Add your logic to decline the request
   };
 
-  const handleMessage = (id) => {
-    console.log(`Sending message to alumni with ID: ${id}`);
-    // Add your logic to send a message
+  const handleEmail = (id) => {
+    console.log(`Emailing alumni with ID: ${id}`);
+    // Add your logic to send an email
   };
 
   return (
@@ -76,20 +77,21 @@ const MyList = () => {
           marginBottom: 2,
         }}
       >
-        <ConnectWithoutContactIcon sx={{ marginRight: 1 }} />
-        {alumniData.length} Connected
+        <PendingActionsIcon sx={{ marginRight: 1 }} />
+        {requestedAlumniData.length} Pending
       </Typography>
 
       <Container
-      sx={{
-        padding: 2,
-        minHeight: "90vh",
-        overflowY: "auto",
-        border: "2px solid #00000030",
-        borderRadius: "8px",
-      }}>
+        sx={{
+          padding: 2,
+          minHeight: "90vh",
+          overflowY: "auto",
+          border: "2px solid #00000030",
+          borderRadius: "8px",
+        }}
+      >
         <Grid container spacing={2}>
-          {alumniData.map((alumni) => (
+          {requestedAlumniData.map((alumni) => (
             <Grid item key={alumni.id} xs={12} sm={6} md={4}>
               <Card
                 sx={{
@@ -137,18 +139,27 @@ const MyList = () => {
                   </div>
                   <div style={{ display: "flex", justifyContent: "space-around" }}>
                     <IconButton
-                      onClick={() => handleViewProfile(alumni.id)}
-                      aria-label="view profile"
+                      onClick={() => handleEmail(alumni.id)}
+                      aria-label="email"
                     >
-                      <VisibilityIcon />
+                      <EmailIcon />
                     </IconButton>
-
-                    <IconButton
-                      onClick={() => handleMessage(alumni.id)}
-                      aria-label="message"
+                    <Button
+                      variant="outlined"
+                      color="success"
+                      startIcon={<CheckCircleIcon />}
+                      onClick={() => handleAcceptRequest(alumni.id)}
                     >
-                      <MessageIcon />
-                    </IconButton>
+                      Accept
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      color="error"
+                      startIcon={<CancelIcon />}
+                      onClick={() => handleDeclineRequest(alumni.id)}
+                    >
+                      Decline
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
@@ -160,4 +171,4 @@ const MyList = () => {
   );
 };
 
-export default MyList;
+export default RequestedAlumni;

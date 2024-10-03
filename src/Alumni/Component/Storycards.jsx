@@ -15,7 +15,7 @@ const StoryCard = ({ story }) => {
     <Card variant="outlined" sx={{ height: "100%" }}>
       <CardMedia
         component="img"
-        image={story.image} // Use a URL or local path for the image
+        image={`http://localhost:3000/${story.image_url}`} // Use image_url from the query result
         alt={story.title}
         sx={{
           width: "100%", // Make the image full width
@@ -27,10 +27,10 @@ const StoryCard = ({ story }) => {
           {story.title}
         </Typography>
         <Typography variant="body2" color="textSecondary">
-          {story.content}
+          {story.description} {/* Updated to use description */}
         </Typography>
         <Typography variant="caption" sx={{ mt: 1 }}>
-          By: {story.author}
+          By: {story.first_name} {story.last_name}
         </Typography>
       </CardContent>
       <CardActions>
@@ -38,7 +38,7 @@ const StoryCard = ({ story }) => {
           <FavoriteIcon />
         </IconButton>
         <Typography variant="body2" color="textSecondary">
-          {story.favorites} {/* Optionally show the number of favorites */}
+          {story.reactions} {/* Show the number of reactions */}
         </Typography>
       </CardActions>
     </Card>
