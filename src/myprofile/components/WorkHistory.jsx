@@ -267,6 +267,7 @@ const WorkHistory = () => {
             margin="dense"
             label="Start Date"
             fullWidth
+            type="date"
             variant="outlined"
             value={newInternship.start}
             onChange={(e) =>

@@ -1,13 +1,20 @@
-import React, { useState } from "react";
-import { Box, Tabs as MuiTabs, Tab, Typography } from "@mui/material";
-
+import React, { useState, useContext } from "react";
+import { Box, CircularProgress, Tabs as MuiTabs, Tab } from "@mui/material";
+import { useParams } from "react-router-dom";
 import About from "./About";
 import WorkHistory from "./WorkHistory";
 import Academic from "./Academic";
-// Sample components for demonstration
+import useFetch from "../../CustomHooks/useFetch";
 
-// Renamed component to avoid conflict
 const TabComponent = () => {
+  const userId = useParams().userId;
+
+  const { data, isLoading, isError, error } = useFetch({
+    url: "http://localhost:3000/myprofile/getinfo",
+    queryKey: ["gettinguserinfo"],
+    params: { userId },
+  });
+
   const [value, setValue] = useState(0); // State to track the selected tab
 
   const handleChange = (event, newValue) => {
@@ -28,6 +35,11 @@ const TabComponent = () => {
     }
   };
 
+  // If data is loading, show a loading spinner
+  if (isLoading) {
+    return <CircularProgress />;
+  }
+
   return (
     <Box sx={{ width: "100%" }}>
       <MuiTabs
@@ -37,9 +49,11 @@ const TabComponent = () => {
         textColor="secondary"
       >
         <Tab label="About" />
-        <Tab label="Work History" />
-        <Tab label="Academics" />
+        {/* Conditionally render the additional tabs but don't conditionally call hooks */}
+        {data && data.user_type !== "guest" && <Tab label="Work History" />}
+        {data && data.user_type !== "guest" && <Tab label="Academics" />}
       </MuiTabs>
+
       <Box sx={{ padding: 2 }}>
         {renderContent()} {/* Render content based on selected tab */}
       </Box>

@@ -96,7 +96,7 @@ const UserProfile = () => {
               style={{ display: "none" }}
             />
 
-            {state.image !== null && auth.id === userId ? (
+            {state.image !== null ? (
               <>
                 <Button
                   variant="contained"
@@ -115,15 +115,17 @@ const UserProfile = () => {
                 </Button>
               </>
             ) : (
-              <Button
-                onClick={() => {
-                  imageRef.current.click();
-                }}
-                variant="outlined"
-                sx={{ mb: 3 }}
-              >
-                Change Profile
-              </Button>
+              auth.id === userId && (
+                <Button
+                  onClick={() => {
+                    imageRef.current.click();
+                  }}
+                  variant="outlined"
+                  sx={{ mb: 3 }}
+                >
+                  Change Profile
+                </Button>
+              )
             )}
           </Grid>
 

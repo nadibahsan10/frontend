@@ -44,7 +44,6 @@ const Skills = () => {
   const { state, handleChange, reset } = useInput({
     skill: { value: "", isValid: true },
   });
-  console.log(data);
 
   const [skills, setSkills] = useState(["Graphic Design", "Branding", "AI"]);
   const [open, setOpen] = useState(false); // State to manage modal open/close

@@ -19,7 +19,6 @@ const style = {
 };
 
 const Popup = ({ open, onClose, errorMessage, status }) => {
-  console.log(status);
   return (
     <Modal
       open={open}

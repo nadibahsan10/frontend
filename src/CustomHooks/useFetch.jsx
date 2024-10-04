@@ -16,11 +16,11 @@ const useFetch = ({
     if (paramsByMutate) {
       finalParams = paramsByMutate.params || finalParams;
     }
+
     const token = JSON.parse(localStorage.getItem("token"));
 
     // Create FormData if data is provided and method is POST or PUT
     let requestData = data instanceof FormData ? data : null;
-    console.log(data);
 
     if (!requestData) {
       requestData = new FormData();
