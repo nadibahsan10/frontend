@@ -13,6 +13,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import useFetch from "../../CustomHooks/useFetch";
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -40,28 +41,31 @@ const AddProducts = () => {
     condition: { value: "", isValid: true },
     image: null,
   });
-  const mutation = useMutation({
-    mutationFn: async () => {
-      await AddPost(
-        state.title.value,
-        state.description.value,
-        state.price.value,
-        state.condition.value,
-        state.category.value,
-        state.address.value,
-        state.image
-      );
-    },
-    onSuccess: () => {
-      reset();
+
+  const mutation = useFetch({
+    url: "http://localhost:3000/marketplace/addpost",
+    method: "POST",
+    data: {
+      title: state.title.value,
+      description: state.description.value,
+      price: state.price.value,
+      condition: state.condition.value,
+      category: state.category.value,
+      address: state.address.value,
+      files: state.image,
     },
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(state);
-    mutation.mutate();
+    mutation.mutate(undefined, {
+      onSuccess: (data) => {
+        console.log(data);
+      },
+    });
   };
+  console.log(mutation.error);
   const imageRef = useRef([]);
   return (
     <Container maxWidth="lg" sx={{ marginTop: 5 }}>
