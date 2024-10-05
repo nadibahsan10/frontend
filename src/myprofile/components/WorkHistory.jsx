@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Box,
   Typography,
@@ -15,7 +15,6 @@ import {
   DialogContentText,
   DialogTitle,
   TextField,
-  Input,
 } from "@mui/material";
 import WorkIcon from "@mui/icons-material/Work"; // Icon for job entries
 import SchoolIcon from "@mui/icons-material/School"; // Icon for internship entries
@@ -23,61 +22,31 @@ import RemoveIcon from "@mui/icons-material/Remove"; // Icon for remove action
 import AddIcon from "@mui/icons-material/Add"; // Icon for add action
 import DeleteIcon from "@mui/icons-material/Delete"; // Icon for individual remove action
 import { useQueryClient } from "@tanstack/react-query";
+import { AuthContext } from "../../Auth/AuthContext";
 
-// Sample data for internships and job histories
-const initialInternshipData = [
-  {
-    internship_id: 1,
-    uid: 101,
-    company_name: "Tech Corp",
-    position: "Software Intern",
-    start: "June 2023",
-    end: "August 2023",
-  },
-  {
-    internship_id: 2,
-    uid: 102,
-    company_name: "Design Studio",
-    position: "Design Intern",
-    start: "January 2023",
-    end: "May 2023",
-  },
-];
 import useFetch from "../../CustomHooks/useFetch";
 import { useParams } from "react-router-dom";
 
-const initialJobHistoryData = [
-  {
-    history_id: 1,
-    uid: 101,
-    job_title: "Junior Developer",
-    company: "Web Solutions",
-    start_date: "September 2023",
-    end_date: "Present",
-    reason_for_leaving: "N/A",
-  },
-  {
-    history_id: 2,
-    uid: 102,
-    job_title: "Freelance Designer",
-    company: "Creative Hub",
-    start_date: "June 2022",
-    end_date: "December 2022",
-    reason_for_leaving: "Completed project",
-  },
-];
-
 const WorkHistory = () => {
+  const auth = useContext(AuthContext);
   const userId = useParams().userId;
   const { data, isLoading, isError, error } = useFetch({
     url: "http://localhost:3000/myprofile/getintern",
     queryKey: ["getinternsip"],
     params: { userId },
   });
-  console.log(data);
+  const {
+    data: jobs,
+    isLoading: jobLoading,
+    isError: jobisError,
+    error: jobError,
+  } = useFetch({
+    url: "http://localhost:3000/myprofile/getjob",
+    queryKey: ["getjob"],
+    params: { userId },
+  });
 
-  const [internshipData, setInternshipData] = useState(initialInternshipData);
-  const [jobHistoryData, setJobHistoryData] = useState(initialJobHistoryData);
+  console.log(jobError);
 
   // State for modals
   const [openInternshipModal, setOpenInternshipModal] = useState(false);
@@ -122,62 +91,132 @@ const WorkHistory = () => {
   const [successMessage, setSuccessMessage] = useState("");
 
   const queryClient = useQueryClient();
-  // Function to add an internship
+  // Function to Add and Delete an internship
   const mutation = useFetch({
     url: "http://localhost:3000/myprofile/addintern",
     method: "POST",
-    params: {
-      userId,
-      company_name: newInternship.company_name,
-      position: newInternship.position,
-    },
   });
   const addInternship = () => {
-    mutation.mutate(undefined, {
-      onSuccess: async (data) => {
-        await queryClient.invalidateQueries(["getinternsip"]);
-        queryClient.refetchQueries(["getinternsip"]);
-        setSuccessMessage(data.message);
-        setOpenSuccessPopup(true);
-
-        reset();
+    mutation.mutate(
+      {
+        params: {
+          userId,
+          company_name: newInternship.company_name,
+          position: newInternship.position,
+          start: newInternship.start,
+          end: newInternship.end,
+        },
       },
-      onError: (data) => {
-        console.log(data);
-      },
-    });
+      {
+        onSuccess: async (data) => {
+          await queryClient.invalidateQueries(["getinternsip"]);
+          queryClient.refetchQueries(["getinternsip"]);
+          setSuccessMessage(data.message);
+          setOpenSuccessPopup(true);
+        },
+        onError: (data) => {
+          console.log(data);
+        },
+      }
+    );
     handleCloseInternshipModal(); // Close modal after adding
     setNewInternship({ company_name: "", position: "", start: "", end: "" }); // Reset form
   };
 
-  // Function to remove an individual internship
+  const deletion = useFetch({
+    url: "http://localhost:3000/myprofile/deletintern",
+    method: "DELETE",
+  });
   const removeInternship = (id) => {
-    setInternshipData(
-      internshipData.filter((internship) => internship.internship_id !== id)
+    deletion.mutate(
+      {
+        params: {
+          id,
+        },
+      },
+      {
+        onSuccess: async (data) => {
+          await queryClient.invalidateQueries(["getinternsip"]);
+          queryClient.refetchQueries(["getinternsip"]);
+          setSuccessMessage(data.message);
+          setOpenSuccessPopup(true);
+
+          reset();
+        },
+        onError: (data) => {
+          console.log(data);
+        },
+      }
     );
   };
+  // Function To Delete
+
+  //Fuction for Job
+
+  const jobDeletion = useFetch({
+    url: "http://localhost:3000/myprofile/deletejobhistory",
+    method: "DELETE",
+  });
+  const jobAddition = useFetch({
+    url: "http://localhost:3000/myprofile/addjobhistory",
+    method: "POST",
+  });
 
   // Function to add a job history entry
   const addJobHistory = () => {
-    const newJobData = {
-      history_id: jobHistoryData.length + 1,
-      uid: 101,
-      ...newJob,
-    };
-    setJobHistoryData([...jobHistoryData, newJobData]);
+    jobAddition.mutate(
+      {
+        params: {
+          uid: userId,
+          job_title: newJob.job_title,
+          company: newJob.company,
+          start_date: newJob.start_date,
+          EndDate: newJob.end_date,
+        },
+      },
+      {
+        onSuccess: async (data) => {
+          await queryClient.invalidateQueries(["getjob"]);
+          queryClient.refetchQueries(["getjob"]);
+          setSuccessMessage(data.message);
+          setOpenSuccessPopup(true);
+        },
+        onError: (data) => {
+          console.log(data);
+        },
+      }
+    );
+    console.log(jobAddition.error);
+
     handleCloseJobModal(); // Close modal after adding
     setNewJob({
       job_title: "",
       company: "",
       start_date: "",
       end_date: "",
-      reason_for_leaving: "",
     }); // Reset form
   };
 
   // Function to remove an individual job history entry
   const removeJobHistory = (id) => {
-    setJobHistoryData(jobHistoryData.filter((job) => job.history_id !== id));
+    jobDeletion.mutate(
+      {
+        params: {
+          id,
+        },
+      },
+      {
+        onSuccess: async (data) => {
+          await queryClient.invalidateQueries(["getjob"]);
+          queryClient.refetchQueries(["getjob"]);
+          setSuccessMessage(data.message);
+          setOpenSuccessPopup(true);
+        },
+        onError: (data) => {
+          console.log(data);
+        },
+      }
+    );
   };
 
   return (
@@ -186,15 +225,18 @@ const WorkHistory = () => {
       <Typography variant="h5" gutterBottom>
         Internships
       </Typography>
-      <Button
-        variant="contained"
-        color="primary"
-        startIcon={<AddIcon />}
-        onClick={handleOpenInternshipModal}
-        sx={{ mb: 2 }}
-      >
-        Add Internship
-      </Button>
+      {auth.id === userId && (
+        <Button
+          variant="contained"
+          color="primary"
+          startIcon={<AddIcon />}
+          onClick={handleOpenInternshipModal}
+          sx={{ mb: 2 }}
+        >
+          Add Internship
+        </Button>
+      )}
+
       <List>
         {data?.map((internship) => (
           <ListItem key={internship.internship_id} sx={{ mb: 2 }}>
@@ -212,13 +254,15 @@ const WorkHistory = () => {
                 </Typography>
               }
             />
-            <IconButton
-              edge="end"
-              aria-label="delete"
-              onClick={() => removeInternship(internship.internship_id)}
-            >
-              <DeleteIcon />
-            </IconButton>
+            {auth.id === userId && (
+              <IconButton
+                edge="end"
+                aria-label="delete"
+                onClick={() => removeInternship(internship.internship_id)}
+              >
+                <DeleteIcon />
+              </IconButton>
+            )}
           </ListItem>
         ))}
       </List>
@@ -228,17 +272,20 @@ const WorkHistory = () => {
       <Typography variant="h5" gutterBottom>
         Job History
       </Typography>
-      <Button
-        variant="contained"
-        color="primary"
-        startIcon={<AddIcon />}
-        onClick={handleOpenJobModal}
-        sx={{ mb: 2 }}
-      >
-        Add Job History
-      </Button>
+      {auth.id === userId && (
+        <Button
+          variant="contained"
+          color="primary"
+          startIcon={<AddIcon />}
+          onClick={handleOpenJobModal}
+          sx={{ mb: 2 }}
+        >
+          Add Job History
+        </Button>
+      )}
+
       <List>
-        {jobHistoryData.map((job) => (
+        {jobs?.map((job) => (
           <ListItem key={job.history_id} sx={{ mb: 2 }}>
             <ListItemIcon>
               <WorkIcon color="primary" />
@@ -247,18 +294,19 @@ const WorkHistory = () => {
               primary={<Typography variant="h6">{job.job_title}</Typography>}
               secondary={
                 <Typography variant="body2" color="text.secondary">
-                  {job.company} | {job.start_date} - {job.end_date}
-                  {job.reason_for_leaving && ` (${job.reason_for_leaving})`}
+                  {job.company} | {job.start_date} - {job.EndDate}
                 </Typography>
               }
             />
-            <IconButton
-              edge="end"
-              aria-label="delete"
-              onClick={() => removeJobHistory(job.history_id)}
-            >
-              <DeleteIcon />
-            </IconButton>
+            {auth.id === userId && (
+              <IconButton
+                edge="end"
+                aria-label="delete"
+                onClick={() => removeJobHistory(job.history_id)}
+              >
+                <DeleteIcon />
+              </IconButton>
+            )}
           </ListItem>
         ))}
       </List>
@@ -358,7 +406,9 @@ const WorkHistory = () => {
           <TextField
             margin="dense"
             label="Start Date"
+            type="date"
             fullWidth
+            focused
             variant="outlined"
             value={newJob.start_date}
             onChange={(e) =>
@@ -366,22 +416,14 @@ const WorkHistory = () => {
             }
           />
           <TextField
+            focused
             margin="dense"
             label="End Date"
+            type="date"
             fullWidth
             variant="outlined"
             value={newJob.end_date}
             onChange={(e) => setNewJob({ ...newJob, end_date: e.target.value })}
-          />
-          <TextField
-            margin="dense"
-            label="Reason for Leaving"
-            fullWidth
-            variant="outlined"
-            value={newJob.reason_for_leaving}
-            onChange={(e) =>
-              setNewJob({ ...newJob, reason_for_leaving: e.target.value })
-            }
           />
         </DialogContent>
         <DialogActions>

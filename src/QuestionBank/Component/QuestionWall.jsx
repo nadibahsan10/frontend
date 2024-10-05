@@ -37,7 +37,7 @@ const QuestionWall = ({ search, department, trimester, examType, year }) => {
       border="2px solid #EBEBEB"
     >
       {data &&
-        data.map((item, index) => {
+        data?.map((item, index) => {
           return <Question key={index} {...item} />;
         })}
     </Box>
