@@ -5,7 +5,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import Question from "./Question";
 import getQuestions from "../Functions/getQuestions";
 const QuestionWall = ({ search, department, trimester, examType, year }) => {
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: [
       "getquestions",
       search.value,

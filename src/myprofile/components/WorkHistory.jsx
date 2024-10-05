@@ -15,12 +15,14 @@ import {
   DialogContentText,
   DialogTitle,
   TextField,
+  Input,
 } from "@mui/material";
 import WorkIcon from "@mui/icons-material/Work"; // Icon for job entries
 import SchoolIcon from "@mui/icons-material/School"; // Icon for internship entries
 import RemoveIcon from "@mui/icons-material/Remove"; // Icon for remove action
 import AddIcon from "@mui/icons-material/Add"; // Icon for add action
 import DeleteIcon from "@mui/icons-material/Delete"; // Icon for individual remove action
+import { useQueryClient } from "@tanstack/react-query";
 
 // Sample data for internships and job histories
 const initialInternshipData = [
@@ -41,6 +43,8 @@ const initialInternshipData = [
     end: "May 2023",
   },
 ];
+import useFetch from "../../CustomHooks/useFetch";
+import { useParams } from "react-router-dom";
 
 const initialJobHistoryData = [
   {
@@ -64,6 +68,14 @@ const initialJobHistoryData = [
 ];
 
 const WorkHistory = () => {
+  const userId = useParams().userId;
+  const { data, isLoading, isError, error } = useFetch({
+    url: "http://localhost:3000/myprofile/getintern",
+    queryKey: ["getinternsip"],
+    params: { userId },
+  });
+  console.log(data);
+
   const [internshipData, setInternshipData] = useState(initialInternshipData);
   const [jobHistoryData, setJobHistoryData] = useState(initialJobHistoryData);
 
@@ -106,15 +118,34 @@ const WorkHistory = () => {
   const handleCloseJobModal = () => {
     setOpenJobModal(false);
   };
+  const [openSuccessPopup, setOpenSuccessPopup] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
 
+  const queryClient = useQueryClient();
   // Function to add an internship
+  const mutation = useFetch({
+    url: "http://localhost:3000/myprofile/addintern",
+    method: "POST",
+    params: {
+      userId,
+      company_name: newInternship.company_name,
+      position: newInternship.position,
+    },
+  });
   const addInternship = () => {
-    const newInternshipData = {
-      internship_id: internshipData.length + 1,
-      uid: 101,
-      ...newInternship,
-    };
-    setInternshipData([...internshipData, newInternshipData]);
+    mutation.mutate(undefined, {
+      onSuccess: async (data) => {
+        await queryClient.invalidateQueries(["getinternsip"]);
+        queryClient.refetchQueries(["getinternsip"]);
+        setSuccessMessage(data.message);
+        setOpenSuccessPopup(true);
+
+        reset();
+      },
+      onError: (data) => {
+        console.log(data);
+      },
+    });
     handleCloseInternshipModal(); // Close modal after adding
     setNewInternship({ company_name: "", position: "", start: "", end: "" }); // Reset form
   };
@@ -165,7 +196,7 @@ const WorkHistory = () => {
         Add Internship
       </Button>
       <List>
-        {internshipData.map((internship) => (
+        {data?.map((internship) => (
           <ListItem key={internship.internship_id} sx={{ mb: 2 }}>
             <ListItemIcon>
               <SchoolIcon color="primary" />
@@ -239,8 +270,8 @@ const WorkHistory = () => {
           <DialogContentText>
             Please enter the details of the internship.
           </DialogContentText>
+
           <TextField
-            autoFocus
             margin="dense"
             label="Company Name"
             fullWidth
@@ -266,6 +297,7 @@ const WorkHistory = () => {
           <TextField
             margin="dense"
             label="Start Date"
+            focused
             fullWidth
             type="date"
             variant="outlined"
@@ -275,9 +307,11 @@ const WorkHistory = () => {
             }
           />
           <TextField
+            focused
             margin="dense"
             label="End Date"
             fullWidth
+            type="date"
             variant="outlined"
             value={newInternship.end}
             onChange={(e) =>
