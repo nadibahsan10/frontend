@@ -11,11 +11,13 @@ const Market = () => {
   return (
     <Box>
       <Routes>
-        <Route path="/*" element={<Products />} />
+        <Route path="/" element={<Products />} />
         <Route
           path="/individualproduct/:itemId"
           element={<IndividualProduct />}
         />
+        <Route path="/myproduct" element={<MyProduct />} />
+        <Route path="/bookmark" element={<h1>Bookmark</h1>} />
         <Route path="/addproduct" element={<AddProducts />} />
       </Routes>
     </Box>

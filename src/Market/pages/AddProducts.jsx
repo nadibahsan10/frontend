@@ -19,6 +19,10 @@ import useFetch from "../../CustomHooks/useFetch";
 import { useInput } from "../../CustomHooks/useInput";
 import PreviewImage from "../../Feed/components/PreviewImage";
 import { AuthContext } from "../../Auth/AuthContext";
+import { Link } from "react-router-dom";
+import Inventory2Icon from "@mui/icons-material/Inventory2";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 const AddProducts = () => {
   const auth = useContext(AuthContext);
@@ -65,15 +69,102 @@ const AddProducts = () => {
 
   return (
     <Container maxWidth="lg" sx={{ marginTop: 5 }}>
-      <Typography
-        textTransform="uppercase"
-        textAlign="center"
-        variant="h4"
-        color="primary"
-        gutterBottom
+      <Box
+        display="flex"
+        gap={2}
+        padding={3}
+        alignItems="center"
+        flexDirection="column"
+        justifyContent="flex-start"
+        mb={2}
+        marginTop={2}
+        borderRadius={2}
+        border="2px solid #EBEBEB"
+        sx={{
+          backgroundColor: "#f9f9f9", // Light background for the entire box
+          boxShadow: 1, // Subtle shadow for depth
+        }}
       >
-        List Your Product
-      </Typography>
+        <Typography
+          textTransform="uppercase"
+          textAlign="center"
+          variant="h4"
+          color="primary"
+          gutterBottom
+        >
+          List Your Product
+        </Typography>
+        <Box gap={2} display="flex">
+          <Button
+            component={Link}
+            to="/market"
+            variant="outlined"
+            color="primary"
+            startIcon={<Inventory2Icon />}
+            sx={{
+              borderRadius: 1,
+              padding: "10px 15px",
+              "&:hover": {
+                backgroundColor: "#f0f0f0",
+              },
+            }}
+          >
+            Products
+          </Button>
+          <Button
+            component={Link}
+            to="/market/bookmark"
+            variant="outlined"
+            color="primary"
+            startIcon={<BookmarkBorderIcon />}
+            sx={{
+              borderRadius: 1,
+              padding: "10px 15px",
+              "&:hover": {
+                backgroundColor: "#f0f0f0",
+              },
+            }}
+          >
+            Bookmarks
+          </Button>
+
+          <Button
+            component={Link}
+            to="/market/myproduct"
+            variant="outlined"
+            color="primary"
+            startIcon={<Inventory2Icon />}
+            sx={{
+              borderRadius: 1,
+              padding: "10px 15px",
+              "&:hover": {
+                backgroundColor: "#f0f0f0",
+              },
+            }}
+          >
+            My Products
+          </Button>
+
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<AddCircleIcon />}
+            component={Link}
+            to="/market/addproduct"
+            sx={{
+              borderRadius: 1,
+              padding: "10px 15px",
+              background: "linear-gradient(to right, #2196f3, #64b5f6)",
+              "&:hover": {
+                background: "linear-gradient(to right, #1976d2, #42a5f5)",
+              },
+            }}
+          >
+            Add Product
+          </Button>
+        </Box>
+      </Box>
+
       <Grid container spacing={4}>
         {/* Left side for product image upload */}
         <Grid item xs={12} sm={6}>

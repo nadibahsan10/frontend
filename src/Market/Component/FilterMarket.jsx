@@ -34,9 +34,14 @@ const FilterComponent = ({
       <Typography variant="subtitle1">Category</Typography>
       <RadioGroup
         column
-        value={filters.category} // Bind category state to the RadioGroup
+        value={filters.category || ""} // Default value will be empty string for "Any"
         onChange={handleCategoryChange}
       >
+        <FormControlLabel
+          value="" // No value will be passed for "Any"
+          control={<Radio color="primary" />}
+          label="Any"
+        />
         <FormControlLabel
           value="1"
           control={<Radio color="primary" />}

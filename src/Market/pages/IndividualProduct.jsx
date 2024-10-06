@@ -31,7 +31,7 @@ const IndividualProduct = () => {
     queryKey: ["individualproduct"],
     params: { id: itemId },
   });
-  console.log(data);
+
   const [openSuccessPopup, setOpenSuccessPopup] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -140,7 +140,7 @@ const IndividualProduct = () => {
         }}
         successMessage={successMessage}
       />
-      <UpdateProduct open={open} handleClose={handleClose} />
+      <UpdateProduct open={open} id={itemId} handleClose={handleClose} />
       <Container>
         <Grid container marginTop={2} spacing={2}>
           <Grid item xs={12} md={8}>
