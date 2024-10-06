@@ -14,7 +14,7 @@ import useFetch from "../../CustomHooks/useFetch";
 const Products = () => {
   const [filters, setFilters] = useState({
     search: "",
-    category: "1", // Default category is set to Smartphones
+    category: "", // Default category is set to Smartphones
     priceRange: [0, 10000], // Default price range
   });
 
@@ -76,7 +76,6 @@ const Products = () => {
               boxShadow: 1, // Subtle shadow for depth
             }}
           >
-     
             <TextField
               sx={{
                 width: "100%",
@@ -96,8 +95,6 @@ const Products = () => {
               label="Search Product"
               variant="outlined"
             />
-
-        
 
             {/* Additional Buttons */}
             <Box gap={2} display="flex">
