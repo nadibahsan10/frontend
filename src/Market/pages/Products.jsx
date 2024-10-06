@@ -33,6 +33,7 @@ const Products = () => {
       max_price: filters.priceRange[1],
     },
   });
+  console.log(error);
 
   // Handle category change
   const handleCategoryChange = (event) => {
@@ -75,7 +76,7 @@ const Products = () => {
               boxShadow: 1, // Subtle shadow for depth
             }}
           >
-            {/* Search TextField */}
+     
             <TextField
               sx={{
                 width: "100%",
@@ -96,13 +97,13 @@ const Products = () => {
               variant="outlined"
             />
 
-            {/* Button for Search */}
+        
 
             {/* Additional Buttons */}
             <Box gap={2} display="flex">
               <Button
                 component={Link}
-                to="/market/all"
+                to="/market"
                 variant="outlined"
                 color="primary"
                 startIcon={<Inventory2Icon />}
@@ -117,6 +118,8 @@ const Products = () => {
                 Products
               </Button>
               <Button
+                component={Link}
+                to="/market/bookmark"
                 variant="outlined"
                 color="primary"
                 startIcon={<BookmarkBorderIcon />}
@@ -133,7 +136,7 @@ const Products = () => {
 
               <Button
                 component={Link}
-                to="myproduct"
+                to="/market/myproduct"
                 variant="outlined"
                 color="primary"
                 startIcon={<Inventory2Icon />}
@@ -153,7 +156,7 @@ const Products = () => {
                 color="primary"
                 startIcon={<AddCircleIcon />}
                 component={Link}
-                to="addproduct"
+                to="/market/addproduct"
                 sx={{
                   borderRadius: 1,
                   padding: "10px 15px",
@@ -175,13 +178,9 @@ const Products = () => {
             filters={filters}
           />
         </Grid>
-        <Grid item xs={0.2}></Grid>
 
+        <Grid item xs={0.2}></Grid>
         <Grid item xs={8.8}>
-          <Routes>
-            <Route path="/all" element={<ProductList />} />
-            <Route path="/myproduct" element={<MyProduct />} />
-          </Routes>
           <ProductList items={data} />
         </Grid>
       </Grid>
