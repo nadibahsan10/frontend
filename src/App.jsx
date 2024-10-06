@@ -6,6 +6,7 @@ import { AuthContext } from "./Auth/AuthContext";
 import Footer from "./Shared/Footer";
 import Home from "./Home/Home";
 import About from "./About/About";
+import MainTolet from "./ToLet/MainTolet"
 import Market from "./Market/Market";
 import Inbox from "./Inbox/Inbox";
 import Admin from "./Admin/Admin";
@@ -89,10 +90,10 @@ const App = () => {
 
             <Route path="/market/*" element={<Market />} />
             <Route path="/myprofile/*" element={<MyProfile />} />
-
+            {/* <Route path="/tolet/*" element={<MainTolet />} /> */}
             <Route path="/question/*" element={<MainQuestionBank />} />
             <Route path="/alumni/*" element={<Alumni />} />
-            <Route path="/about" element={<About />} />
+            <Route path="/about" element={<MainTolet />} />
           </Routes>
           {/* <Footer /> */}
         </AuthContext.Provider>
